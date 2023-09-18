@@ -1,3 +1,3 @@
-module suitespot.core {
+module suitespot.core {    
     exports core;
 }
