@@ -1,4 +1,4 @@
-package core.fileUtil;
+package core.model;
 
 
 
@@ -7,6 +7,7 @@ public class Customer {
     public Customer(String name, String age) {
         this.name = name;
         this.age = age;
+    
     }
     public Customer(){}
     
@@ -15,15 +16,14 @@ public class Customer {
     private String age;
 
 
+
     public String getName() {
         return this.name;
     }
 
-
     public String getAge() {
         return this.age;
     }
-
 
     @Override
     public String toString() {
@@ -32,6 +32,5 @@ public class Customer {
             ", age='" + age + "'" +
             "}";
     }
-    
-    
+
 }

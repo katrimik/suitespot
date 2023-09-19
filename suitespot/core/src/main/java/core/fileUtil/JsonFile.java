@@ -12,6 +12,8 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import core.model.Customer;
+
 public class JsonFile<T> {
     private final Class<T> targetType;
     private final Path path;
