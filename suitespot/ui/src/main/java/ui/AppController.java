@@ -1,6 +1,5 @@
 package ui;
 
-import core.Suitespot;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -16,7 +15,6 @@ public class AppController {
 
     @FXML
     public void runTest(){
-        label1.setText(Suitespot.test());
         System.out.println("here");
     }
 
