@@ -3,10 +3,12 @@ package ui;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
-
 import core.manager.CustomerManager;
 import core.model.Customer;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -33,12 +35,13 @@ public class CustomerController implements Initializable {
     @FXML
     Button customerSave;
     @FXML
-    ListView <String> customerList;
+    ListView <Customer> customerList;
+    @FXML
+    Text StatusCrudLbl;
+    @FXML
+    Label StatusErrorLbl;
 
-    private String currentCustomerId;
     private final CustomerManager customerManager;
-
-
 
     public CustomerController() {
         customerManager = new CustomerManager();
@@ -46,13 +49,40 @@ public class CustomerController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        System.out.println("init");
+        refreshCustomers();
 
+        customerList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Customer>() {
+            @Override
+            public void changed(ObservableValue<? extends Customer> observable, Customer oldValue, Customer newValue) {
+                selectedCustomerChanged(newValue);
+            }
+        });
+    }
+
+    @FXML
+    public void selectedCustomerChanged(Customer c) {
+        if (c == null) {
+            StatusCrudLbl.setText("Create new customer");
+            return;
+        };
+
+        StatusCrudLbl.setText("Edit customer");
+
+        customerFirstName.setText(c.getFirstName());
+        customerLastName.setText(c.getLastName());
+        customerPhone.setText(c.getPhone());
+        customerEmail.setText(c.getEmail());
+
+    }
+
+    private void refreshCustomers() {
+        List<Customer> customers = customerManager.listCustomers();
+        ObservableList<Customer> customersOberservable = FXCollections.observableArrayList(customers);
+        customerList.setItems(customersOberservable);
     }
 
     @FXML
     public void customerAdd() {
-        // currentCustomerId = null;
         resetFields();
     }
 
@@ -61,28 +91,47 @@ public class CustomerController implements Initializable {
         customerLastName.setText("");
         customerPhone.setText("");
         customerEmail.setText("");
+        StatusErrorLbl.setText("");
+        customerList.getSelectionModel().select(null);
     }
 
     @FXML
     public void customerDelete() {
-        System.out.println(customerManager.listCustomers());
+        Customer listViewCustomer = customerList.getSelectionModel().getSelectedItem();
+        if (listViewCustomer == null) return;
+
+        customerManager.deleteCustomer(listViewCustomer.getId());
+
+        refreshCustomers();
+        resetFields();
     }
 
     @FXML
     public void customerSave() {
+        Customer customer = null;
+        try {
+            customer = new Customer(customerFirstName.getText(), customerLastName.getText(), customerEmail.getText(), customerPhone.getText());
+        } catch (Exception e) {
+            StatusErrorLbl.setText(e.getLocalizedMessage());
+        }
 
-        Customer customer = new Customer(customerFirstName.getText(), customerLastName.getText(), customerEmail.getText(), customerPhone.getText());
-        System.out.println(customer);
+        if (customer == null) return;
+
+        Customer listViewCustomer = customerList.getSelectionModel().getSelectedItem();
+        if (listViewCustomer != null) {
+            customer.setId(listViewCustomer.getId());
+        }
+
         customerManager.saveCustomer(customer);
-
+        refreshCustomers();
+        resetFields();
     }
 
     public static void main(String[] args) {
         CustomerController c = new CustomerController();
-        Customer customer = new Customer("sdasfaf", "easddsr", "elisssa@gmail.com", "99999999");
+        Customer customer = new Customer("Elias", "Test", "elias@example.com", "99999999");
         c.customerManager.saveCustomer(customer);
         List<Customer> customers = c.customerManager.listCustomers();
         customers.forEach(x-> System.out.println(x));
     }
-
 }

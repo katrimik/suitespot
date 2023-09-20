@@ -38,10 +38,7 @@ public class CustomerManager {
         if (customer.getId() == null) { // creates a new customer
             customer.setId(createNewId());
             customerFileManager.appendFile(customer);
-
-        }
-
-        else { // saves the changes made to an already existing customer
+        } else { // saves the changes made to an already existing customer
             ArrayList<Customer> listCustomers = customerFileManager.readFile();
 
             Customer customerToUpdate = listCustomers.stream()
