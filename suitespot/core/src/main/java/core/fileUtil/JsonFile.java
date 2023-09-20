@@ -16,11 +16,11 @@ import core.model.Customer;
 
 public class JsonFile<T> {
     private final Class<T> targetType;
-    // private final Path path;
+    private final Path path;
 
     public JsonFile(Class<T> targetType, FileTypeEnum fileType) {
         this.targetType = targetType;
-        // this.path = createPath(fileType);
+        this.path = createPath(fileType);
     }
 
     private static Path createPath(FileTypeEnum fileType) {
@@ -32,7 +32,7 @@ public class JsonFile<T> {
         Gson gson = new Gson();
         ArrayList<T> items = new ArrayList<>();
 
-        try (FileReader reader = new FileReader(createPath(FileTypeEnum.CUSTOMER).toString())) {
+        try (FileReader reader = new FileReader(path.toString())) {
             // Use TypeToken to specify the type you want to deserialize into
             Type genericListType = TypeToken.getParameterized(List.class, targetType).getType();
             items = gson.fromJson(reader, genericListType);
@@ -55,7 +55,7 @@ public class JsonFile<T> {
      */
     public void writeFile(List<T> items) {
         Gson gson = new Gson();
-        try (FileWriter writer = new FileWriter(createPath(FileTypeEnum.CUSTOMER).toString())) {
+        try (FileWriter writer = new FileWriter(path.toString())) {
             writer.write(gson.toJson(items));
         } catch (Exception e) {
             e.printStackTrace();
