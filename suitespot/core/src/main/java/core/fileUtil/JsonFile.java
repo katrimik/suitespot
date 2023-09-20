@@ -27,9 +27,9 @@ public class JsonFile<T> {
         return Paths.get("storage", fileType.getFileName() + ".json");
     }
 
-    public List<T> readFile() {
+    public ArrayList<T> readFile() {
         Gson gson = new Gson();
-        List<T> items = new ArrayList<>();
+        ArrayList<T> items = new ArrayList<>();
 
         try (FileReader reader = new FileReader(path.toString())) {
             // Use TypeToken to specify the type you want to deserialize into
@@ -72,21 +72,4 @@ public class JsonFile<T> {
     public final void appendFile(T... items){
         appendFile(Arrays.asList(items));
     }
-
- 
-
-    public static void main(String[] args) {
-        JsonFile<Customer> jsonFile = new JsonFile<Customer>(Customer.class, FileTypeEnum.CUSTOMER);
-        Customer c1 = new Customer("Benji", "12");
-        Customer c2 = new Customer("elias", "19");
-
-        jsonFile.appendFile(c1, c2, c1);
-        List<Customer> test = jsonFile.readFile();
-        // System.out.println(test);
-        test.stream().forEach(x -> System.out.println(x.getName()));
-        // System.out.println(test);
-
-        
-    }
-
 }
