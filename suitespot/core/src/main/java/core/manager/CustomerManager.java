@@ -1,6 +1,7 @@
 package core.manager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,10 +38,7 @@ public class CustomerManager {
         if (customer.getId() == null) { // creates a new customer
             customer.setId(createNewId());
             customerFileManager.appendFile(customer);
-
-        }
-
-        else { // saves the changes made to an already existing customer
+        } else { // saves the changes made to an already existing customer
             ArrayList<Customer> listCustomers = customerFileManager.readFile();
 
             Customer customerToUpdate = listCustomers.stream()
@@ -71,6 +69,7 @@ public class CustomerManager {
     public List<Customer> listCustomers() {
         return customerFileManager.readFile();
     }
+
 
     public static void main(String[] args) {
         var cm = new CustomerManager();

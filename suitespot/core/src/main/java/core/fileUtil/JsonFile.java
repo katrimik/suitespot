@@ -11,8 +11,8 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import core.model.Customer;
+
 
 public class JsonFile<T> {
     private final Class<T> targetType;
@@ -24,7 +24,8 @@ public class JsonFile<T> {
     }
 
     private static Path createPath(FileTypeEnum fileType) {
-        return Paths.get("storage", fileType.getFileName() + ".json");
+        Path existing = Paths.get("..", "storage", fileType.getFileName() + ".json");
+        return existing.toAbsolutePath();
     }
 
     public ArrayList<T> readFile() {
@@ -50,7 +51,6 @@ public class JsonFile<T> {
 
     /**
      * Write a file. Overriding all existing items
-     * @param fileType CUSTOMER, ROOM, BOOKING 
      * @param items List of all Customers, all Rooms, or all Bookings
      */
     public void writeFile(List<T> items) {
@@ -71,5 +71,12 @@ public class JsonFile<T> {
     @SafeVarargs 
     public final void appendFile(T... items){
         appendFile(Arrays.asList(items));
+    }
+
+    public static void main(String[] args) {
+        JsonFile<Customer> customerFileManager = new JsonFile<Customer>(Customer.class, FileTypeEnum.CUSTOMER);
+        Customer c = new Customer("Banan", "Eplekake", "tull234567@outlook.com", "12345678");
+        customerFileManager.appendFile(c);
+
     }
 }

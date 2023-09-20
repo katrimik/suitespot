@@ -81,7 +81,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Id: " + id + ", fullName: " + getFullName();
+        return getFullName();
     }
 
     public static void main(String[] args) {
