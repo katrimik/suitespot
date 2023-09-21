@@ -19,7 +19,7 @@ public class Customer {
     } // need an empty constructor to work with json
 
     private boolean validateName(String name) {
-        return name.matches("^[a-zA-ZäöåÄÖÅ-]+$");
+        return name.matches("^[a-zA-ZÅÄÖåäö_]+([- ]?[a-zA-ZÅÄÖåäö_]+)*$"); 
     }
 
     public String getFirstName() {
@@ -59,6 +59,9 @@ public class Customer {
     }
 
     public void setPhone(String phone) {
+        if (!phone.matches("^[0-9]{8}$")) {
+            throw new IllegalArgumentException("Not a valid phone number.");
+        }
         this.phone = phone;
     }
 
