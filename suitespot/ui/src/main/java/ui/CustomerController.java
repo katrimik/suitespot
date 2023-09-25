@@ -20,27 +20,16 @@ import javafx.scene.text.Text;
 
 public class CustomerController implements Initializable {    
     @FXML
-    Label label1;
+    Label label1, StatusErrorLbl;
     @FXML
-    TextField customerFirstName;
+    TextField customerFirstName, customerLastName, customerPhone, customerEmail;
     @FXML
-    TextField customerLastName;
-    @FXML
-    TextField customerPhone;
-    @FXML
-    TextField customerEmail;
-    @FXML
-    Button customerAdd;
-    @FXML
-    Button customerDelete;
-    @FXML
-    Button customerSave;
+    Button customerAdd, customerDelete, customerSave;
     @FXML
     ListView <Customer> customerList;
     @FXML
     Text StatusCrudLbl;
-    @FXML
-    Label StatusErrorLbl;
+
 
     private final CustomerManager customerManager;
 
@@ -128,11 +117,4 @@ public class CustomerController implements Initializable {
         resetFields();
     }
 
-    public static void main(String[] args) {
-        CustomerController c = new CustomerController();
-        Customer customer = new Customer("Elias", "Test", "elias@example.com", "99999999");
-        c.customerManager.saveCustomer(customer);
-        List<Customer> customers = c.customerManager.listCustomers();
-        customers.forEach(x-> System.out.println(x));
-    }
 }
