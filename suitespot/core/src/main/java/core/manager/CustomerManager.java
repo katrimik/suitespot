@@ -1,16 +1,16 @@
 package core.manager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
 import core.fileUtil.FileTypeEnum;
-import core.fileUtil.JsonFile;
+import core.fileUtil.IJsonFileParser;
+import core.fileUtil.JsonFileParser;
 import core.model.Customer;
 
 public class CustomerManager {
-    JsonFile<Customer> customerFileManager = new JsonFile<Customer>(Customer.class, FileTypeEnum.CUSTOMER);
+    IJsonFileParser<Customer> customerFileManager = new JsonFileParser<Customer>(Customer.class, FileTypeEnum.CUSTOMER);
 
     public CustomerManager() {
 
