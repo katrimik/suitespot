@@ -32,7 +32,7 @@ public class CustomerManager {
         return id.toString();
     }
 
-    public void saveCustomer(Customer customer) {
+    public String saveCustomer(Customer customer) {
         if (customer.getId() == null) { // creates a new customer
             customer.setId(createNewId());
             customerFileManager.appendFile(customer);
@@ -52,6 +52,8 @@ public class CustomerManager {
             listCustomers.set(customerIndex, customer);
             customerFileManager.writeFile(listCustomers);
         }
+
+        return customer.getId();
     }
 
     public Customer readCustomer(String id) {
