@@ -4,16 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import core.fileUtil.FileTypeEnum;
 import core.fileUtil.IJsonFileParser;
-import core.fileUtil.JsonFileParser;
 import core.model.Customer;
 
 public class CustomerManager {
-    IJsonFileParser<Customer> customerFileManager = new JsonFileParser<Customer>(Customer.class, FileTypeEnum.CUSTOMER);
+    IJsonFileParser<Customer> customerFileManager;
 
-    public CustomerManager() {
-
+    public CustomerManager(IJsonFileParser<Customer> customerFileManager) {
+        this.customerFileManager = customerFileManager;
     }
 
     public void deleteCustomer(String id) {
@@ -69,28 +67,4 @@ public class CustomerManager {
     public List<Customer> listCustomers() {
         return customerFileManager.readFile();
     }
-
-
-    public static void main(String[] args) {
-        var cm = new CustomerManager();
-
-        Customer c1 = new Customer("Banan", "Eplekake", "tull234567@outlook.com", "12345678");
-        Customer c2 = new Customer("Benji", "Leverpostei", "hie@jalla.com", "87654321");
-        c1.setId("0a49135f-b5ef-4ff1-82a6-bb215a572ea9");
-        cm.saveCustomer(c1);
-        cm.saveCustomer(c2);
-
-        cm.deleteCustomer("0a49135f-b5ef-4ff1-82a6-bb215a572ea9");
-
-        var customers = cm.listCustomers();
-        
-
-        for (Customer c : customers) {
-            System.out.println(c.getFullName());
-        }
-
-
-
-    }
-
 }
