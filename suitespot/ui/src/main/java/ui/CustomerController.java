@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import core.manager.CustomerManager;
+import core.manager.Manager;
 import core.model.Customer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -44,7 +45,7 @@ public class CustomerController implements Initializable {
     private final CustomerManager customerManager;
 
     public CustomerController() {
-        customerManager = new CustomerManager();
+        customerManager = Manager.GetCustomerManager();
     }
 
     @Override

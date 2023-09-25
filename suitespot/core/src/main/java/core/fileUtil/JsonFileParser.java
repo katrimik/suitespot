@@ -14,11 +14,11 @@ import com.google.gson.reflect.TypeToken;
 import core.model.Customer;
 
 
-public class JsonFile<T> {
+public class JsonFileParser<T> implements IJsonFileParser<T> {
     private final Class<T> targetType;
     private final Path path;
 
-    public JsonFile(Class<T> targetType, FileTypeEnum fileType) {
+    public JsonFileParser(Class<T> targetType, FileTypeEnum fileType) {
         this.targetType = targetType;
         this.path = createPath(fileType);
     }
@@ -28,6 +28,7 @@ public class JsonFile<T> {
         return existing.toAbsolutePath();
     }
 
+    @Override
     public ArrayList<T> readFile() {
         Gson gson = new Gson();
         ArrayList<T> items = new ArrayList<>();
@@ -53,6 +54,7 @@ public class JsonFile<T> {
      * Write a file. Overriding all existing items
      * @param items List of all Customers, all Rooms, or all Bookings
      */
+    @Override
     public void writeFile(List<T> items) {
         Gson gson = new Gson();
         try (FileWriter writer = new FileWriter(path.toString())) {
@@ -62,19 +64,21 @@ public class JsonFile<T> {
         }
     }
 
+    @Override
     public void appendFile(List<T> items) {
         List<T> readItems = readFile();
         readItems.addAll(items);
         writeFile(readItems);
     }
 
+    @Override
     @SafeVarargs 
     public final void appendFile(T... items){
         appendFile(Arrays.asList(items));
     }
 
     public static void main(String[] args) {
-        JsonFile<Customer> customerFileManager = new JsonFile<Customer>(Customer.class, FileTypeEnum.CUSTOMER);
+        IJsonFileParser<Customer> customerFileManager = new JsonFileParser<Customer>(Customer.class, FileTypeEnum.CUSTOMER);
         Customer c = new Customer("Banan", "Eplekake", "tull234567@outlook.com", "12345678");
         customerFileManager.appendFile(c);
 
