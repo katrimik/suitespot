@@ -1,6 +1,9 @@
 # Group gr2305 repository - IT1901 fall 2023
 > benjakil, eliashet, sbnorton, katrimik 
 
+## Eclipse che
+[open in Eclipse Che](https://che.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2305/gr2305?new)
+
 ### What the app does
 See [docs/app-description](./docs/app-description.md)
 
@@ -26,7 +29,6 @@ git checkout <BranchName> # to view branch
 git ls-remote # to list branches
 
 ```
-
 
 ## Local versions
 This can be tedious if you don't have the right environment, but should be straight forward if you're on windows with maven and java installed.Any subversion of 17 should work fine. 
