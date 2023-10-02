@@ -9,7 +9,7 @@ import core.model.RoomType;
 
 public class RoomTypeManager {
 
-    IJsonFileParser<RoomType> roomTypeFileManager;
+    private IJsonFileParser<RoomType> roomTypeFileManager;
 
     public RoomTypeManager(IJsonFileParser<RoomType> roomTypeFileManager) {
         this.roomTypeFileManager = roomTypeFileManager;
@@ -70,6 +70,14 @@ public class RoomTypeManager {
         }
 
         roomTypeFileManager.writeFile(tmpRoomTypes);
+
+        RoomManager roomManager = Manager.GetRoomManager();
+        roomManager.deleteAllInRoomType(roomTypeId);
+    }
+
+
+    public static void main(String[] args){
+        System.out.println("hei");
     }
 
 }
