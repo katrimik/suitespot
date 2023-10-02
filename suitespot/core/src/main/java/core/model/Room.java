@@ -8,15 +8,13 @@ public class Room {
     private String id;
     private int roomNumber;
     private String typeId;
-    private String availability;
     private final static int MIN_ROOMNUMBER = 101;
     private final static int MAX_ROOMNUMBER = 600;
     private Set<LocalDate> bookedDates = new HashSet<LocalDate>();
 
-    public Room(int roomNumber, String typeId, String availability) {
+    public Room(int roomNumber, String typeId) {
         this.roomNumber = roomNumber;
         this.typeId = typeId;
-        this.availability = availability;
     }
 
     public Room() {
@@ -52,14 +50,6 @@ public class Room {
 
     public void setTypeId(String typeId) {
         this.typeId = typeId;
-    }
-
-    public String getAvailability() { // get from roommanager
-        return availability;
-    }
-
-    public void setAvailability(String availability) {
-        this.availability = availability;
     }
 
     public Set<LocalDate> getBookedDates() {
@@ -103,24 +93,4 @@ public class Room {
     public String toString() {
         return "Room nr " + getRoomNumber() + " is booked: " + getBookedDates() + " ";
     }
-
-    public static void main(String[] args) {
-        Room single1 = new Room(1);
-        System.out.println(single1);
-
-        LocalDate startDate = LocalDate.of(2023, 9, 25);
-        LocalDate endDate = LocalDate.of(2023, 9, 30);
-
-        single1.bookRoom(startDate, endDate);
-
-        System.out.println(single1);
-        System.out.println("Room booked for the following dates:");
-
-        for (LocalDate date : single1.bookedDates) {
-            System.out.println(date);
-        }
-
-        single1.bookRoom(LocalDate.of(2023, 9, 27), LocalDate.of(2023, 9, 28));
-    }
-    // hvordan sette inn variablene?
 }
