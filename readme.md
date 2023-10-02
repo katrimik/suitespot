@@ -2,7 +2,7 @@
 > benjakil, eliashet, sbnorton, katrimik 
 
 ### What the app does
-See [docs/app-description](./docs/app-description.md)
+See [suitespot/app-description](./suitespot/app-description.md)
 
 ### Cloning the project
 ```bash
