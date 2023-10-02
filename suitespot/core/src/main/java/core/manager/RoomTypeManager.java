@@ -22,7 +22,7 @@ public class RoomTypeManager {
 
     public String saveRoomType(RoomType roomType) {
         if (roomType.getRoomTypeId() == null) { // creates a new room type
-            roomType.setId(createNewId());
+            roomType.setRoomTypeId(createNewId());
             roomTypeFileManager.appendFile(roomType);
         } else { // saves the changes made to an already existing room type
             ArrayList<RoomType> listRoomTypes = roomTypeFileManager.readFile();

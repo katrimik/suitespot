@@ -8,7 +8,11 @@ public class RoomType {
     public RoomType() {
         this.roomTypeId = "";
         this.name = "";
+    }
 
+    public RoomType(String name, String roomTypeId) {
+        this.name = name;
+        this.roomTypeId = roomTypeId;
     }
 
     public String getName() {
@@ -31,7 +35,7 @@ public class RoomType {
         return this.roomTypeId;
     }
 
-    public void setId(String roomTypeId) {
+    public void setRoomTypeId(String roomTypeId) {
         this.roomTypeId = roomTypeId;
     }
 
