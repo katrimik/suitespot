@@ -71,7 +71,7 @@ public class Room {
         }
         this.price = price;
     }
-    
+
         public Room(int roomNumber) {
             this.roomNumber = roomNumber;
             this.bookedDates = new HashSet<>();
@@ -90,7 +90,7 @@ public class Room {
         public void bookRoom(LocalDate startDate, LocalDate endDate) {
             LocalDate date = startDate;
     
-            if (!(isAvailble(date))) {
+            if (!(isAvailable(date))) {
                 throw new IllegalArgumentException("Date is aldready booked. Try another date.");
             }
             while (!date.isAfter(endDate)) {
@@ -99,14 +99,14 @@ public class Room {
             }
         }       
     
-        public boolean isAvailble(LocalDate date) {
+        public boolean isAvailable(LocalDate date) {
             return !bookedDates.contains(date);
         }
     
-        public boolean isAvailble(LocalDate startDate, LocalDate endDate) {
+        public boolean isAvailable(LocalDate startDate, LocalDate endDate) {
             while (!startDate.isAfter(endDate)) {
                 if (bookedDates.contains(startDate)) {
-                    throw new IllegalArgumentException("Room is booked.");
+                    return false;
                 }
                 startDate = startDate.plusDays(1);
             }
