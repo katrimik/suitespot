@@ -7,7 +7,7 @@ import java.util.UUID;
 import core.fileUtil.IJsonFileParser;
 import core.model.Room;
 
-public class RoomManager {
+public class RoomManager implements IRoomManager {
     /*
      * save
      * get
@@ -29,6 +29,7 @@ public class RoomManager {
     }
 
     
+    @Override
     public String saveRoom(Room room) {
         if (room.getRoomId() == null) { // creates a new room type
             room.setRoomId(createNewId());
@@ -56,6 +57,7 @@ public class RoomManager {
 
     }
 
+    @Override
     public List<Room> listRooms() {
         return roomManager.readFile();
     }
@@ -64,6 +66,7 @@ public class RoomManager {
      * Deletes one room with the given id
      * @param roomId
      */
+    @Override
     public void deleteRoom(String roomId) {
         ArrayList<Room> listRoom = roomManager.readFile();
         ArrayList<Room> tmpRoom = new ArrayList<Room>();
@@ -81,6 +84,7 @@ public class RoomManager {
      * Deletes all rooms of given room type-id
      * @param roomTypeId
      */
+    @Override
     public void deleteAllInRoomType(String roomTypeId){
         ArrayList<Room> listRoom = roomManager.readFile();
         ArrayList<Room> tmpRooms = new ArrayList<Room>();

@@ -13,13 +13,14 @@ public class Manager {
         return new CustomerManager(f);
     }
 
-    public static RoomManager GetRoomManager() {
+    public static IRoomManager GetRoomManager() {
         IJsonFileParser<Room> f = new JsonFileParser<Room>(Room.class, FileTypeEnum.ROOM);
         return new RoomManager(f);
     }
 
     public static RoomTypeManager GetRoomTypeManager() {
         IJsonFileParser<RoomType> f = new JsonFileParser<RoomType>(RoomType.class, FileTypeEnum.ROOM_TYPE);
-        return new RoomTypeManager(f);
+        IRoomManager roomManager = Manager.GetRoomManager();
+        return new RoomTypeManager(f, roomManager);
     }
 }

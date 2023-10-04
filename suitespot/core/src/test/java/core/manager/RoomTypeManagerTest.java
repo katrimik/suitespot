@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import core.fileUtil.IJsonFileParser;
 import core.fileUtil.mock.JsonFileParserMock;
+import core.model.Room;
 import core.model.RoomType;
 
 public class RoomTypeManagerTest {
@@ -20,7 +21,8 @@ public class RoomTypeManagerTest {
     @BeforeEach
     public void setup() {
         IJsonFileParser<RoomType> fileParser = new JsonFileParserMock<RoomType>();
-        roomTypeManager = new RoomTypeManager(fileParser);
+        IJsonFileParser<Room> roomParser = new JsonFileParserMock<Room>();
+        roomTypeManager = new RoomTypeManager(fileParser, new RoomManager(roomParser));
         newRoomType = new RoomType("Suite", null, 200);
     }
 
