@@ -9,31 +9,30 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="757.0" style="-fx-background-color: #a5d496;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.CustomerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="757.0" style="-fx-background-color: #a5d496;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.RoomController">
    <children>
       <Text layoutX="607.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suitespot" textAlignment="CENTER">
          <font>
             <Font name="Modern No. 20" size="37.0" />
          </font>
       </Text>
-      <ListView fx:id="roomTypeList" layoutX="61.0" layoutY="144.0" prefHeight="341.0" prefWidth="201.0" style="-fx-border-image-insets: #d0ebc7;" />
+      <ListView fx:id="roomTypeList" layoutX="61.0" layoutY="144.0" prefHeight="300.0" prefWidth="201.0" style="-fx-border-image-insets: #d0ebc7;" />
       <Text layoutX="63.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage rooms">
          <font>
             <Font name="Modern No. 20" size="30.0" />
          </font>
       </Text>
-      <TextField fx:id="roomType" layoutX="508.0" layoutY="146.0" prefHeight="27.0" prefWidth="224.0" promptText="Type name" />
       <TextField fx:id="roomNumber" layoutX="509.0" layoutY="184.0" prefHeight="26.0" prefWidth="223.0" promptText="Room number" />
       <TextField fx:id="roomPrice" layoutX="509.0" layoutY="223.0" prefHeight="26.0" prefWidth="223.0" promptText="Price" />
-      <ListView fx:id="roomNumberList" layoutX="277.0" layoutY="144.0" prefHeight="341.0" prefWidth="201.0" style="-fx-border-image-insets: #d0ebc7;" />
-      <TextField fx:id="searchRoomType" layoutX="61.0" layoutY="106.0" prefHeight="27.0" prefWidth="201.0" promptText="Search for room types here" />
-      <TextField fx:id="searchRoomNumber" layoutX="278.0" layoutY="106.0" prefHeight="27.0" prefWidth="201.0" promptText="Search for room number here" />
-      <Button fx:id="createRoom" layoutX="240.0" layoutY="495.0" mnemonicParsing="false" onAction="#createRoom" prefHeight="27.0" prefWidth="158.0" style="-fx-background-color: #a9baa2;" text="Create new">
+      <ListView fx:id="roomNumberList" layoutX="277.0" layoutY="144.0" prefHeight="300.0" prefWidth="201.0" style="-fx-border-image-insets: #d0ebc7;" />
+      <TextField fx:id="searchRoomType" layoutX="61.0" layoutY="106.0" onAction="#searchRoomType" prefHeight="27.0" prefWidth="201.0" promptText="Search for room types here" />
+      <TextField fx:id="searchRoomNumber" layoutX="278.0" layoutY="106.0" onAction="#searchRoomNumber" prefHeight="27.0" prefWidth="201.0" promptText="Search for room number here" />
+      <Button fx:id="createRoomType" layoutX="61.0" layoutY="450.0" mnemonicParsing="false" onAction="#createRoomType" prefHeight="27.0" prefWidth="201.0" style="-fx-background-color: #a9baa2;" text="Create room type">
          <font>
             <Font name="Modern No. 20" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="deleteRoom" layoutX="62.0" layoutY="495.0" mnemonicParsing="false" onAction="#deleteRoom" prefHeight="27.0" prefWidth="158.0" style="-fx-background-color: #e33124;" text="Delete" textFill="WHITE">
+      <Button fx:id="deleteRoomNumber" layoutX="277.0" layoutY="482.0" mnemonicParsing="false" onAction="#deleteRoomNumber" prefHeight="27.0" prefWidth="201.0" style="-fx-background-color: #e33124;" text="Delete" textFill="WHITE">
          <font>
             <Font name="Modern No. 20" size="14.0" />
          </font>
@@ -46,7 +45,24 @@
             <Insets />
          </opaqueInsets>
       </Button>
-      <Button fx:id="saveRoom" layoutX="422.0" layoutY="495.0" mnemonicParsing="false" onAction="#saveRoom" prefHeight="27.0" prefWidth="157.0" style="-fx-background-color: #658f57;" text="Save" textFill="WHITE">
+      <Label fx:id="StatusErrorLbl" layoutX="508.0" layoutY="261.0" prefHeight="17.0" prefWidth="223.0" />
+      <Button fx:id="saveRoom" layoutX="625.0" layoutY="482.0" mnemonicParsing="false" onAction="#saveRoom" prefHeight="27.0" prefWidth="102.0" style="-fx-background-color: #658f57;" text="Save" textFill="WHITE">
+         <font>
+            <Font name="Modern No. 20" size="14.0" />
+         </font>
+      </Button>
+      <Label fx:id="StatusCrudLbl" layoutX="508.0" layoutY="107.0" text="Create new room">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="roomType" layoutX="510.0" layoutY="144.0" prefHeight="26.0" prefWidth="223.0" promptText="Room type" />
+      <Button fx:id="createRoom" layoutX="277.0" layoutY="450.0" mnemonicParsing="false" onAction="#createRoom" prefHeight="27.0" prefWidth="201.0" style="-fx-background-color: #a9baa2;" text="Create room">
+         <font>
+            <Font name="Modern No. 20" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="deleteRoomType" layoutX="60.0" layoutY="482.0" mnemonicParsing="false" onAction="#deleteRoomType" prefHeight="27.0" prefWidth="201.0" style="-fx-background-color: #e33124;" text="Delete" textFill="WHITE">
          <font>
             <Font name="Modern No. 20" size="14.0" />
          </font>

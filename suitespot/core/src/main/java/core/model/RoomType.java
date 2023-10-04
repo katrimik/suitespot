@@ -4,11 +4,28 @@ public class RoomType {
 
     private String roomTypeId;
     private String name;
+    private int price;
 
     public RoomType() {
         this.roomTypeId = "";
         this.name = "";
+    }
 
+    public RoomType(String name, String roomTypeId, int price) {
+        this.name = name;
+        this.roomTypeId = roomTypeId;
+        this.price = price;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        if(price < 0){
+            throw new IllegalArgumentException("Can't be a negative price");
+        }
+        this.price = price;
     }
 
     public String getName() {
