@@ -10,7 +10,7 @@ public class Room {
     private String typeId;
     private final static int MIN_ROOMNUMBER = 101;
     private final static int MAX_ROOMNUMBER = 600;
-    private Set<String> bookedDates = new HashSet<String>();
+    private Set<LocalDate> bookedDates = new HashSet<LocalDate>();
 
     public Room(int roomNumber, String typeId) {
         this.roomNumber = roomNumber;
@@ -53,7 +53,7 @@ public class Room {
     }
 
     public Set<LocalDate> getBookedDates() {
-        Set<LocalDate> tempBookedDates = new HashSet<LocalDate>(bookedDates.stream().map(b -> LocalDate.parse(b)).toList());
+        Set<LocalDate> tempBookedDates = new HashSet<LocalDate>(bookedDates);
         return tempBookedDates;
     }
 
@@ -70,18 +70,18 @@ public class Room {
             throw new IllegalArgumentException("Date is aldready booked. Try another date.");
         }
         while (!date.isAfter(endDate)) {
-            bookedDates.add(date.toString());
+            bookedDates.add(date);
             date = date.plusDays(1);
         }
     }
 
     public boolean isAvailable(LocalDate date) {
-        return !bookedDates.contains(date.toString());
+        return !bookedDates.contains(date);
     }
 
     public boolean isAvailable(LocalDate startDate, LocalDate endDate) {
         while (!startDate.isAfter(endDate)) {
-            if (bookedDates.contains(startDate.toString())) {
+            if (bookedDates.contains(startDate)) {
                 return false;
             }
             startDate = startDate.plusDays(1);
