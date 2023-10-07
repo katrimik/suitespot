@@ -61,5 +61,7 @@
             <Font name="Modern No. 20" size="14.0" />
          </font>
       </Button>
+      <Label layoutX="63.0" layoutY="99.0" prefHeight="18.0" prefWidth="102.0" text="Room Type" />
+      <Label layoutX="277.0" layoutY="99.0" prefHeight="18.0" prefWidth="136.0" text="Room" />
    </children>
 </AnchorPane>
