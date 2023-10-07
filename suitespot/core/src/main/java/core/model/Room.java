@@ -92,6 +92,6 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Room nr " + getRoomNumber() + " is booked: " + getBookedDates() + " ";
+        return "Room nr " + getRoomNumber();
     }
 }

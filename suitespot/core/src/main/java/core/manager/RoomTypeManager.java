@@ -48,7 +48,7 @@ public class RoomTypeManager {
     public RoomType getRoomType(String roomTypeId) {
         List<RoomType> listRoomTypes = roomTypeFileManager.readFile();
         RoomType roomType = listRoomTypes.stream()
-                .filter(c -> c.getRoomTypeId() == roomTypeId)
+                .filter(c -> c.getRoomTypeId().equals(roomTypeId))
                 .findFirst()
                 .orElse(null);
 

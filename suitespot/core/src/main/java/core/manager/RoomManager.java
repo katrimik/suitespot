@@ -33,9 +33,7 @@ public class RoomManager {
         if (room.getRoomId() == null) { // creates a new room type
             room.setRoomId(createNewId());
             roomManager.appendFile(room);
-        } 
-        
-        else { // saves the changes made to an already existing room type
+        } else { // saves the changes made to an already existing room type
             ArrayList<Room> listRoom = roomManager.readFile();
 
             Room roomsToUpdate = listRoom.stream()

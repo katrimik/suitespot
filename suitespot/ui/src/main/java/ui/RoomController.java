@@ -26,7 +26,7 @@ public class RoomController implements Initializable {
     @FXML
     ListView<RoomType> roomTypeList;
     @FXML
-    TextField roomType, roomNumber, roomPrice, searchRoomType, searchRoomNumber;
+    TextField roomType, roomNumber, roomPrice;
     @FXML
     Button createRoom, createRoomType, deleteRoomNumber, deleteRoomType;
     @FXML
@@ -59,19 +59,20 @@ public class RoomController implements Initializable {
 
         refreshRoomTypes();
         refreshRoomNumbers();
+        createRoom.setDisable(true);
+        deleteRoomNumber.setDisable(true);
     }
 
-    @FXML
     public void selectedRoomChanged(Room r) {
         if (r == null) {
             StatusCrudLbl.setText("Create new room");
             return;
         }
-        ;
 
         StatusCrudLbl.setText("Edit room");
 
         String typeId = r.getTypeId();
+        System.out.println(typeId);
         RoomType roomTypeData = roomTypeManager.getRoomType(typeId);
 
         roomType.setText(roomTypeData.getName());
@@ -79,32 +80,41 @@ public class RoomController implements Initializable {
         roomPrice.setText(String.valueOf(roomTypeData.getPrice()));
     }
 
-    @FXML
     public void selectedRoomTypeChanged(RoomType rt) {
+        createRoom.setDisable(rt == null);
+        deleteRoomNumber.setDisable(rt == null);
+
         if (rt == null) {
-            StatusCrudLbl.setText("Create new room type");
             return;
         }
-        ;
 
         StatusCrudLbl.setText("Edit room");
 
         roomType.setText(rt.getName());
         roomNumber.setText("");
         roomPrice.setText(String.valueOf(rt.getPrice()));
-
+        refreshRoomNumbers();
     }
 
     private void resetFields() {
         roomType.setText("");
         roomNumber.setText("");
         roomPrice.setText("");
-        searchRoomType.setText("");
-        searchRoomNumber.setText("");
+
+        roomType.setDisable(false);
+        roomNumber.setDisable(false);
+        roomPrice.setDisable(false);
     }
 
     private void refreshRoomNumbers() {
+        RoomType roomType = roomTypeList.getSelectionModel().getSelectedItem();
+        if (roomType == null) {
+            roomNumberList.setItems(null);
+            return;
+        }
+
         List<Room> roomNumbers = roomManager.listRooms();
+        roomNumbers = roomNumbers.stream().filter(r -> r.getTypeId().equals(roomType.getRoomTypeId())).toList();
         ObservableList<Room> roomObservable = FXCollections.observableArrayList(roomNumbers);
         roomNumberList.setItems(roomObservable);
     }
@@ -117,19 +127,31 @@ public class RoomController implements Initializable {
 
     @FXML
     public void createRoom() {
-        resetFields();
+        roomNumber.setText("");
+        roomType.setDisable(true);
+        roomPrice.setDisable(true);
+        roomNumber.setDisable(false);
+        roomNumberList.getSelectionModel().select(null);
+        StatusCrudLbl.setText("Create room");
     }
 
     @FXML
     public void createRoomType() {
         resetFields();
+        roomType.setDisable(false);
+        roomPrice.setDisable(false);
+        roomNumber.setDisable(true);
+        roomTypeList.getSelectionModel().select(null);
+        roomNumberList.getSelectionModel().select(null);
+        StatusCrudLbl.setText("Create room type");
     }
 
     @FXML
     public void deleteRoomNumber() {
         Room listViewRoomNumber = roomNumberList.getSelectionModel().getSelectedItem();
-        if (listViewRoomNumber == null)
+        if (listViewRoomNumber == null) {
             return;
+        }
 
         roomManager.deleteRoom(listViewRoomNumber.getRoomId());
 
@@ -140,8 +162,9 @@ public class RoomController implements Initializable {
     @FXML
     public void deleteRoomType() {
         RoomType listViewRoomType = roomTypeList.getSelectionModel().getSelectedItem();
-        if (listViewRoomType == null)
+        if (listViewRoomType == null) {
             return;
+        }
 
         roomTypeManager.deleteRoomType(listViewRoomType.getRoomTypeId());
 
@@ -153,15 +176,22 @@ public class RoomController implements Initializable {
     @FXML
     public void saveRoom() {
 
-        RoomType roomTypeObject;
-
-        if (roomTypeList.getSelectionModel().getSelectedItem() == null) {
-            roomTypeObject = new RoomType(roomType.getText(), null, Integer.parseInt(roomPrice.getText()));
-        } else {
-            roomTypeObject = roomTypeList.getSelectionModel().getSelectedItem();
+        try {
+            if (Integer.parseInt(roomPrice.getText()) < 0) {
+                throw new IllegalArgumentException("Price under 0");
+            }
+        } catch (Exception e) {
+            StatusErrorLbl.setText("Price must be a positive number");
+            return;
         }
 
-        String roomTypeId = "";
+        String roomTypeId = null;
+        if (roomTypeList.getSelectionModel().getSelectedItem() != null) {
+            roomTypeId = roomTypeList.getSelectionModel().getSelectedItem().getRoomTypeId();
+        }
+
+        RoomType roomTypeObject = new RoomType(roomType.getText(), roomTypeId, Integer.parseInt(roomPrice.getText()));
+
         try {
             roomTypeId = roomTypeManager.saveRoomType(roomTypeObject);
         } catch (Exception e) {
@@ -169,12 +199,9 @@ public class RoomController implements Initializable {
         }
 
         if (!roomTypeId.isEmpty() && !roomNumber.getText().trim().isEmpty() && !roomPrice.getText().trim().isEmpty()) {
-
-            Room room;
-            if (roomNumberList.getSelectionModel().getSelectedItem() == null) {
-                room = new Room(Integer.parseInt(roomNumber.getText()), roomTypeId);
-            } else {
-                room = roomNumberList.getSelectionModel().getSelectedItem();
+            Room room = new Room(Integer.parseInt(roomNumber.getText()), roomTypeId);
+            if (roomNumberList.getSelectionModel().getSelectedItem() != null) {
+                room.setRoomId(roomNumberList.getSelectionModel().getSelectedItem().getRoomId());
             }
 
             try {
@@ -190,26 +217,7 @@ public class RoomController implements Initializable {
     }
 
     @FXML
-    public void searchRoomNumber() {
-        roomNumberList.getItems().stream()
-                .filter(room -> room.getRoomNumber() == Integer.parseInt(searchRoomNumber.getText()))
-                .findAny();
-
-        refreshRoomNumbers();
+    public void goToMainPage() {
+        App.SetView("App");
     }
-
-    @FXML
-    public void searchRoomType() {
-        roomTypeList.getItems().stream()
-                .filter(rt -> rt.getName() == searchRoomType.getText())
-                .findAny();
-
-        refreshRoomTypes();
-    }
-
-    @FXML
-    public void previousPage() {
-        System.out.println("hei");
-    }
-
 }

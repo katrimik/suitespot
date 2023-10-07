@@ -51,9 +51,7 @@ public class CustomerController implements Initializable {
 
     @FXML
     public void goToMainPage() {
-        AppController appController = new AppController();
-        appController.openFXML("App");
-        //AppController.GoToMainPage();
+        App.SetView("App");
     }
 
     @FXML

@@ -52,4 +52,8 @@ public class RoomType {
         this.roomTypeId = roomTypeId;
     }
 
+    @Override
+    public String toString() {
+        return "RoomType " + name;
+    }
 }
