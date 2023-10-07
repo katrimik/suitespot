@@ -50,6 +50,13 @@ public class CustomerController implements Initializable {
     }
 
     @FXML
+    public void goToMainPage() {
+        AppController appController = new AppController();
+        appController.openFXML("App");
+        //AppController.GoToMainPage();
+    }
+
+    @FXML
     public void selectedCustomerChanged(Customer c) {
         if (c == null) {
             StatusCrudLbl.setText("Create new customer");
