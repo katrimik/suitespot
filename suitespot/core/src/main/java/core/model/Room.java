@@ -9,22 +9,22 @@ public class Room {
     private int roomNumber;
     private String typeId;
     private final static int MIN_ROOMNUMBER = 101;
-    private final static int MAX_ROOMNUMBER = 600;
+    private final static int MAX_ROOMNUMBER = 599;
     private Set<LocalDate> bookedDates = new HashSet<LocalDate>();
 
     public Room(int roomNumber, String typeId) {
-        this.roomNumber = roomNumber;
-        this.typeId = typeId;
+        this.setRoomNumber(roomNumber);
+        this.setTypeId(typeId);
     }
 
     public Room() {
     } // need an empty constructor to work with json
 
-    public String getRoomId() {
+    public String getId() {
         return id;
     }
 
-    public void setRoomId(String id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -34,7 +34,7 @@ public class Room {
 
     public void setRoomNumber(int roomNumber) {
         if (roomNumber < MIN_ROOMNUMBER || roomNumber > MAX_ROOMNUMBER) {
-            throw new IllegalArgumentException("Not a valid roomnumber");
+            throw new IllegalArgumentException("Room number must be in interval [101, 599]");
         }
         this.roomNumber = roomNumber;
     }

@@ -2,19 +2,19 @@ package core.model;
 
 public class RoomType {
 
-    private String roomTypeId;
+    private String id;
     private String name;
     private int price;
 
     public RoomType() {
-        this.roomTypeId = "";
+        this.id = "";
         this.name = "";
     }
 
-    public RoomType(String name, String roomTypeId, int price) {
-        this.name = name;
-        this.roomTypeId = roomTypeId;
-        this.price = price;
+    public RoomType(String name, String id, int price) {
+        this.setName(name);
+        this.setId(id);
+        this.setPrice(price);
     }
 
     public int getPrice() {
@@ -39,21 +39,21 @@ public class RoomType {
     public void setName(String name) {
         if (!validateName(name)) {
             throw new IllegalArgumentException("Not a room type.");
-
         }
+
         this.name = name;
     }
 
-    public String getRoomTypeId() {
-        return this.roomTypeId;
+    public String getId() {
+        return this.id;
     }
 
-    public void setId(String roomTypeId) {
-        this.roomTypeId = roomTypeId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
-        return "RoomType " + name;
+        return name;
     }
 }

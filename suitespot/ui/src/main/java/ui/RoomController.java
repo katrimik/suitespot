@@ -114,7 +114,7 @@ public class RoomController implements Initializable {
         }
 
         List<Room> roomNumbers = roomManager.listRooms();
-        roomNumbers = roomNumbers.stream().filter(r -> r.getTypeId().equals(roomType.getRoomTypeId())).toList();
+        roomNumbers = roomNumbers.stream().filter(r -> r.getTypeId().equals(roomType.getId())).toList();
         ObservableList<Room> roomObservable = FXCollections.observableArrayList(roomNumbers);
         roomNumberList.setItems(roomObservable);
     }
@@ -153,7 +153,7 @@ public class RoomController implements Initializable {
             return;
         }
 
-        roomManager.deleteRoom(listViewRoomNumber.getRoomId());
+        roomManager.deleteRoom(listViewRoomNumber.getId());
 
         refreshRoomNumbers();
         resetFields();
@@ -166,7 +166,7 @@ public class RoomController implements Initializable {
             return;
         }
 
-        roomTypeManager.deleteRoomType(listViewRoomType.getRoomTypeId());
+        roomTypeManager.deleteRoomType(listViewRoomType.getId());
 
         refreshRoomNumbers();
         refreshRoomTypes();
@@ -175,45 +175,79 @@ public class RoomController implements Initializable {
 
     @FXML
     public void saveRoom() {
-
-        try {
-            if (Integer.parseInt(roomPrice.getText()) < 0) {
-                throw new IllegalArgumentException("Price under 0");
-            }
-        } catch (Exception e) {
-            StatusErrorLbl.setText("Price must be a positive number");
-            return;
-        }
+        StatusErrorLbl.setText("");
 
         String roomTypeId = null;
         if (roomTypeList.getSelectionModel().getSelectedItem() != null) {
-            roomTypeId = roomTypeList.getSelectionModel().getSelectedItem().getRoomTypeId();
+            roomTypeId = roomTypeList.getSelectionModel().getSelectedItem().getId();
         }
 
-        RoomType roomTypeObject = new RoomType(roomType.getText(), roomTypeId, Integer.parseInt(roomPrice.getText()));
+        try {
+            Integer.parseInt(roomPrice.getText());
+        } catch (Exception e) {
+            StatusErrorLbl.setText("Room price must be a number");
+            refreshData();
+            return;
+        }
+
+        RoomType roomTypeObject = null;
+        try {
+            roomTypeObject = new RoomType(roomType.getText(), roomTypeId, Integer.parseInt(roomPrice.getText()));
+        } catch (Exception e) {
+            StatusErrorLbl.setText(e.getLocalizedMessage());
+            refreshData();
+            return;
+        }
 
         try {
             roomTypeId = roomTypeManager.saveRoomType(roomTypeObject);
         } catch (Exception e) {
             StatusErrorLbl.setText(e.getLocalizedMessage());
+            refreshData();
+            return;
         }
 
-        if (!roomTypeId.isEmpty() && !roomNumber.getText().trim().isEmpty() && !roomPrice.getText().trim().isEmpty()) {
-            Room room = new Room(Integer.parseInt(roomNumber.getText()), roomTypeId);
-            if (roomNumberList.getSelectionModel().getSelectedItem() != null) {
-                room.setRoomId(roomNumberList.getSelectionModel().getSelectedItem().getRoomId());
-            }
-
-            try {
-                roomManager.saveRoom(room);
-            } catch (Exception e) {
-                StatusErrorLbl.setText(e.getLocalizedMessage());
-            }
+        if (roomNumber.getText().trim().equals("")) {
+            refreshData();
+            return;
         }
 
+        try {
+            Integer.parseInt(roomNumber.getText());
+        } catch (Exception e) {
+            StatusErrorLbl.setText("Room number must be a number");
+            refreshData();
+            return;
+        }
+
+        Room room = null;
+        try {
+            room = new Room(Integer.parseInt(roomNumber.getText()), roomTypeId);
+        } catch (Exception e) {
+            StatusErrorLbl.setText(e.getLocalizedMessage());
+            refreshData();
+            return;
+        }
+
+        if (roomNumberList.getSelectionModel().getSelectedItem() != null) {
+            room.setId(roomNumberList.getSelectionModel().getSelectedItem().getId());
+        }
+
+        try {
+            roomManager.saveRoom(room);
+        } catch (Exception e) {
+            StatusErrorLbl.setText(e.getLocalizedMessage());
+            refreshData();
+            return;
+        }
+
+        refreshData();
+        resetFields();
+    }
+
+    private void refreshData() {
         refreshRoomTypes();
         refreshRoomNumbers();
-        resetFields();
     }
 
     @FXML

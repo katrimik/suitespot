@@ -21,14 +21,14 @@ public class RoomTypeManager {
     }
 
     public String saveRoomType(RoomType roomType) {
-        if (roomType.getRoomTypeId() == null) { // creates a new room type
+        if (roomType.getId() == null) { // creates a new room type
             roomType.setId(createNewId());
             roomTypeFileManager.appendFile(roomType);
         } else { // saves the changes made to an already existing room type
             ArrayList<RoomType> listRoomTypes = roomTypeFileManager.readFile();
 
             RoomType roomTypeToUpdate = listRoomTypes.stream()
-                    .filter(rt -> rt.getRoomTypeId().equals(roomType.getRoomTypeId()))
+                    .filter(rt -> rt.getId().equals(roomType.getId()))
                     .findFirst()
                     .orElse(null);
 
@@ -41,14 +41,14 @@ public class RoomTypeManager {
             roomTypeFileManager.writeFile(listRoomTypes);
         }
 
-        return roomType.getRoomTypeId();
+        return roomType.getId();
 
     }
 
     public RoomType getRoomType(String roomTypeId) {
         List<RoomType> listRoomTypes = roomTypeFileManager.readFile();
         RoomType roomType = listRoomTypes.stream()
-                .filter(c -> c.getRoomTypeId().equals(roomTypeId))
+                .filter(c -> c.getId().equals(roomTypeId))
                 .findFirst()
                 .orElse(null);
 
@@ -64,7 +64,7 @@ public class RoomTypeManager {
         ArrayList<RoomType> tmpRoomTypes = new ArrayList<RoomType>();
 
         for (RoomType rt : listRoomTypes) {
-            if (!(rt.getRoomTypeId().equals(roomTypeId))) {
+            if (!(rt.getId().equals(roomTypeId))) {
                 tmpRoomTypes.add(rt);
             }
         }
@@ -74,10 +74,4 @@ public class RoomTypeManager {
         RoomManager roomManager = Manager.GetRoomManager();
         roomManager.deleteAllInRoomType(roomTypeId);
     }
-
-
-    public static void main(String[] args){
-        System.out.println("hei");
-    }
-
 }
