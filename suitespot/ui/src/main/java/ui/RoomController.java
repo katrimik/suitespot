@@ -59,11 +59,17 @@ public class RoomController implements Initializable {
 
         refreshRoomTypes();
         refreshRoomNumbers();
+        resetFields();
         createRoom.setDisable(true);
         deleteRoomNumber.setDisable(true);
     }
 
     public void selectedRoomChanged(Room r) {
+        roomType.setDisable(r == null);
+        roomNumber.setDisable(r == null);
+        roomPrice.setDisable(r == null);
+        deleteRoomNumber.setDisable(r == null);
+
         if (r == null) {
             StatusCrudLbl.setText("Create new room");
             return;
@@ -82,7 +88,6 @@ public class RoomController implements Initializable {
 
     public void selectedRoomTypeChanged(RoomType rt) {
         createRoom.setDisable(rt == null);
-        deleteRoomNumber.setDisable(rt == null);
 
         if (rt == null) {
             return;
@@ -90,10 +95,13 @@ public class RoomController implements Initializable {
 
         StatusCrudLbl.setText("Edit room");
 
+        refreshRoomNumbers();
+
         roomType.setText(rt.getName());
         roomNumber.setText("");
         roomPrice.setText(String.valueOf(rt.getPrice()));
-        refreshRoomNumbers();
+        roomType.setDisable(false);
+        roomPrice.setDisable(false);
     }
 
     private void resetFields() {
@@ -101,9 +109,9 @@ public class RoomController implements Initializable {
         roomNumber.setText("");
         roomPrice.setText("");
 
-        roomType.setDisable(false);
-        roomNumber.setDisable(false);
-        roomPrice.setDisable(false);
+        roomType.setDisable(true);
+        roomNumber.setDisable(true);
+        roomPrice.setDisable(true);
     }
 
     private void refreshRoomNumbers() {
@@ -127,22 +135,19 @@ public class RoomController implements Initializable {
 
     @FXML
     public void createRoom() {
-        roomNumber.setText("");
-        roomType.setDisable(true);
-        roomPrice.setDisable(true);
-        roomNumber.setDisable(false);
         roomNumberList.getSelectionModel().select(null);
+        roomNumber.setText("");
+        roomNumber.setDisable(false);
         StatusCrudLbl.setText("Create room");
     }
 
     @FXML
     public void createRoomType() {
         resetFields();
-        roomType.setDisable(false);
-        roomPrice.setDisable(false);
-        roomNumber.setDisable(true);
         roomTypeList.getSelectionModel().select(null);
         roomNumberList.getSelectionModel().select(null);
+        roomType.setDisable(false);
+        roomPrice.setDisable(false);
         StatusCrudLbl.setText("Create room type");
     }
 
@@ -186,7 +191,6 @@ public class RoomController implements Initializable {
             Integer.parseInt(roomPrice.getText());
         } catch (Exception e) {
             StatusErrorLbl.setText("Room price must be a number");
-            refreshData();
             return;
         }
 
@@ -195,20 +199,6 @@ public class RoomController implements Initializable {
             roomTypeObject = new RoomType(roomType.getText(), roomTypeId, Integer.parseInt(roomPrice.getText()));
         } catch (Exception e) {
             StatusErrorLbl.setText(e.getLocalizedMessage());
-            refreshData();
-            return;
-        }
-
-        try {
-            roomTypeId = roomTypeManager.saveRoomType(roomTypeObject);
-        } catch (Exception e) {
-            StatusErrorLbl.setText(e.getLocalizedMessage());
-            refreshData();
-            return;
-        }
-
-        if (roomNumber.getText().trim().equals("")) {
-            refreshData();
             return;
         }
 
@@ -216,38 +206,39 @@ public class RoomController implements Initializable {
             Integer.parseInt(roomNumber.getText());
         } catch (Exception e) {
             StatusErrorLbl.setText("Room number must be a number");
-            refreshData();
             return;
         }
 
         Room room = null;
         try {
-            room = new Room(Integer.parseInt(roomNumber.getText()), roomTypeId);
+            if (!roomNumber.getText().trim().equals("")) {
+                room = new Room(Integer.parseInt(roomNumber.getText()), null);
+            }
         } catch (Exception e) {
             StatusErrorLbl.setText(e.getLocalizedMessage());
-            refreshData();
             return;
-        }
-
-        if (roomNumberList.getSelectionModel().getSelectedItem() != null) {
-            room.setId(roomNumberList.getSelectionModel().getSelectedItem().getId());
         }
 
         try {
-            roomManager.saveRoom(room);
+            roomTypeId = roomTypeManager.saveRoomType(roomTypeObject);
+
+            if (room != null) {
+
+                if (roomNumberList.getSelectionModel().getSelectedItem() == null) {
+                    room.setId(roomTypeId);
+                } else {
+                    room.setId(roomNumberList.getSelectionModel().getSelectedItem().getId());
+                }
+
+                roomManager.saveRoom(room);
+            }
         } catch (Exception e) {
             StatusErrorLbl.setText(e.getLocalizedMessage());
-            refreshData();
-            return;
         }
 
-        refreshData();
-        resetFields();
-    }
-
-    private void refreshData() {
         refreshRoomTypes();
         refreshRoomNumbers();
+        resetFields();
     }
 
     @FXML

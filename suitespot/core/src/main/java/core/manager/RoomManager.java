@@ -30,11 +30,12 @@ public class RoomManager {
     }
 
     public String saveRoom(Room room) {
+        boolean isRoomNumberAvailable = isRoomNumberAvailable(room.getRoomNumber(), room.getId());
+        if (!isRoomNumberAvailable) {
+            throw new IllegalArgumentException("Room number already taken");
+        }
+
         if (room.getId() == null) { // creates a new room type
-            boolean isRoomNumberAvailable = isRoomNumberAvailable(room.getRoomNumber());
-            if (!isRoomNumberAvailable) {
-                throw new IllegalArgumentException("Room number already taken");
-            }
             room.setId(createNewId());
             roomManager.appendFile(room);
         } else { // saves the changes made to an already existing room type
@@ -98,8 +99,8 @@ public class RoomManager {
         roomManager.writeFile(tmpRooms);
     }
 
-    public boolean isRoomNumberAvailable(int roomNumber) {
+    public boolean isRoomNumberAvailable(int roomNumber, String roomId) {
         List<Room> rooms = listRooms();
-        return !rooms.stream().anyMatch(r -> r.getRoomNumber() == roomNumber);
+        return !rooms.stream().anyMatch(r -> r.getRoomNumber() == roomNumber && r.getId() != roomId);
     }
 }
