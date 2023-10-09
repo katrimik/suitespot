@@ -21,6 +21,11 @@ public class RoomTypeManager {
     }
 
     public String saveRoomType(RoomType roomType) {
+        boolean isRoomTypeAvailable = isRoomTypeAvailable(roomType.getName(), roomType.getId());
+        if (!isRoomTypeAvailable) {
+            throw new IllegalArgumentException("Room type name is already taken");
+        }
+
         if (roomType.getId() == null) { // creates a new room type
             roomType.setId(createNewId());
             roomTypeFileManager.appendFile(roomType);
@@ -33,7 +38,7 @@ public class RoomTypeManager {
                     .orElse(null);
 
             if (roomTypeToUpdate == null) {
-                throw new IllegalArgumentException("Not a valid id.");
+                throw new IllegalArgumentException("Not a valid room type id.");
             }
 
             int roomTypeIndex = listRoomTypes.indexOf(roomTypeToUpdate);
@@ -73,5 +78,11 @@ public class RoomTypeManager {
 
         RoomManager roomManager = Manager.GetRoomManager();
         roomManager.deleteAllInRoomType(roomTypeId);
+    }
+
+
+    public boolean isRoomTypeAvailable(String name, String id) {
+        List<RoomType> roomTypes = listRoomTypes();
+        return !roomTypes.stream().anyMatch(r -> r.getName().trim().toLowerCase().equals(name.trim().toLowerCase()) && !r.getId().equals(id));
     }
 }

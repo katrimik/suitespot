@@ -101,6 +101,6 @@ public class RoomManager {
 
     public boolean isRoomNumberAvailable(int roomNumber, String roomId) {
         List<Room> rooms = listRooms();
-        return !rooms.stream().anyMatch(r -> r.getRoomNumber() == roomNumber && r.getId() != roomId);
+        return !rooms.stream().anyMatch(r -> r.getRoomNumber() == roomNumber && !r.getId().equals(roomId));
     }
 }

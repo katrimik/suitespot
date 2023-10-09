@@ -11,6 +11,7 @@ public class Room {
     private final static int MIN_ROOMNUMBER = 101;
     private final static int MAX_ROOMNUMBER = 599;
     private Set<LocalDate> bookedDates = new HashSet<LocalDate>();
+    private String customStringFormatter = "";
 
     public Room(int roomNumber, String typeId) {
         this.setRoomNumber(roomNumber);
@@ -22,6 +23,14 @@ public class Room {
 
     public String getId() {
         return id;
+    }
+
+    public String getCustomStringFormatter() {
+        return customStringFormatter;
+    }
+
+    public void setCustomStringFormatter(String value) {
+        customStringFormatter = value;
     }
 
     public void setId(String id) {
@@ -92,6 +101,10 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Room nr " + getRoomNumber();
+        if (customStringFormatter == null || customStringFormatter.trim().equals("")) {
+            return "" + getRoomNumber();
+        }
+
+        return customStringFormatter.replace("%1", String.valueOf(getRoomNumber()));
     }
 }

@@ -38,7 +38,7 @@ public class RoomType {
 
     public void setName(String name) {
         if (!validateName(name)) {
-            throw new IllegalArgumentException("Not a room type.");
+            throw new IllegalArgumentException("Room type name can only be letters, space and hyphen");
         }
 
         this.name = name;

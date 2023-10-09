@@ -9,28 +9,32 @@ import core.manager.RoomManager;
 import core.manager.RoomTypeManager;
 import core.model.Room;
 import core.model.RoomType;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 
 public class RoomController implements Initializable {
     @FXML
-    ListView<Room> roomNumberList;
+    ListView<RoomType> roomTypeListView;
     @FXML
-    ListView<RoomType> roomTypeList;
+    ListView<Room> roomListView;
     @FXML
-    TextField roomType, roomNumber, roomPrice;
+    TextField roomTypeNameTxt;
     @FXML
-    Button createRoom, createRoomType, deleteRoomNumber, deleteRoomType;
+    Spinner<Integer> roomTypePriceTxt, roomNumberTxt;
     @FXML
-    Label StatusErrorLbl, StatusCrudLbl;
+    ComboBox<RoomType> roomTypeComboBox;
+    @FXML
+    Label roomTypeErrorLbl, roomErrorLbl;
+    @FXML
+    Button roomTypeDeleteBtn, roomDeleteBtn;
 
     private final RoomManager roomManager;
     private final RoomTypeManager roomTypeManager;
@@ -38,207 +42,149 @@ public class RoomController implements Initializable {
     public RoomController() {
         roomManager = Manager.GetRoomManager();
         roomTypeManager = Manager.GetRoomTypeManager();
-
     }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        roomNumberList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Room>() {
-            @Override
-            public void changed(ObservableValue<? extends Room> observable, Room oldValue, Room newValue) {
-                selectedRoomChanged(newValue);
-            }
-        });
+        roomTypeListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> selectedRoomTypeChanged(newValue));
+        roomListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> selectedRoomChanged(newValue));
+        loadRoomTypes();
+        loadRooms();
 
-        roomTypeList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<RoomType>() {
-            @Override
-            public void changed(ObservableValue<? extends RoomType> observable, RoomType oldValue, RoomType newValue) {
-                selectedRoomTypeChanged(newValue);
-            }
-        });
+        roomTypePriceTxt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000000, 0));
+        roomNumberTxt.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(101, 599, 101));
 
-        refreshRoomTypes();
-        refreshRoomNumbers();
-        resetFields();
-        createRoom.setDisable(true);
-        deleteRoomNumber.setDisable(true);
+        roomTypeErrorLbl.setText("");
+        roomErrorLbl.setText("");
+
+        roomTypeDeleteBtn.setDisable(true);
+        roomDeleteBtn.setDisable(true);
     }
 
-    public void selectedRoomChanged(Room r) {
-        roomType.setDisable(r == null);
-        roomNumber.setDisable(r == null);
-        roomPrice.setDisable(r == null);
-        deleteRoomNumber.setDisable(r == null);
+    public void selectedRoomTypeChanged(RoomType roomType) {
+        roomTypeNameTxt.setText(roomType == null ? null : roomType.getName());
+        roomTypePriceTxt.getValueFactory().setValue(roomType == null ? 0 : roomType.getPrice());
+        roomTypeDeleteBtn.setDisable(roomType == null);
+    }
 
-        if (r == null) {
-            StatusCrudLbl.setText("Create new room");
-            return;
+    public void selectedRoomChanged(Room room) {
+        roomNumberTxt.getValueFactory().setValue(room == null ? 101 : room.getRoomNumber());
+
+        RoomType roomType = null;
+        if (room != null) {
+            roomType = roomTypeManager.getRoomType(room.getTypeId());
         }
 
-        StatusCrudLbl.setText("Edit room");
-
-        String typeId = r.getTypeId();
-        System.out.println(typeId);
-        RoomType roomTypeData = roomTypeManager.getRoomType(typeId);
-
-        roomType.setText(roomTypeData.getName());
-        roomNumber.setText(String.valueOf(r.getRoomNumber()));
-        roomPrice.setText(String.valueOf(roomTypeData.getPrice()));
+        roomTypeComboBox.getSelectionModel().select(roomType);
+        roomDeleteBtn.setDisable(room == null);
     }
 
-    public void selectedRoomTypeChanged(RoomType rt) {
-        createRoom.setDisable(rt == null);
-
-        if (rt == null) {
-            return;
-        }
-
-        StatusCrudLbl.setText("Edit room");
-
-        refreshRoomNumbers();
-
-        roomType.setText(rt.getName());
-        roomNumber.setText("");
-        roomPrice.setText(String.valueOf(rt.getPrice()));
-        roomType.setDisable(false);
-        roomPrice.setDisable(false);
-    }
-
-    private void resetFields() {
-        roomType.setText("");
-        roomNumber.setText("");
-        roomPrice.setText("");
-
-        roomType.setDisable(true);
-        roomNumber.setDisable(true);
-        roomPrice.setDisable(true);
-    }
-
-    private void refreshRoomNumbers() {
-        RoomType roomType = roomTypeList.getSelectionModel().getSelectedItem();
-        if (roomType == null) {
-            roomNumberList.setItems(null);
-            return;
-        }
-
-        List<Room> roomNumbers = roomManager.listRooms();
-        roomNumbers = roomNumbers.stream().filter(r -> r.getTypeId().equals(roomType.getId())).toList();
-        ObservableList<Room> roomObservable = FXCollections.observableArrayList(roomNumbers);
-        roomNumberList.setItems(roomObservable);
-    }
-
-    private void refreshRoomTypes() {
+    private void loadRoomTypes() {
         List<RoomType> roomTypes = roomTypeManager.listRoomTypes();
-        ObservableList<RoomType> roomTypeObservable = FXCollections.observableArrayList(roomTypes);
-        roomTypeList.setItems(roomTypeObservable);
+        roomTypeListView.setItems(FXCollections.observableArrayList(roomTypes));
+        roomTypeComboBox.setItems(FXCollections.observableArrayList(roomTypes));
     }
 
-    @FXML
-    public void createRoom() {
-        roomNumberList.getSelectionModel().select(null);
-        roomNumber.setText("");
-        roomNumber.setDisable(false);
-        StatusCrudLbl.setText("Create room");
+    private void loadRooms() {
+        List<RoomType> roomTypes = roomTypeManager.listRoomTypes();
+
+        List<Room> rooms = roomManager.listRooms();
+        rooms = rooms.stream()
+            .sorted((a, b) -> a.getRoomNumber() - b.getRoomNumber())
+            .toList();
+
+        rooms.forEach(r -> {
+            RoomType roomType = roomTypes.stream().filter(rt -> rt.getId().equals(r.getTypeId())).findFirst().orElse(null);
+            String roomTypeName = roomType == null ? "no room type" : roomType.getName();
+            r.setCustomStringFormatter("%1 " + "(" + roomTypeName + ")");
+        });
+
+        roomListView.setItems(FXCollections.observableArrayList(rooms));
     }
 
-    @FXML
-    public void createRoomType() {
-        resetFields();
-        roomTypeList.getSelectionModel().select(null);
-        roomNumberList.getSelectionModel().select(null);
-        roomType.setDisable(false);
-        roomPrice.setDisable(false);
-        StatusCrudLbl.setText("Create room type");
+    private RoomType getSelectedRoomType() {
+        return roomTypeListView.getSelectionModel().getSelectedItem();
     }
 
-    @FXML
-    public void deleteRoomNumber() {
-        Room listViewRoomNumber = roomNumberList.getSelectionModel().getSelectedItem();
-        if (listViewRoomNumber == null) {
-            return;
-        }
+    private Room getSelectedRoom() {
+        return roomListView.getSelectionModel().getSelectedItem();
+    }
 
-        roomManager.deleteRoom(listViewRoomNumber.getId());
+    private void clearRoomType() {
+        roomTypeListView.getSelectionModel().select(null);
+        roomTypeNameTxt.setText(null);
+        roomTypePriceTxt.getValueFactory().setValue(0);
+        roomTypeErrorLbl.setText("");
+    }
 
-        refreshRoomNumbers();
-        resetFields();
+    private void clearRoom() {
+        roomListView.getSelectionModel().select(null);
+        roomNumberTxt.getValueFactory().setValue(101);;
+        roomTypeComboBox.getSelectionModel().select(null);
+        roomErrorLbl.setText("");
     }
 
     @FXML
     public void deleteRoomType() {
-        RoomType listViewRoomType = roomTypeList.getSelectionModel().getSelectedItem();
-        if (listViewRoomType == null) {
+        roomTypeManager.deleteRoomType(getSelectedRoomType().getId());
+        loadRoomTypes();
+        clearRoomType();
+    }
+
+    @FXML
+    public void createRoomType() {
+        clearRoomType();
+    }
+
+    @FXML
+    public void saveRoomType() {
+        try {
+            RoomType existingRoomType = getSelectedRoomType();
+            String roomTypeId = existingRoomType == null ? null : existingRoomType.getId();
+            RoomType roomType = new RoomType(roomTypeNameTxt.getText(), roomTypeId, roomTypePriceTxt.getValue());
+            roomTypeManager.saveRoomType(roomType);
+        } catch (Exception e) {
+            roomTypeErrorLbl.setText(e.getLocalizedMessage());
             return;
         }
 
-        roomTypeManager.deleteRoomType(listViewRoomType.getId());
+        loadRoomTypes();
+        clearRoomType();
+    }
 
-        refreshRoomNumbers();
-        refreshRoomTypes();
-        resetFields();
+    @FXML
+    public void deleteRoom() {
+        roomManager.deleteRoom(getSelectedRoom().getId());
+        loadRooms();
+        clearRoom();
+    }
+
+    @FXML
+    public void createRoom() {
+        clearRoom();
     }
 
     @FXML
     public void saveRoom() {
-        StatusErrorLbl.setText("");
-
-        String roomTypeId = null;
-        if (roomTypeList.getSelectionModel().getSelectedItem() != null) {
-            roomTypeId = roomTypeList.getSelectionModel().getSelectedItem().getId();
-        }
-
         try {
-            Integer.parseInt(roomPrice.getText());
-        } catch (Exception e) {
-            StatusErrorLbl.setText("Room price must be a number");
-            return;
-        }
+            Room existingRoom = getSelectedRoom();
+            String roomId = existingRoom == null ? null : existingRoom.getId();
 
-        RoomType roomTypeObject = null;
-        try {
-            roomTypeObject = new RoomType(roomType.getText(), roomTypeId, Integer.parseInt(roomPrice.getText()));
-        } catch (Exception e) {
-            StatusErrorLbl.setText(e.getLocalizedMessage());
-            return;
-        }
-
-        try {
-            Integer.parseInt(roomNumber.getText());
-        } catch (Exception e) {
-            StatusErrorLbl.setText("Room number must be a number");
-            return;
-        }
-
-        Room room = null;
-        try {
-            if (!roomNumber.getText().trim().equals("")) {
-                room = new Room(Integer.parseInt(roomNumber.getText()), null);
+            RoomType roomType = roomTypeComboBox.getSelectionModel().getSelectedItem();
+            if (roomType == null) {
+                throw new IllegalArgumentException("You must select a room-type");
             }
+
+            Room room = new Room(roomNumberTxt.getValue(), roomType.getId());
+            room.setId(roomId);
+            roomManager.saveRoom(room);
         } catch (Exception e) {
-            StatusErrorLbl.setText(e.getLocalizedMessage());
+            roomErrorLbl.setText(e.getLocalizedMessage());
             return;
         }
 
-        try {
-            roomTypeId = roomTypeManager.saveRoomType(roomTypeObject);
-
-            if (room != null) {
-
-                if (roomNumberList.getSelectionModel().getSelectedItem() == null) {
-                    room.setId(roomTypeId);
-                } else {
-                    room.setId(roomNumberList.getSelectionModel().getSelectedItem().getId());
-                }
-
-                roomManager.saveRoom(room);
-            }
-        } catch (Exception e) {
-            StatusErrorLbl.setText(e.getLocalizedMessage());
-        }
-
-        refreshRoomTypes();
-        refreshRoomNumbers();
-        resetFields();
+        loadRooms();
+        clearRoom();
     }
 
     @FXML
