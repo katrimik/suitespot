@@ -67,7 +67,8 @@ public class RoomManager implements IRoomManager {
   /**
    * Deletes one room with the given id
    * 
-   * @param roomId
+   * @param roomId id of room
+   * 
    */
   @Override
   public void deleteRoom(String roomId) {
@@ -86,7 +87,8 @@ public class RoomManager implements IRoomManager {
   /**
    * Deletes all rooms of given room type-id
    * 
-   * @param roomTypeId
+   * @param roomTypeId id of room type
+   * 
    */
   public void deleteAllInRoomType(String roomTypeId) {
     ArrayList<Room> listRoom = roomManager.readFile();

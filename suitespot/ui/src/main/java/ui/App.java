@@ -2,7 +2,6 @@ package ui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -22,20 +21,28 @@ public class App extends Application {
   private static AnchorPane rootAnchor;
   private static String currentViewName;
 
+  private static void writeCurrentViewName(String viewName) {
+    currentViewName = viewName;
+  }
+
+  private static void writeRootAncher(AnchorPane anchor) {
+    rootAnchor = anchor;
+  }
+
   @Override
   public void start(Stage stage) throws IOException {
     List<String> viewNames = Arrays.asList("App", "Room", "Customer");
-    viewNames.forEach(viewName -> LoadView(viewName));
+    viewNames.forEach(viewName -> loadView(viewName));
 
-    rootAnchor = FXMLLoader.load(this.getClass().getResource("Layout.fxml"));
+    writeRootAncher(FXMLLoader.load(this.getClass().getResource("Layout.fxml")));
 
     rootAnchor.getChildren().add(views.get("App"));
-    currentViewName = "App";
+    writeCurrentViewName("App");
     stage.setScene(new Scene(rootAnchor));
     stage.show();
   }
 
-  private void LoadView(String viewName) {
+  private void loadView(String viewName) {
     try {
       AnchorPane view = FXMLLoader.load(getClass().getResource(viewName + ".fxml"));
       views.put(viewName, view);
@@ -45,14 +52,14 @@ public class App extends Application {
     }
   }
 
-  public static void SetView(String viewName) {
+  public static void setView(String viewName) {
     if (!views.containsKey(viewName)) {
       throw new IllegalArgumentException("viewName does not correspond to a stored view");
     }
 
     rootAnchor.getChildren().remove(views.get(currentViewName));
     rootAnchor.getChildren().add(views.get(viewName));
-    currentViewName = viewName;
+    writeCurrentViewName(viewName);
   }
 
   public static void main(String[] args) {

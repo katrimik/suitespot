@@ -59,7 +59,7 @@ public class CustomerManager {
   public Customer readCustomer(String id) {
     List<Customer> listCustomers = customerFileManager.readFile();
     Customer customer = listCustomers.stream()
-        .filter(c -> c.getId() == id)
+        .filter(c -> c.getId().equals(id))
         .findFirst()
         .orElse(null);
 

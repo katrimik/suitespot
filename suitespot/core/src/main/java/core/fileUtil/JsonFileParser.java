@@ -3,6 +3,7 @@ package core.fileUtil;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -39,7 +40,7 @@ public class JsonFileParser<T> implements IJsonFileParser<T> {
   public ArrayList<T> readFile() {
     ArrayList<T> items = new ArrayList<>();
 
-    try (FileReader reader = new FileReader(path.toString())) {
+    try (FileReader reader = new FileReader(path.toString(), StandardCharsets.UTF_8)) {
       // Use TypeToken to specify the type you want to deserialize into
       Type genericListType = TypeToken.getParameterized(List.class, targetType).getType();
       items = gson.fromJson(reader, genericListType);
@@ -63,7 +64,7 @@ public class JsonFileParser<T> implements IJsonFileParser<T> {
    */
   @Override
   public void writeFile(List<T> items) {
-    try (FileWriter writer = new FileWriter(path.toString())) {
+    try (FileWriter writer = new FileWriter(path.toString(), StandardCharsets.UTF_8)) {
       writer.write(gson.toJson(items));
     } catch (Exception e) {
       e.printStackTrace();

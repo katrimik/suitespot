@@ -5,11 +5,11 @@ import javafx.fxml.FXML;
 public class AppController {
   @FXML
   public void openCustomerView() {
-    App.SetView("Customer");
+    App.setView("Customer");
   }
 
   @FXML
   public void openRoomView() {
-    App.SetView("Room");
+    App.setView("Room");
   }
 }

@@ -40,8 +40,8 @@ public class RoomController implements Initializable {
   private final RoomTypeManager roomTypeManager;
 
   public RoomController() {
-    roomManager = Manager.GetRoomManager();
-    roomTypeManager = Manager.GetRoomTypeManager();
+    roomManager = Manager.getRoomManager();
+    roomTypeManager = Manager.getRoomTypeManager();
   }
 
   @Override
@@ -148,11 +148,12 @@ public class RoomController implements Initializable {
       String roomTypeId = existingRoomType == null ? null : existingRoomType.getId();
       RoomType roomType = new RoomType(roomTypeNameTxt.getText(), roomTypeId, roomTypePriceTxt.getValue());
       roomTypeManager.saveRoomType(roomType);
-    } catch (NullPointerException e) {
-      roomTypeErrorLbl.setText("Price must be set");
-      return;
     } catch (Exception e) {
-      roomTypeErrorLbl.setText(e.getLocalizedMessage());
+      if (e instanceof NullPointerException) {
+        roomTypeErrorLbl.setText("Price must be set");
+      } else {
+        roomTypeErrorLbl.setText(e.getLocalizedMessage());
+      }
       return;
     }
 
@@ -188,11 +189,12 @@ public class RoomController implements Initializable {
       Room room = new Room(roomNumberTxt.getValue(), roomType.getId());
       room.setId(roomId);
       roomManager.saveRoom(room);
-    } catch (NullPointerException e) {
-      roomErrorLbl.setText("Room number must be set");
-      return;
     } catch (Exception e) {
-      roomErrorLbl.setText(e.getLocalizedMessage());
+      if (e instanceof NullPointerException) {
+        roomErrorLbl.setText("Room number must be set");
+      } else {
+        roomErrorLbl.setText(e.getLocalizedMessage());
+      }
       return;
     }
 
@@ -202,6 +204,6 @@ public class RoomController implements Initializable {
 
   @FXML
   public void goToMainPage() {
-    App.SetView("App");
+    App.setView("App");
   }
 }

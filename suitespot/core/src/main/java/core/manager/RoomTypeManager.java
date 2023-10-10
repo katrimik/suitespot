@@ -1,11 +1,11 @@
 package core.manager;
 
+import core.fileUtil.IJsonFileParser;
+import core.model.RoomType;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import core.fileUtil.IJsonFileParser;
-import core.model.RoomType;
 
 public class RoomTypeManager {
 
@@ -82,7 +82,9 @@ public class RoomTypeManager {
 
   public boolean isRoomTypeAvailable(String name, String id) {
     List<RoomType> roomTypes = listRoomTypes();
-    return !roomTypes.stream().anyMatch(r -> r.getName().trim().toLowerCase().equals(name.trim().toLowerCase())
+    return !roomTypes
+      .stream()
+      .anyMatch(r -> r.getName().trim().toLowerCase().equals(name.trim().toLowerCase())
         && !r.getId().equals(id == null ? "" : id));
   }
 }

@@ -33,7 +33,7 @@ public class CustomerController implements Initializable {
   private final CustomerManager customerManager;
 
   public CustomerController() {
-    customerManager = Manager.GetCustomerManager();
+    customerManager = Manager.getCustomerManager();
   }
 
   @Override
@@ -50,7 +50,7 @@ public class CustomerController implements Initializable {
 
   @FXML
   public void goToMainPage() {
-    App.SetView("App");
+    App.setView("App");
   }
 
   @FXML
