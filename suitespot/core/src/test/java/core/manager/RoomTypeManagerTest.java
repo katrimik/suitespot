@@ -1,6 +1,7 @@
 package core.manager;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -32,13 +33,17 @@ public class RoomTypeManagerTest {
 
     @Test
     public void testDeleteRoomType() {
+        RoomType baseRoom = new RoomType("single", null, 200);
+        roomTypeManager.saveRoomType(baseRoom);
+
         String newId = roomTypeManager.saveRoomType(newRoomType);
         roomTypeManager.deleteRoomType(newId);
 
         List<RoomType> roomTypes = roomTypeManager.listRoomTypes();
         List<RoomType> deletedRoomTypesThatExist = roomTypes.stream().filter(c -> c.getId().equals(newId)).toList();
 
-        assertTrue(roomTypes.size() == 0);
+        assertTrue(roomTypes.get(0).getName().equals("single"));
+
         assertTrue(deletedRoomTypesThatExist.size() == 0);
     }
 
@@ -90,5 +95,25 @@ public class RoomTypeManagerTest {
         assertTrue(beforeUpdateRoomTypes.size() == 1);
         assertTrue(afterUpdateRoomTypes.size() == 1);
         assertTrue(roomTypeWithNewName.getName().equals(testName));
+    }
+
+    @Test
+    void testInvalidIdUpdateRoom() {
+        newRoomType.setId("invalid id");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            roomTypeManager.saveRoomType(newRoomType);
+        });
+    }
+
+    @Test
+    void testDuplicateNameRoom() {
+        RoomType type1 = new RoomType("Suite", null, 200);
+        RoomType type2 = new RoomType("suite", null, 200);
+        roomTypeManager.saveRoomType(type1);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            roomTypeManager.saveRoomType(type2);
+        });
     }
 }
