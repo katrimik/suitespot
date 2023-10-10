@@ -16,46 +16,46 @@ import java.util.List;
  * JavaFX App
  */
 public class App extends Application {
-    // Layout engine inspired by: https://youtu.be/C-ReKeKSQrw?si=GAEHbs6U3f9g9GlB
+  // Layout engine inspired by: https://youtu.be/C-ReKeKSQrw?si=GAEHbs6U3f9g9GlB
 
-    private static final HashMap<String, AnchorPane> views = new HashMap<>();
-    private static AnchorPane rootAnchor;
-    private static String currentViewName;
+  private static final HashMap<String, AnchorPane> views = new HashMap<>();
+  private static AnchorPane rootAnchor;
+  private static String currentViewName;
 
-    @Override
-    public void start(Stage stage) throws IOException {
-        List<String> viewNames = Arrays.asList("App", "Room", "Customer");
-        viewNames.forEach(viewName -> LoadView(viewName));
+  @Override
+  public void start(Stage stage) throws IOException {
+    List<String> viewNames = Arrays.asList("App", "Room", "Customer");
+    viewNames.forEach(viewName -> LoadView(viewName));
 
-        rootAnchor = FXMLLoader.load(this.getClass().getResource("Layout.fxml"));
+    rootAnchor = FXMLLoader.load(this.getClass().getResource("Layout.fxml"));
 
-        rootAnchor.getChildren().add(views.get("App"));
-        currentViewName = "App";
-        stage.setScene(new Scene(rootAnchor));
-        stage.show();
+    rootAnchor.getChildren().add(views.get("App"));
+    currentViewName = "App";
+    stage.setScene(new Scene(rootAnchor));
+    stage.show();
+  }
+
+  private void LoadView(String viewName) {
+    try {
+      AnchorPane view = FXMLLoader.load(getClass().getResource(viewName + ".fxml"));
+      views.put(viewName, view);
+    } catch (IOException e) {
+      System.out.println("Failed to load Layout.fxml");
+      e.printStackTrace();
+    }
+  }
+
+  public static void SetView(String viewName) {
+    if (!views.containsKey(viewName)) {
+      throw new IllegalArgumentException("viewName does not correspond to a stored view");
     }
 
-    private void LoadView(String viewName) {
-        try {
-            AnchorPane view = FXMLLoader.load(getClass().getResource(viewName + ".fxml"));
-            views.put(viewName, view);
-        } catch (IOException e) {
-            System.out.println("Failed to load Layout.fxml");
-            e.printStackTrace();
-        }
-    }
+    rootAnchor.getChildren().remove(views.get(currentViewName));
+    rootAnchor.getChildren().add(views.get(viewName));
+    currentViewName = viewName;
+  }
 
-    public static void SetView(String viewName) {
-        if (!views.containsKey(viewName)) {
-            throw new IllegalArgumentException("viewName does not correspond to a stored view");
-        }
-
-        rootAnchor.getChildren().remove(views.get(currentViewName));
-        rootAnchor.getChildren().add(views.get(viewName));
-        currentViewName = viewName;
-    }
-
-    public static void main(String[] args) {
-        launch();
-    }
+  public static void main(String[] args) {
+    launch();
+  }
 }

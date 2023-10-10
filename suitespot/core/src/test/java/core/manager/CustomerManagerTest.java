@@ -15,82 +15,83 @@ import core.model.Customer;
 
 public class CustomerManagerTest {
 
-    private CustomerManager customerManager;
-    private Customer newCustomer;
+  private CustomerManager customerManager;
+  private Customer newCustomer;
 
-    @BeforeEach
-    public void setup() {
-        IJsonFileParser<Customer> fileParser = new JsonFileParserMock<Customer>();
-        customerManager = new CustomerManager(fileParser);
-        newCustomer = new Customer("John", "Nordmann", "john@nordmann.no", "12345678");
-    }
+  @BeforeEach
+  public void setup() {
+    IJsonFileParser<Customer> fileParser = new JsonFileParserMock<Customer>();
+    customerManager = new CustomerManager(fileParser);
+    newCustomer = new Customer("John", "Nordmann", "john@nordmann.no", "12345678");
+  }
 
-    @Test
-    public void testDeleteCustomer() {
-        String newId = customerManager.saveCustomer(newCustomer);
-        customerManager.deleteCustomer(newId);
+  @Test
+  public void testDeleteCustomer() {
+    String newId = customerManager.saveCustomer(newCustomer);
+    customerManager.deleteCustomer(newId);
 
-        List<Customer> customers = customerManager.listCustomers();
-        List<Customer> deletedCustomersThatExist = customers.stream().filter(c -> c.getId().equals(newId)).toList();
+    List<Customer> customers = customerManager.listCustomers();
+    List<Customer> deletedCustomersThatExist = customers.stream().filter(c -> c.getId().equals(newId)).toList();
 
-        assertTrue(customers.size() == 0);
-        assertTrue(deletedCustomersThatExist.size() == 0);
-    }
+    assertTrue(customers.size() == 0);
+    assertTrue(deletedCustomersThatExist.size() == 0);
+  }
 
-    @Test
-    public void testListCustomers() {
-        List<Customer> contains0Customers = customerManager.listCustomers();
-        customerManager.saveCustomer(newCustomer);
-        List<Customer> contains1Customers = customerManager.listCustomers();
-        newCustomer.setId(null);
-        customerManager.saveCustomer(newCustomer);
-        List<Customer> contains2Customers = customerManager.listCustomers();
+  @Test
+  public void testListCustomers() {
+    List<Customer> contains0Customers = customerManager.listCustomers();
+    customerManager.saveCustomer(newCustomer);
+    List<Customer> contains1Customers = customerManager.listCustomers();
+    newCustomer.setId(null);
+    customerManager.saveCustomer(newCustomer);
+    List<Customer> contains2Customers = customerManager.listCustomers();
 
-        assertTrue(contains0Customers.size() == 0);
-        assertTrue(contains1Customers.size() == 1);
-        assertTrue(contains2Customers.size() == 2);
-    }
+    assertTrue(contains0Customers.size() == 0);
+    assertTrue(contains1Customers.size() == 1);
+    assertTrue(contains2Customers.size() == 2);
+  }
 
-    @Test
-    public void testSaveCustomer() {
-        String newCustomerId = customerManager.saveCustomer(newCustomer);
-        List<Customer> containsCustomers = customerManager.listCustomers();
-        Customer foundCustomer = containsCustomers.stream().filter(c -> c.getId().equals(newCustomerId)).findFirst().orElse(null);
-        assertNotNull(foundCustomer);
-    }
+  @Test
+  public void testSaveCustomer() {
+    String newCustomerId = customerManager.saveCustomer(newCustomer);
+    List<Customer> containsCustomers = customerManager.listCustomers();
+    Customer foundCustomer = containsCustomers.stream().filter(c -> c.getId().equals(newCustomerId)).findFirst()
+        .orElse(null);
+    assertNotNull(foundCustomer);
+  }
 
-    @Test
-    public void testReadCustomer() {
-        String customerId = customerManager.saveCustomer(newCustomer);
-        Customer customer = customerManager.readCustomer(customerId);
-        
-        // testing name and not id since id is set dynamically
-        assertTrue(newCustomer.getFullName().equals(customer.getFullName()));
-    }
+  @Test
+  public void testReadCustomer() {
+    String customerId = customerManager.saveCustomer(newCustomer);
+    Customer customer = customerManager.readCustomer(customerId);
 
-    @Test
-    public void testUpdateCustomer() {
-        String testName = "test update";
+    // testing name and not id since id is set dynamically
+    assertTrue(newCustomer.getFullName().equals(customer.getFullName()));
+  }
 
-        String customerId = customerManager.saveCustomer(newCustomer);
-        List<Customer> beforeUpdateCustomers = customerManager.listCustomers();
-        newCustomer.setFirstName(testName);
-        customerManager.saveCustomer(newCustomer);
-        List<Customer> afterUpdateCustomers = customerManager.listCustomers();
+  @Test
+  public void testUpdateCustomer() {
+    String testName = "test update";
 
-        Customer customerWithNewName = customerManager.readCustomer(customerId);
+    String customerId = customerManager.saveCustomer(newCustomer);
+    List<Customer> beforeUpdateCustomers = customerManager.listCustomers();
+    newCustomer.setFirstName(testName);
+    customerManager.saveCustomer(newCustomer);
+    List<Customer> afterUpdateCustomers = customerManager.listCustomers();
 
-        assertTrue(beforeUpdateCustomers.size() == 1);
-        assertTrue(afterUpdateCustomers.size() == 1);
-        assertTrue(customerWithNewName.getFirstName().equals(testName));
-    }
+    Customer customerWithNewName = customerManager.readCustomer(customerId);
 
-    @Test
-    public void testNotValidCustomerId() {
-        newCustomer.setId("not-valid-id");
+    assertTrue(beforeUpdateCustomers.size() == 1);
+    assertTrue(afterUpdateCustomers.size() == 1);
+    assertTrue(customerWithNewName.getFirstName().equals(testName));
+  }
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            customerManager.saveCustomer(newCustomer);
-        });
-    }
+  @Test
+  public void testNotValidCustomerId() {
+    newCustomer.setId("not-valid-id");
+
+    assertThrows(IllegalArgumentException.class, () -> {
+      customerManager.saveCustomer(newCustomer);
+    });
+  }
 }
