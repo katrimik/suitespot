@@ -26,13 +26,17 @@ public class RoomTypeManagerTest {
         newRoomType = new RoomType("Suite", null, 200);
     }
 
+    private RoomType createRoomType() {
+        return new RoomType("Suite", null, 200);
+    }
+
     @Test
     public void testDeleteRoomType() {
         String newId = roomTypeManager.saveRoomType(newRoomType);
         roomTypeManager.deleteRoomType(newId);
 
         List<RoomType> roomTypes = roomTypeManager.listRoomTypes();
-        List<RoomType> deletedRoomTypesThatExist = roomTypes.stream().filter(c -> c.getRoomTypeId().equals(newId)).toList();
+        List<RoomType> deletedRoomTypesThatExist = roomTypes.stream().filter(c -> c.getId().equals(newId)).toList();
 
         assertTrue(roomTypes.size() == 0);
         assertTrue(deletedRoomTypesThatExist.size() == 0);
@@ -43,7 +47,9 @@ public class RoomTypeManagerTest {
         List<RoomType> contains0RoomTypes = roomTypeManager.listRoomTypes();
         roomTypeManager.saveRoomType(newRoomType);
         List<RoomType> contains1RoomTypes = roomTypeManager.listRoomTypes();
-        newRoomType.setRoomTypeId(null);
+        newRoomType = createRoomType();
+        newRoomType.setId(null);
+        newRoomType.setName("double room");
         roomTypeManager.saveRoomType(newRoomType);
         List<RoomType> contains2RoomTypes = roomTypeManager.listRoomTypes();
 
@@ -56,7 +62,7 @@ public class RoomTypeManagerTest {
     public void testSaveRoomType() {
         String newRoomTypeId = roomTypeManager.saveRoomType(newRoomType);
         List<RoomType> containsRoomTypes = roomTypeManager.listRoomTypes();
-        RoomType foundRoomType = containsRoomTypes.stream().filter(c -> c.getRoomTypeId().equals(newRoomTypeId)).findFirst().orElse(null);
+        RoomType foundRoomType = containsRoomTypes.stream().filter(c -> c.getId().equals(newRoomTypeId)).findFirst().orElse(null);
         assertNotNull(foundRoomType);
     }
 

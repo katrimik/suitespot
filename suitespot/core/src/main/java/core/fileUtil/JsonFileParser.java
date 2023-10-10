@@ -5,22 +5,29 @@ import java.io.FileWriter;
 import java.lang.reflect.Type;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import core.model.Customer;
-
 
 public class JsonFileParser<T> implements IJsonFileParser<T> {
     private final Class<T> targetType;
     private final Path path;
+    private final Gson gson;
 
     public JsonFileParser(Class<T> targetType, FileTypeEnum fileType) {
         this.targetType = targetType;
         this.path = createPath(fileType);
+
+        // Configure Gson with custom serializer/deserializer here
+        this.gson = new GsonBuilder()
+            .registerTypeHierarchyAdapter(LocalDate.class, new LocalDateAdapter().nullSafe())
+            .create();
     }
 
     private static Path createPath(FileTypeEnum fileType) {
@@ -30,7 +37,6 @@ public class JsonFileParser<T> implements IJsonFileParser<T> {
 
     @Override
     public ArrayList<T> readFile() {
-        Gson gson = new Gson();
         ArrayList<T> items = new ArrayList<>();
 
         try (FileReader reader = new FileReader(path.toString())) {
@@ -52,11 +58,11 @@ public class JsonFileParser<T> implements IJsonFileParser<T> {
 
     /**
      * Write a file. Overriding all existing items
+     * 
      * @param items List of all Customers, all Rooms, or all Bookings
      */
     @Override
     public void writeFile(List<T> items) {
-        Gson gson = new Gson();
         try (FileWriter writer = new FileWriter(path.toString())) {
             writer.write(gson.toJson(items));
         } catch (Exception e) {
@@ -72,13 +78,14 @@ public class JsonFileParser<T> implements IJsonFileParser<T> {
     }
 
     @Override
-    @SafeVarargs 
-    public final void appendFile(T... items){
+    @SafeVarargs
+    public final void appendFile(T... items) {
         appendFile(Arrays.asList(items));
     }
 
     public static void main(String[] args) {
-        IJsonFileParser<Customer> customerFileManager = new JsonFileParser<Customer>(Customer.class, FileTypeEnum.CUSTOMER);
+        IJsonFileParser<Customer> customerFileManager = new JsonFileParser<Customer>(Customer.class,
+                FileTypeEnum.CUSTOMER);
         Customer c = new Customer("Banan", "Eplekake", "tull234567@outlook.com", "12345678");
         customerFileManager.appendFile(c);
 

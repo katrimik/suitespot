@@ -21,13 +21,13 @@ public class RoomTypeTest {
         roomType = new RoomType("name", "123", 200);
 
         assertTrue(roomType.getName().equals("name"));
-        assertTrue(roomType.getRoomTypeId().equals("123"));
+        assertTrue(roomType.getId().equals("123"));
         assertEquals(200, roomType.getPrice());
     }
 
     @Test 
     void testConstructor() {
-        assertTrue(roomType.getRoomTypeId().equals(""));
+        assertTrue(roomType.getId().equals(""));
         assertTrue(roomType.getName().equals(""));
     }
 
@@ -41,8 +41,8 @@ public class RoomTypeTest {
     @Test
     void testSetGetRoomTypeId() {
         String name = "testid";
-        roomType.setRoomTypeId(name);
-        assertTrue(roomType.getRoomTypeId().equals(name));       
+        roomType.setId(name);
+        assertTrue(roomType.getId().equals(name));       
     }
 
     @Test

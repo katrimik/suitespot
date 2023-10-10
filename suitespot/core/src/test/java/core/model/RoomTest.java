@@ -24,18 +24,18 @@ public class RoomTest {
 
     @Test
     void testConstructors() {
-        room = new Room(4);
-        assertEquals(4, room.getRoomNumber());
+        room = new Room(400);
+        assertEquals(400, room.getRoomNumber());
 
-        room = new Room(5, "123");
-        assertEquals(5, room.getRoomNumber());
+        room = new Room(500, "123");
+        assertEquals(500, room.getRoomNumber());
         assertEquals("123", room.getTypeId());
     }
 
     @Test
     void testSetGetRoomId() {
-        room.setRoomId("123");
-        assertEquals("123", room.getRoomId());
+        room.setId("123");
+        assertEquals("123", room.getId());
     }
 
     @Test

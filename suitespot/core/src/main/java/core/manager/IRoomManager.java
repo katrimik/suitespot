@@ -22,4 +22,12 @@ public interface IRoomManager {
      */
     void deleteAllInRoomType(String roomTypeId);
 
+    /**
+     * checks if the room number is available (aka, not taken)
+     * @param roomNumber
+     * @param roomId
+     * @return
+     */
+    boolean isRoomNumberAvailable(int roomNumber, String roomId);
+
 }

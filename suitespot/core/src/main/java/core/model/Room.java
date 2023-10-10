@@ -9,27 +9,31 @@ public class Room {
     private int roomNumber;
     private String typeId;
     private final static int MIN_ROOMNUMBER = 101;
-    private final static int MAX_ROOMNUMBER = 600;
+    private final static int MAX_ROOMNUMBER = 599;
     private Set<LocalDate> bookedDates = new HashSet<LocalDate>();
+    private String customStringFormatter = "";
 
     public Room(int roomNumber, String typeId) {
-        this.roomNumber = roomNumber;
-        this.typeId = typeId;
+        this.setRoomNumber(roomNumber);
+        this.setTypeId(typeId);
     }
 
     public Room() {
     } // need an empty constructor to work with json
 
-    public Room(int roomNumber) {
-        this.roomNumber = roomNumber;
-        this.bookedDates = new HashSet<>();
-    }
-
-    public String getRoomId() {
+    public String getId() {
         return id;
     }
 
-    public void setRoomId(String id) {
+    public String getCustomStringFormatter() {
+        return customStringFormatter;
+    }
+
+    public void setCustomStringFormatter(String value) {
+        customStringFormatter = value;
+    }
+
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -39,7 +43,7 @@ public class Room {
 
     public void setRoomNumber(int roomNumber) {
         if (roomNumber < MIN_ROOMNUMBER || roomNumber > MAX_ROOMNUMBER) {
-            throw new IllegalArgumentException("Not a valid roomnumber");
+            throw new IllegalArgumentException("Room number must be in interval [101, 599]");
         }
         this.roomNumber = roomNumber;
     }
@@ -52,8 +56,14 @@ public class Room {
         this.typeId = typeId;
     }
 
+    public Room(int roomNumber) {
+        this.roomNumber = roomNumber;
+        this.bookedDates = new HashSet<>();
+    }
+
     public Set<LocalDate> getBookedDates() {
-        return bookedDates;
+        Set<LocalDate> tempBookedDates = new HashSet<LocalDate>(bookedDates);
+        return tempBookedDates;
     }
 
     /**
@@ -91,6 +101,10 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Room nr " + getRoomNumber() + " is booked: " + getBookedDates() + " ";
+        if (customStringFormatter == null || customStringFormatter.trim().equals("")) {
+            return "" + getRoomNumber();
+        }
+
+        return customStringFormatter.replace("%1", String.valueOf(getRoomNumber()));
     }
 }
