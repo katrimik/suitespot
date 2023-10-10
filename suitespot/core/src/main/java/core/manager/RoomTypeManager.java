@@ -9,10 +9,12 @@ import core.model.RoomType;
 
 public class RoomTypeManager {
 
-    private IJsonFileParser<RoomType> roomTypeFileManager;
+    private IJsonFileParser<RoomType> roomTypeManager;
+    private IRoomManager roomManager;
 
-    public RoomTypeManager(IJsonFileParser<RoomType> roomTypeFileManager) {
-        this.roomTypeFileManager = roomTypeFileManager;
+    public RoomTypeManager(IJsonFileParser<RoomType> roomTypeFileManager, IRoomManager roomManager) {
+        this.roomTypeManager = roomTypeFileManager;
+        this.roomManager = roomManager;
     }
 
     private String createNewId() {
@@ -28,9 +30,9 @@ public class RoomTypeManager {
 
         if (roomType.getId() == null) { // creates a new room type
             roomType.setId(createNewId());
-            roomTypeFileManager.appendFile(roomType);
+            roomTypeManager.appendFile(roomType);
         } else { // saves the changes made to an already existing room type
-            ArrayList<RoomType> listRoomTypes = roomTypeFileManager.readFile();
+            ArrayList<RoomType> listRoomTypes = roomTypeManager.readFile();
 
             RoomType roomTypeToUpdate = listRoomTypes.stream()
                     .filter(rt -> rt.getId().equals(roomType.getId()))
@@ -43,7 +45,7 @@ public class RoomTypeManager {
 
             int roomTypeIndex = listRoomTypes.indexOf(roomTypeToUpdate);
             listRoomTypes.set(roomTypeIndex, roomType);
-            roomTypeFileManager.writeFile(listRoomTypes);
+            roomTypeManager.writeFile(listRoomTypes);
         }
 
         return roomType.getId();
@@ -51,7 +53,7 @@ public class RoomTypeManager {
     }
 
     public RoomType getRoomType(String roomTypeId) {
-        List<RoomType> listRoomTypes = roomTypeFileManager.readFile();
+        List<RoomType> listRoomTypes = roomTypeManager.readFile();
         RoomType roomType = listRoomTypes.stream()
                 .filter(c -> c.getId().equals(roomTypeId))
                 .findFirst()
@@ -61,11 +63,11 @@ public class RoomTypeManager {
     }
 
     public List<RoomType> listRoomTypes() {
-        return roomTypeFileManager.readFile();
+        return roomTypeManager.readFile();
     }
 
     public void deleteRoomType(String roomTypeId) {
-        ArrayList<RoomType> listRoomTypes = roomTypeFileManager.readFile();
+        ArrayList<RoomType> listRoomTypes = roomTypeManager.readFile();
         ArrayList<RoomType> tmpRoomTypes = new ArrayList<RoomType>();
 
         for (RoomType rt : listRoomTypes) {
@@ -74,15 +76,13 @@ public class RoomTypeManager {
             }
         }
 
-        roomTypeFileManager.writeFile(tmpRoomTypes);
-
-        RoomManager roomManager = Manager.GetRoomManager();
+        roomTypeManager.writeFile(tmpRoomTypes);
         roomManager.deleteAllInRoomType(roomTypeId);
     }
 
 
     public boolean isRoomTypeAvailable(String name, String id) {
         List<RoomType> roomTypes = listRoomTypes();
-        return !roomTypes.stream().anyMatch(r -> r.getName().trim().toLowerCase().equals(name.trim().toLowerCase()) && !r.getId().equals(id));
+        return !roomTypes.stream().anyMatch(r -> r.getName().trim().toLowerCase().equals(name.trim().toLowerCase()) && !r.getId().equals(id == null ? "" : id));
     }
 }
