@@ -2,13 +2,30 @@ package core.model;
 
 public class RoomType {
 
-    private String roomTypeId;
+    private String id;
     private String name;
+    private int price;
 
     public RoomType() {
-        this.roomTypeId = "";
+        this.id = "";
         this.name = "";
+    }
 
+    public RoomType(String name, String id, int price) {
+        this.setName(name);
+        this.setId(id);
+        this.setPrice(price);
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        if(price < 0){
+            throw new IllegalArgumentException("Can't be a negative price");
+        }
+        this.price = price;
     }
 
     public String getName() {
@@ -16,23 +33,27 @@ public class RoomType {
     }
 
     private boolean validateName(String name) {
-        return name.matches("^[a-zA-ZÅÄÖåäö_]+([- ]?[a-zA-ZÅÄÖåäö_]+)*$");
+        return name != null && !name.equals("") && name.matches("^[a-zA-ZÅÄÖåäö_]+([- ]?[a-zA-ZÅÄÖåäö_]+)*$");
     }
 
     public void setName(String name) {
         if (!validateName(name)) {
-            throw new IllegalArgumentException("Not a room type.");
-
+            throw new IllegalArgumentException("Room type name can only be letters, space and hyphen");
         }
+
         this.name = name;
     }
 
-    public String getRoomTypeId() {
-        return this.roomTypeId;
+    public String getId() {
+        return this.id;
     }
 
-    public void setId(String roomTypeId) {
-        this.roomTypeId = roomTypeId;
+    public void setId(String id) {
+        this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }
