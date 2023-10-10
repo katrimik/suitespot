@@ -146,12 +146,17 @@ public class RoomController implements Initializable {
             String roomTypeId = existingRoomType == null ? null : existingRoomType.getId();
             RoomType roomType = new RoomType(roomTypeNameTxt.getText(), roomTypeId, roomTypePriceTxt.getValue());
             roomTypeManager.saveRoomType(roomType);
+        } catch (NullPointerException e) {
+            roomTypeErrorLbl.setText("Price must be set");
+            return;
         } catch (Exception e) {
             roomTypeErrorLbl.setText(e.getLocalizedMessage());
             return;
         }
 
         loadRoomTypes();
+        loadRooms();
+        clearRoom();
         clearRoomType();
     }
 
@@ -181,6 +186,9 @@ public class RoomController implements Initializable {
             Room room = new Room(roomNumberTxt.getValue(), roomType.getId());
             room.setId(roomId);
             roomManager.saveRoom(room);
+        } catch (NullPointerException e) {
+            roomErrorLbl.setText("Room number must be set");
+            return;
         } catch (Exception e) {
             roomErrorLbl.setText(e.getLocalizedMessage());
             return;
