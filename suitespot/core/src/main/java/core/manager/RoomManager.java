@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.UUID;
 
 import core.fileUtil.IJsonFileParser;
-import core.fileUtil.mock.JsonFileParserMock;
 import core.model.Room;
 
 public class RoomManager {
@@ -94,15 +93,4 @@ public class RoomManager {
         roomManager.writeFile(tmpRooms);
 
     }
-
-    public static void main(String[] args){
-        IJsonFileParser<Room> fileparser = new JsonFileParserMock<Room>();
-        Room room = new Room();
-        RoomManager rm = new RoomManager(fileparser);
-        rm.saveRoom(room);
-        System.out.println("hei");
-
-    }
-    
-
 }
