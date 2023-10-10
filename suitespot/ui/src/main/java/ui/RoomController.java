@@ -128,7 +128,9 @@ public class RoomController implements Initializable {
     public void deleteRoomType() {
         roomTypeManager.deleteRoomType(getSelectedRoomType().getId());
         loadRoomTypes();
+        loadRooms();
         clearRoomType();
+        clearRoom();
     }
 
     @FXML

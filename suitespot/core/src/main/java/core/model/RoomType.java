@@ -33,7 +33,7 @@ public class RoomType {
     }
 
     private boolean validateName(String name) {
-        return name.matches("^[a-zA-ZÅÄÖåäö_]+([- ]?[a-zA-ZÅÄÖåäö_]+)*$");
+        return name != null && !name.equals("") && name.matches("^[a-zA-ZÅÄÖåäö_]+([- ]?[a-zA-ZÅÄÖåäö_]+)*$");
     }
 
     public void setName(String name) {

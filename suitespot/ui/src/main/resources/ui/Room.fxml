@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="655.0" style="-fx-background-color: #a5d496;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.RoomController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="655.0" style="-fx-background-color: #a5d496;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.RoomController">
    <children>
       <ListView fx:id="roomTypeListView" layoutX="15.0" layoutY="219.0" prefHeight="292.0" prefWidth="270.0" style="-fx-border-image-insets: #d0ebc7;" />
       <Text layoutX="243.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage rooms">
@@ -25,7 +25,7 @@
             <Font name="Modern No. 20" size="14.0" />
          </font>
       </Button>
-      <Label fx:id="StatusCrudLbl" layoutX="14.0" layoutY="67.0" text="Room type">
+      <Label fx:id="StatusCrudLbl" layoutX="16.0" layoutY="51.0" text="Room type">
          <font>
             <Font size="16.0" />
          </font>
@@ -64,7 +64,7 @@
             <Font name="Modern No. 20" size="14.0" />
          </font>
       </Button>
-      <Label fx:id="StatusCrudLbl1" layoutX="363.0" layoutY="67.0" text="Room">
+      <Label fx:id="StatusCrudLbl1" layoutX="363.0" layoutY="54.0" text="Room">
          <font>
             <Font size="16.0" />
          </font>
@@ -72,8 +72,8 @@
       <Separator layoutX="308.0" layoutY="67.0" orientation="VERTICAL" prefHeight="444.0" prefWidth="42.0" />
       <Label layoutX="363.0" layoutY="146.0" text="Room type" />
       <ComboBox fx:id="roomTypeComboBox" layoutX="475.0" layoutY="142.0" prefHeight="26.0" prefWidth="160.0" />
-      <Label fx:id="roomErrorLbl" layoutX="450.0" layoutY="70.0" prefHeight="18.0" prefWidth="186.0" text="Error Label" />
-      <Label fx:id="roomTypeErrorLbl" layoutX="128.0" layoutY="70.0" prefHeight="18.0" prefWidth="186.0" text="Error Label" />
+      <Label fx:id="roomErrorLbl" layoutX="362.0" layoutY="83.0" prefHeight="18.0" prefWidth="285.0" text="Error Label" />
+      <Label fx:id="roomTypeErrorLbl" layoutX="15.0" layoutY="79.0" prefHeight="25.0" prefWidth="308.0" text="Error Label" wrapText="true" />
       <Spinner fx:id="roomTypePriceTxt" editable="true" layoutX="112.0" layoutY="142.0" prefHeight="26.0" prefWidth="174.0" />
       <Spinner fx:id="roomNumberTxt" editable="true" layoutX="475.0" layoutY="107.0" prefHeight="26.0" prefWidth="160.0" />
    </children>
