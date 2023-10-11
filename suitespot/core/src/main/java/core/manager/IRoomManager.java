@@ -11,7 +11,7 @@ public interface IRoomManager {
   List<Room> listRooms();
 
   /**
-   * Deletes one room with the given id
+   * Deletes one room with the given room id.
    * 
    * @param roomId room id
    * 
@@ -19,7 +19,7 @@ public interface IRoomManager {
   void deleteRoom(String roomId);
 
   /**
-   * Deletes all rooms of given room type-id
+   * Deletes all rooms of given room type id.
    * 
    * @param roomTypeId room type id
    * 
@@ -27,11 +27,13 @@ public interface IRoomManager {
   void deleteAllInRoomType(String roomTypeId);
 
   /**
-   * checks if the room number is available (aka, not taken)
+   * Checks if the room number is available (aka, not taken).
    * 
-   * @param roomNumber
-   * @param roomId
-   * @return bool if it is available
+   * @param roomNumber room number
+   * 
+   * @param roomId room id
+   * 
+   * @return true if available
    * 
    */
   boolean isRoomNumberAvailable(int roomNumber, String roomId);

@@ -7,6 +7,12 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
+/**
+ * 
+ * Encode json to a local date object, and opposite
+ * 
+ */
+
 public final class LocalDateAdapter extends TypeAdapter<LocalDate> {
   @Override
   public void write(final JsonWriter jsonWriter, final LocalDate localDate) throws IOException {

@@ -12,12 +12,19 @@ public class Customer {
     setLastName(lastName);
     setEmail(email);
     setPhone(phone);
-
   }
 
   public Customer() {
   } // need an empty constructor to work with json
 
+  /**
+   * Checks if name contains legal signs (Scandinavian letters).
+   * 
+   * @param name customer objects name
+   * 
+   * @return true if name is valid
+   * 
+   */
   private boolean validateName(String name) {
     return name.matches("^[a-zA-ZÅÄÖåäö_]+([- ]?[a-zA-ZÅÄÖåäö_]+)*$");
   }
@@ -86,7 +93,5 @@ public class Customer {
   public String toString() {
     return getFullName();
   }
-
-  public static void main(String[] args) {
-  }
+  
 }

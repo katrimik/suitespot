@@ -13,9 +13,27 @@ public class Room {
   private Set<LocalDate> bookedDates = new HashSet<LocalDate>();
   private String customStringFormatter = "";
 
+  /**
+   * Initialize room.
+   * 
+   * @param roomNumber room number
+   * 
+   * @param typeId type id
+   * 
+   */
   public Room(int roomNumber, String typeId) {
     this.setRoomNumber(roomNumber);
     this.setTypeId(typeId);
+  }
+
+  /**
+   * Initialize room.
+   * 
+   * @param roomNumber room number
+   * 
+   */
+  public Room(int roomNumber) {
+    this.roomNumber = roomNumber;
   }
 
   public Room() {
@@ -56,21 +74,18 @@ public class Room {
     this.typeId = typeId;
   }
 
-  public Room(int roomNumber) {
-    this.roomNumber = roomNumber;
-    this.bookedDates = new HashSet<>();
-  }
-
   public Set<LocalDate> getBookedDates() {
     Set<LocalDate> tempBookedDates = new HashSet<LocalDate>(bookedDates);
     return tempBookedDates;
   }
 
   /**
-   * Local date uses the ISO-8601 calendar system. (yy-mm-dd)
+   * Local date uses the ISO-8601 calendar system. (yy-mm-dd).
    * 
    * @param startDate could be 2023-9-10, and
+   * 
    * @param endDate   could be 2023-9-20
+   * 
    */
   public void bookRoom(LocalDate startDate, LocalDate endDate) {
     LocalDate date = startDate;
@@ -84,10 +99,28 @@ public class Room {
     }
   }
 
+  /**
+   * Checks if room is available.
+   * 
+   * @param date date
+   * 
+   * @return true if room isavailable (aka, no other bookings on the same date)
+   * 
+   */
   public boolean isAvailable(LocalDate date) {
     return !bookedDates.contains(date);
   }
 
+  /**
+   * Checks if room is available.
+   * 
+   * @param startDate start date
+   * 
+   * @param endDate end date
+   * 
+   * @return true if room is available (aka, no other bookings between start and end date)
+   * 
+   */
   public boolean isAvailable(LocalDate startDate, LocalDate endDate) {
     while (!startDate.isAfter(endDate)) {
       if (bookedDates.contains(startDate)) {
@@ -99,6 +132,12 @@ public class Room {
 
   }
 
+  /**
+   * Returns the room number or a custom string if provied in customStringFormatter.
+   * 
+   * @return string of object title
+   * 
+   */
   @Override
   public String toString() {
     if (customStringFormatter == null || customStringFormatter.trim().equals("")) {

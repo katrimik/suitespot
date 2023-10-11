@@ -32,8 +32,17 @@ public class RoomType {
     return this.name;
   }
 
+  /**
+   * Checks if name is valid (aka not null/empty and contains scandinavian letters).
+   * 
+   * @param name name of room type
+   * 
+   * @return true if name is valid
+   * 
+   */
   private boolean validateName(String name) {
-    return name != null && !name.equals("") && name.matches("^[a-zA-ZÅÄÖåäö_]+([- ]?[a-zA-ZÅÄÖåäö_]+)*$");
+    return name != null && !name.equals("") 
+    && name.matches("^[a-zA-ZÅÄÖåäö_]+([- ]?[a-zA-ZÅÄÖåäö_]+)*$");
   }
 
   public void setName(String name) {

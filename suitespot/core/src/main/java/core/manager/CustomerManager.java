@@ -10,10 +10,22 @@ import core.model.Customer;
 public class CustomerManager {
   IJsonFileParser<Customer> customerFileManager;
 
+  /**
+   * Initialize a new CustomerManager.
+   * 
+   * @param customerFileManager the storage mechanism to use
+   * 
+   */
   public CustomerManager(IJsonFileParser<Customer> customerFileManager) {
     this.customerFileManager = customerFileManager;
   }
 
+  /**
+   * Deletes a customer.
+   * 
+   * @param id customer id (uuid)
+   * 
+   */
   public void deleteCustomer(String id) {
     ArrayList<Customer> listCustomers = customerFileManager.readFile();
     ArrayList<Customer> tmpCustomers = new ArrayList<Customer>();
@@ -32,6 +44,14 @@ public class CustomerManager {
     return id.toString();
   }
 
+  /**
+   * Creates and updates customer object.
+   * 
+   * @param customer customer object
+   * 
+   * @return customer id (uuid)
+   * 
+   */
   public String saveCustomer(Customer customer) {
     if (customer.getId() == null) { // creates a new customer
       customer.setId(createNewId());
@@ -56,6 +76,14 @@ public class CustomerManager {
     return customer.getId();
   }
 
+  /**
+   * Find the customer with given id.
+   * 
+   * @param id customer id (uuid)
+   * 
+   * @return given customer object
+   * 
+   */
   public Customer readCustomer(String id) {
     List<Customer> listCustomers = customerFileManager.readFile();
     Customer customer = listCustomers.stream()
@@ -66,6 +94,12 @@ public class CustomerManager {
     return customer;
   }
 
+  /**
+   * List of all customers.
+   * 
+   * @return list of customer objects
+   * 
+   */
   public List<Customer> listCustomers() {
     return customerFileManager.readFile();
   }

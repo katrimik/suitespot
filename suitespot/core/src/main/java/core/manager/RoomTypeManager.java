@@ -12,16 +12,38 @@ public class RoomTypeManager {
   private IJsonFileParser<RoomType> roomTypeManager;
   private IRoomManager roomManager;
 
+  /**
+   * Initialize room type manager.
+   * 
+   * @param roomTypeFileManager room type file manager object
+   * 
+   * @param roomManager room manager object
+   * 
+   */
   public RoomTypeManager(IJsonFileParser<RoomType> roomTypeFileManager, IRoomManager roomManager) {
     this.roomTypeManager = roomTypeFileManager;
     this.roomManager = roomManager;
   }
 
+  /**
+   * Creates an unique room type id.
+   * 
+   * @return room type id (uuid)
+   * 
+   */
   private String createNewId() {
     UUID id = UUID.randomUUID();
     return id.toString();
   }
 
+  /**
+   * Creates and updates room type.
+   * 
+   * @param roomType roomtype
+   * 
+   * @return room type id (uuid)
+   * 
+   */
   public String saveRoomType(RoomType roomType) {
     boolean isRoomTypeAvailable = isRoomTypeAvailable(roomType.getName(), roomType.getId());
     if (!isRoomTypeAvailable) {
@@ -51,7 +73,14 @@ public class RoomTypeManager {
     return roomType.getId();
 
   }
-
+  /**
+   * Get room type. 
+   * 
+   * @param roomTypeId room type id
+   * 
+   * @return room type
+   * 
+   */
   public RoomType getRoomType(String roomTypeId) {
     List<RoomType> listRoomTypes = roomTypeManager.readFile();
     RoomType roomType = listRoomTypes.stream()
@@ -62,10 +91,22 @@ public class RoomTypeManager {
     return roomType;
   }
 
+  /**
+   * List of all room types.
+   * 
+   * @return list of all room types
+   * 
+   */
   public List<RoomType> listRoomTypes() {
     return roomTypeManager.readFile();
   }
 
+  /**
+   * Deletes a room type, including all rooms in type.
+   * 
+   * @param roomTypeId room type id
+   * 
+   */
   public void deleteRoomType(String roomTypeId) {
     ArrayList<RoomType> listRoomTypes = roomTypeManager.readFile();
     ArrayList<RoomType> tmpRoomTypes = new ArrayList<RoomType>();
@@ -80,6 +121,16 @@ public class RoomTypeManager {
     roomManager.deleteAllInRoomType(roomTypeId);
   }
 
+  /**
+   * Checks if room type is available (aka, doesn't exists any duplicates).
+   * 
+   * @param name room type name
+   * 
+   * @param id room type id
+   * 
+   * @return true if room type is available
+   * 
+   */
   public boolean isRoomTypeAvailable(String name, String id) {
     List<RoomType> roomTypes = listRoomTypes();
     return !roomTypes
