@@ -8,27 +8,32 @@ import core.fileUtil.IJsonFileParser;
 import core.model.Room;
 
 public class RoomManager implements IRoomManager {
-  /*
-   * save
-   * get
-   * list
-   * delete
-   * 
-   * 
-   * listbytype
-   * getavailabilty
-   */
+
   private IJsonFileParser<Room> roomManager;
 
   public RoomManager(IJsonFileParser<Room> roomManager) {
     this.roomManager = roomManager;
   }
 
-  private String createNewId() { // dupliserer?
+  /**
+   * Creates an unique id.
+   * 
+   * @return room manager id (uuid)
+   * 
+   */
+  private String createNewId() { 
     UUID id = UUID.randomUUID();
     return id.toString();
   }
 
+  /**
+   * Creates and updates a room.
+   * 
+   * @param room room
+   * 
+   * @return room id (uuid)
+   * 
+   */
   public String saveRoom(Room room) {
     boolean isRoomNumberAvailable = isRoomNumberAvailable(room.getRoomNumber(), room.getId());
     if (!isRoomNumberAvailable) {
@@ -65,9 +70,9 @@ public class RoomManager implements IRoomManager {
   }
 
   /**
-   * Deletes one room with the given id
+   * Deletes one room with the given id.
    * 
-   * @param roomId id of room
+   * @param roomId room id
    * 
    */
   @Override
@@ -85,9 +90,9 @@ public class RoomManager implements IRoomManager {
   }
 
   /**
-   * Deletes all rooms of given room type-id
+   * Deletes all rooms of given room type id.
    * 
-   * @param roomTypeId id of room type
+   * @param roomTypeId room type id
    * 
    */
   public void deleteAllInRoomType(String roomTypeId) {
@@ -103,6 +108,16 @@ public class RoomManager implements IRoomManager {
     roomManager.writeFile(tmpRooms);
   }
 
+  /**
+   * Checks if room is available (aka, not any duplicate numbers).
+   * 
+   * @param roomNumber room number
+   * 
+   * @param roomId room id
+   * 
+   * @return true if room is available
+   * 
+   */
   public boolean isRoomNumberAvailable(int roomNumber, String roomId) {
     List<Room> rooms = listRooms();
     return !rooms.stream().anyMatch(r -> r.getRoomNumber() == roomNumber && !r.getId().equals(roomId));
