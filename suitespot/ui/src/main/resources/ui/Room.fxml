@@ -13,13 +13,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="655.0" style="-fx-background-color: #a5d496;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.RoomController">
    <children>
-      <ListView fx:id="roomTypeListView" layoutX="15.0" layoutY="219.0" prefHeight="292.0" prefWidth="270.0" style="-fx-border-image-insets: #d0ebc7;" />
+      <ListView fx:id="roomTypeListView" layoutX="15.0" layoutY="219.0" prefHeight="292.0" prefWidth="270.0" />
       <Text layoutX="243.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage rooms">
          <font>
             <Font name="Modern No. 20" size="30.0" />
          </font>
       </Text>
-      <ListView fx:id="roomListView" layoutX="364.0" layoutY="219.0" prefHeight="292.0" prefWidth="270.0" style="-fx-border-image-insets: #d0ebc7;" />
+      <ListView fx:id="roomListView" layoutX="364.0" layoutY="219.0" prefHeight="292.0" prefWidth="270.0" />
       <Button fx:id="roomTypeDeleteBtn" layoutX="14.0" layoutY="179.0" mnemonicParsing="false" onAction="#deleteRoomType" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #e33124;" text="Delete" textFill="WHITE">
          <font>
             <Font name="Modern No. 20" size="14.0" />

@@ -5,16 +5,17 @@ import java.util.List;
 
 public interface IJsonFileParser<T> {
 
-    ArrayList<T> readFile();
+  ArrayList<T> readFile();
 
-    /**
-     * Write a file. Overriding all existing items
-     * @param items List of all Customers, all Rooms, or all Bookings
-     */
-    void writeFile(List<T> items);
+  /**
+   * Write a file. Overriding all existing items
+   * 
+   * @param items List of all Customers, all Rooms, or all Bookings
+   */
+  void writeFile(List<T> items);
 
-    void appendFile(List<T> items);
+  void appendFile(List<T> items);
 
-    void appendFile(T... items);
+  void appendFile(T... items);
 
 }
