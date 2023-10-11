@@ -16,6 +16,6 @@ public interface IJsonFileParser<T> {
 
   void appendFile(List<T> items);
 
-  void appendFile(T... items);
+  void appendFile(T item);
 
 }

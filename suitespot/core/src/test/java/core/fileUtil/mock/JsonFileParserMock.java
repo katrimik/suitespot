@@ -21,8 +21,7 @@ public class JsonFileParserMock<T> implements IJsonFileParser<T> {
     allItems.addAll(new ArrayList<T>(items));
   }
 
-  @SafeVarargs
-  public final void appendFile(T... items) {
-    appendFile(Arrays.asList(items));
+  public final void appendFile(T item) {
+    appendFile(Arrays.asList(item));
   }
 }

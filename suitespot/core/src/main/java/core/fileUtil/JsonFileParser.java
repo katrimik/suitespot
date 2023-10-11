@@ -14,7 +14,6 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import core.model.Customer;
 
 public class JsonFileParser<T> implements IJsonFileParser<T> {
   private final Class<T> targetType;
@@ -79,16 +78,8 @@ public class JsonFileParser<T> implements IJsonFileParser<T> {
   }
 
   @Override
-  @SafeVarargs
-  public final void appendFile(T... items) {
-    appendFile(Arrays.asList(items));
+  public final void appendFile(T item) {
+    appendFile(Arrays.asList(item));
   }
 
-  public static void main(String[] args) {
-    IJsonFileParser<Customer> customerFileManager = new JsonFileParser<Customer>(Customer.class,
-        FileTypeEnum.CUSTOMER);
-    Customer c = new Customer("Banan", "Eplekake", "tull234567@outlook.com", "12345678");
-    customerFileManager.appendFile(c);
-
-  }
 }
