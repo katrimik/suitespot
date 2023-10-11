@@ -39,12 +39,12 @@
       <Label layoutX="14.0" layoutY="112.0" prefHeight="18.0" prefWidth="102.0" text="Room type name" />
       <Label layoutX="363.0" layoutY="111.0" text="Room number" />
       <Label layoutX="14.0" layoutY="146.0" text="Price" />
-      <Button layoutX="108.0" layoutY="179.0" mnemonicParsing="false" onAction="#createRoomType" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #38a5ff;" text="Create new" textFill="WHITE">
+      <Button fx:id="roomTypeCreateBtn" layoutX="108.0" layoutY="179.0" mnemonicParsing="false" onAction="#createRoomType" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #38a5ff;" text="Create new" textFill="WHITE">
          <font>
             <Font name="Modern No. 20" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="200.0" layoutY="179.0" mnemonicParsing="false" onAction="#saveRoomType" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #658f57;" text="Save" textFill="WHITE">
+      <Button fx:id="roomTypeSaveBtn" layoutX="200.0" layoutY="179.0" mnemonicParsing="false" onAction="#saveRoomType" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #658f57;" text="Save" textFill="WHITE">
          <font>
             <Font name="Modern No. 20" size="14.0" />
          </font>
@@ -54,12 +54,12 @@
             <Font name="Modern No. 20" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="457.0" layoutY="179.0" mnemonicParsing="false" onAction="#createRoom" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #38a5ff;" text="Create new" textFill="WHITE">
+      <Button fx:id="roomCreateBtn" layoutX="457.0" layoutY="179.0" mnemonicParsing="false" onAction="#createRoom" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #38a5ff;" text="Create new" textFill="WHITE">
          <font>
             <Font name="Modern No. 20" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="549.0" layoutY="179.0" mnemonicParsing="false" onAction="#saveRoom" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #658f57;" text="Save" textFill="WHITE">
+      <Button fx:id="roomSaveBtn" layoutX="549.0" layoutY="179.0" mnemonicParsing="false" onAction="#saveRoom" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #658f57;" text="Save" textFill="WHITE">
          <font>
             <Font name="Modern No. 20" size="14.0" />
          </font>

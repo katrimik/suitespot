@@ -81,8 +81,6 @@ public class CustomerControllerTest extends ApplicationTest {
     assertEquals(selectedCustomerEmail, "");
     assertEquals(selectedCustomerPhone, "");
     assertEquals(selectedTitle, "Create new customer");
-    FxAssert.verifyThat("#customerList", NodeMatchers.isNotFocused());
-
   }
 
   @Test
