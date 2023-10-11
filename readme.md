@@ -6,14 +6,6 @@
 
 [open dev in Eclipse Che](https://che.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2305/gr2305/-/tree/dev?new)
 
-[open test branch in Eclipse Che](https://che.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2305/gr2305/-/tree/16-eclipse-che?new)
-
-[open test branch in Eclipse Che](https://che.stud.ntnu.no/#https%3A%2F%2Fgitlab.stud.idi.ntnu.no%2Fit1901%2Fgroups-2023%2Fgr2305%2Fgr2305%2F-%2Ftree%2F16-eclipse-che%3Fref_type%3Dheads?new)
-
-
-
-
-
 ### What the app does
 See [docs/app-description](./docs/app-description.md)
 
