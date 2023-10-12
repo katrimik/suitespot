@@ -3,13 +3,15 @@
 
 
 ## Table of contents
-1. [Introduction](#introduction)
-    1. [FileTypeEnum](#filetypeenum)
-    2. [JsonFile](#jsonfile)
-    3. [Customer](#customer)
-    4. [CustomerManager](#customermanager)
-    5. [CustomerTest](#customertest)
-3. [Functionality](#functionality-so-far)
+- [Release 1](#release-1)
+  - [Table of contents](#table-of-contents)
+  - [Introduction](#introduction)
+    - [FileTypeEnum](#filetypeenum)
+    - [JsonFile](#jsonfile)
+    - [Customer](#customer)
+    - [CustomerManager](#customermanager)
+    - [CustomerTest](#customertest)
+  - [Functionality (so far)](#functionality-so-far)
 
 ## Introduction
 In our first release ( _Release 1_ ) we have created the Java-files:
@@ -38,9 +40,9 @@ The `Customer`-file is a data-object, for keeping track of one customer. There a
 In `CustomerManager`, the customer-ID is created, and it consists of logic for saving, creating, editing and deleting customers. The java-file is exposed to the core-folder.
 
 ### CustomerTest
-The `CustomerTest` are testing some of the different validation-methods in the `Customer`-file. We are only testing the core-functionality, were the test coverage of `Customer` is at 87%. ![jacoco-r1.png](/docs/image/release1/jacoco-r1.png) 
+The `CustomerTest` are testing some of the different validation-methods in the `Customer`-file. We are only testing the core-functionality, were the test coverage of `Customer` is at 87%. ![jacoco-r1.png](../image/release1/jacoco-r1.png) 
 
-For full report see [jacoco](/suitespot/core/target/site/jacoco/index.html) after running:
+For full report see [jacoco](../../suitespot/core/target/site/jacoco/index.html) after running:
 ```
 mvn verify
 ```
@@ -48,5 +50,5 @@ mvn verify
 
 
 ## Functionality (so far)
-As of now, `Suitespot` lets you create, edit and delete customers, from the customer-user-interface. ![release1UI.png](/docs/image/release1/release1UI.png)
+As of now, `Suitespot` lets you create, edit and delete customers, from the customer-user-interface. ![release1UI.png](../image/release1/release1UI.png)
 

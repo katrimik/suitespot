@@ -110,4 +110,5 @@ suitespot/
 # Package diagram
 Package diagram showing the modules and folders in our project; created with PlantUML. 
 ![PlantUML](./docs/image/release2/plantUML.png)
+*Image of puml package diagram. See code [here](./docs/release2/package-diagram.puml)*.
 
