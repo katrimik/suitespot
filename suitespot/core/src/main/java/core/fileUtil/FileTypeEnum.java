@@ -1,17 +1,18 @@
 package core.fileUtil;
 
 public enum FileTypeEnum {
-    CUSTOMER("customer"),
-    BOOKING("booking"),
-    ROOM("room");
-    
-    private final String fileName;
-    
-    FileTypeEnum(String fileName) {
-        this.fileName = fileName;
-    }
+  CUSTOMER("customer"),
+  BOOKING("booking"),
+  ROOM("room"),
+  ROOM_TYPE("room-type");
 
-    public String getFileName() {
-        return fileName;
-    }
+  private final String fileName;
+
+  FileTypeEnum(String fileName) {
+    this.fileName = fileName;
+  }
+
+  public String getFileName() {
+    return fileName;
+  }
 }
