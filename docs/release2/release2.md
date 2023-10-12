@@ -16,6 +16,7 @@
     - [Room](#room-1)
   - [Testing](#testing)
   - [Functionality (so far)](#functionality-so-far)
+  - [Checkstyle warnings](#checkstyle-warnings)
 
 ## Introduction
 In our first release ( _Release 1_ ) we have created the Java-files in headers _"Introduction"_ and _"Customer-Interface"_. For the following release ( _Release 2_ ), we have implemented Java-files under _"Room"_. In _"Test"_ and _"Functionality"_, we have implemented files accordingly to the appropriate release.   
@@ -90,6 +91,7 @@ Furthermore, you can click on _"Manage rooms"_ from the main page. This will all
 ![manageRooms.png](../image/release2/manageRooms.png) 
 
 
-
+## Checkstyle warnings
+We still have quite a few checkstyle warnings, but they are mostly regarding javadoc. We have added javadoc on most public facing methods in core, but the methods we didn't add javadoc on are mostly self explanatory (getters, setters, etc). Both methods with and without javadoc are well named. There are other warnings on checkstyle too, but we didn't manage to figure out how to link checkstyle to the config file, so we can't change the preferences, since it's mostly about us having another coding style. 
 
 

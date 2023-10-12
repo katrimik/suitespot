@@ -8,8 +8,8 @@ This is the beginning of a PMS (property management system). The goal is to crea
 Right now the application supports customers and rooms. You can create, read, update and delete customers, roomtypes and rooms.
 
 ### Current UI 
-![docs/uiMockup.png](/docs/image/release2/r2-customer.png)
-![roomUI](/docs/image/release2/manageRooms.png)
+![docs/uiMockup.png](../docs/image/release2/r2-customer.png)
+![roomUI](../docs/image/release2/manageRooms.png)
 
 ### User stories
 - A new customer walks into the reception of the hotel and wants a hotel booking. The receptionist saves the customer in the system.
@@ -21,5 +21,5 @@ Right now the application supports customers and rooms. You can create, read, up
 ### Future UI mockups
 > The future UI mockups are subject to change, but illustrate what the application is supposted to do. 
 
-![bookingUI](/docs/image/release1/bookingMockup.png)
-![newBookingUI](/docs/image/release1/newBookingMockup.png)
+![bookingUI](../docs/image/release1/bookingMockup.png)
+![newBookingUI](../docs/image/release1/newBookingMockup.png)
