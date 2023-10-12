@@ -1,10 +1,21 @@
 # Group gr2305 repository - IT1901 fall 2023
 > benjakil, eliashet, sbnorton, katrimik 
 
-### What the app does
-See [docs/app-description](./docs/app-description.md)
+## Links
+### Eclipse che
+- [open master in Eclipse Che](https://che.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2305/gr2305?new)
+- [open dev in Eclipse Che](https://che.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2305/gr2305/-/tree/dev?new)
 
-### Cloning the project
+### Docs
+- Click here to read about our [workflow](./docs/release2/workflow.md).
+- Click here to read all [docs](./docs/).
+- [Release 1](./docs/release1/release1.md)
+- [Release 2](./docs/release2/release2.md)
+
+### App description
+- See [suitespot/app-description](./suitespot/app-description.md)
+
+## Cloning the project
 ```bash
 git clone https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2305/gr2305.git
 ``` 
@@ -27,7 +38,6 @@ git ls-remote # to list branches
 
 ```
 
-
 ## Local versions
 This can be tedious if you don't have the right environment, but should be straight forward if you're on windows with maven and java installed.Any subversion of 17 should work fine. 
 
@@ -35,12 +45,6 @@ This can be tedious if you don't have the right environment, but should be strai
 java: `17.0.5`    
 maven: `3.9.4`
 
-## Where to find code
-- The entire code project is located in the folder:
-    - `suitespot`.
-- This folder contains two modules:
-    - `suitespot/core` (business logic)
-    - `suitespot/ui` (ui logic)
 
 ## Run locally
 Commands to prepare the project might vary based on the packages installed and other local factors. Here's a good starting point.
@@ -62,4 +66,49 @@ Commands to prepare the project might vary based on the packages installed and o
 ```
 
 **remark 1**    
-If the app is running, the command will fail. Close all instances of the app. Make sure to not only close the processes in the terminal, since the app will still run. The app might run with an old version of the core module if this step fails. 
+If the app is running, the command will fail. Close all instances of the app. Make sure to not only close the processes in the terminal, since the app will still run. The app might run with an old version of the core module if this step fails.
+
+## Where to find code
+- The entire code project is located in the folder:
+    - [`suitespot`](./suitespot/)
+- This folder contains two modules:
+    - [`suitespot/core`](./suitespot/core/src/main/java/core/) (business logic)
+    - [`suitespot/ui`](./suitespot/ui/src/main/java/ui/) (ui logic)
+
+### Code location diagram
+```
+suitespot/
+├─ core/
+│  ├─ src/
+│  │  ├─ main/
+│  │  │  ├─ java/
+│  │  │  │  ├─ core/
+│  │  │  │  │  ├─ fileUtil/
+│  │  │  │  │  │  ├─ Files for handling storage
+│  │  │  │  │  ├─ manager/
+│  │  │  │  │  │  ├─ Managers (crud operations on models)
+│  │  │  │  │  ├─ model/
+│  │  ├─ test/
+│  │  │  ├─ java/
+│  │  │  │  ├─ core/
+│  │  │  │  │  ├─ tests for core
+├─ ui/
+│  ├─ src/
+│  │  ├─ main/
+│  │  │  ├─ java/
+│  │  │  │  ├─ ui/
+│  │  │  │  │  ├─ Controllers and layout managers
+|  |  ├─ test/
+│  │  │  ├─ java/
+│  │  │  │  ├─ ui/
+|  |  |  |  |  ├─ UI tests
+├─ storage/
+│  ├─ Json files that stores data
+```
+ 
+
+# Package diagram
+Package diagram showing the modules and folders in our project; created with PlantUML. 
+![PlantUML](./docs/image/release2/plantUML.png)
+*Image of puml package diagram. See code [here](./docs/release2/package-diagram.puml)*.
+

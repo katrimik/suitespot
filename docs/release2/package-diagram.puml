@@ -1,0 +1,50 @@
+@startuml
+title Suitespot (without tests)
+
+component core {
+  folder "core.main" {
+    component fileUtil as fileUtilCoreMain
+    component manager as managerCoreMain
+    component model as modelCoreMain
+  }
+
+}
+
+folder "storage" as storage {
+
+}
+
+[gson] as gson <<Library>>
+
+
+component ui as hovedUI {
+  folder "suitespot.main" as main2 {
+    folder ui
+    folder "resources.ui" {
+
+    }
+
+  }
+}
+
+component javafx as jf {
+  [fxml] <<Library>>
+}
+
+hovedUI -[#Salmon]-> jf
+hovedUI -[#Salmon]-> fxml
+ui  -[#Salmon]-> managerCoreMain
+ui  -[#Salmon]-> modelCoreMain
+fileUtilCoreMain -[#Salmon]-> gson
+fileUtilCoreMain -[#Salmon]-> storage
+managerCoreMain -[#Salmon]-> fileUtilCoreMain
+managerCoreMain -[#Salmon]-> modelCoreMain
+
+
+<style>
+.Library {
+  LineColor Red
+}
+</style>
+
+@enduml
