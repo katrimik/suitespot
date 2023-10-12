@@ -11,7 +11,7 @@ public class Room {
   private static final int MIN_ROOMNUMBER = 101;
   private static final int MAX_ROOMNUMBER = 599;
   private Set<LocalDate> bookedDates = new HashSet<LocalDate>();
-  private String customStringFormatter = "";
+  private transient String customStringFormatter = "";
 
   /**
    * Initialize room.
