@@ -121,7 +121,7 @@
                     <appVersion>1.0.0</appVersion>
                     <vendor>gr2305</vendor>
                     <destination>target/dist</destination>
-                    <module>ui</module>
+                    <module>ui/ui.App</module>
                     <runtimeImage>target/suitespotfx</runtimeImage>
                     <javaOptions>
                         <option>-Dfile.encoding=UTF-8</option>
