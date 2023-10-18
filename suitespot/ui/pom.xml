@@ -100,9 +100,44 @@
                 <configuration>
                     <!-- syntax: module-name/full-app-class-name -->
                     <mainClass>ui/ui.App</mainClass>
+                          <!-- rest of options are for jlink -->
+                    <compress>2</compress>
+                    <noHeaderFiles>true</noHeaderFiles>
+                    <stripDebug>true</stripDebug>
+                    <noManPages>true</noManPages>
+                    <launcher>suitespotfx</launcher>
+                    <jlinkImageName>suitespotfx</jlinkImageName>
+                    <jlinkZipName>suitespotfx</jlinkZipName>
                 </configuration>
             </plugin>
 
+            <!-- config above and below taken from https://dev.to/cherrychain/javafx-jlink-and-jpackage-h9 -->
+            <plugin>
+                <groupId>org.panteleyev</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <name>SuitespotFX</name>
+                    <appVersion>1.0.0</appVersion>
+                    <vendor>gr2305</vendor>
+                    <destination>target/dist</destination>
+                    <module>ui</module>
+                    <runtimeImage>target/suitespotfx</runtimeImage>
+                    <javaOptions>
+                        <option>-Dfile.encoding=UTF-8</option>
+                    </javaOptions>
+                    <!-- linux options --> 
+                    <linuxShortcut>true</linuxShortcut>
+                    <linuxMenuGroup>SuitespotFX</linuxMenuGroup>
+
+                    <!-- windows options --> 
+                    <winDirChooser>true</winDirChooser>
+                    <winShortcut>true</winShortcut>
+                    <winMenu>true</winMenu>
+                    <winMenuGroup>SuitespotFX</winMenuGroup>
+                </configuration>
+            </plugin>
+            
             <!-- Configure jacoco code coverage -->
             <plugin>
                 <groupId>org.jacoco</groupId>
