@@ -18,19 +18,27 @@ public class BookingUtils {
 
     public static List<Booking> sortOnRoom(List<Booking> bookings, List<Room> rooms) {
         return bookings.stream().sorted((a, b) -> {
-            List<Room> foundRooms = rooms
-            .stream().filter(r -> r.getId().equals(a.getRoomId()) || r.getId().equals(b.getRoomId()))
-            .toList();
+            Room roomA = null;
+            Room roomB = null;
 
-            if (foundRooms.size() != 2) {
-                throw new IllegalArgumentException("room list does not contain all rooms in bookings");
+            for (Room room : rooms) {
+                System.out.println(room.getId());
+                if (room.getId().equals(a.getRoomId())) {
+                    roomA = room;
+                }
+                
+                if (room.getId().equals(b.getRoomId())) {
+                    roomB = room;
+                }
+
+                if (roomA != null && roomB != null) {
+                    break;
+                }
             }
 
-           Room roomA = foundRooms
-            .stream().filter(r -> r.getId().equals(a.getRoomId())).findFirst().orElse(null);
-
-           Room roomB = foundRooms
-            .stream().filter(r -> r.getId().equals(b.getRoomId())).findFirst().orElse(null);
+            if (roomA == null | roomB == null) {
+                throw new IllegalArgumentException("room list does not contain all rooms in bookings");
+            }
 
             return roomA.getRoomNumber() - roomB.getRoomNumber();
         }).toList();
@@ -38,19 +46,29 @@ public class BookingUtils {
 
     public static List<Booking> sortOnCustomer(List<Booking> bookings, List<Customer> customers) {
         return bookings.stream().sorted((a, b) -> {
-            List<Customer> foundCustomers = customers
-            .stream().filter(c -> c.getId().equals(a.getCustomerId()) || c.getId().equals(b.getCustomerId()))
-            .toList();
+            Customer customerA = null;
+            Customer customerB = null;
 
-            if (foundCustomers.size() != 2) {
-                throw new IllegalArgumentException("customer list does not contain all customers in bookings");
+            for (Customer customer : customers) {
+                if (customer.getId().equals(a.getCustomerId())) {
+                    customerA = customer;
+                }
+                
+                if (customer.getId().equals(b.getCustomerId())) {
+                    customerB = customer;
+                }
+
+                if (customerA != null && customerB != null) {
+                    break;
+                }
             }
 
-           Customer customerA  = foundCustomers
-            .stream().filter(c -> c.getId().equals(a.getCustomerId())).findFirst().orElse(null);
+            System.out.println(customerA);
+            System.out.println(customerB);
 
-           Customer customerB = foundCustomers
-            .stream().filter(c -> c.getId().equals(b.getCustomerId())).findFirst().orElse(null);
+            if (customerA == null || customerB == null) {
+                throw new IllegalArgumentException("customer list does not contain all customers in bookings");
+            }
 
             return customerA.getFullName().compareTo(customerB.getFullName());
         }).toList();
