@@ -1,4 +1,4 @@
-module suitespot.springboot.rest {
+module suitespot.restserver {
     requires com.fasterxml.jackson.databind;
 
     requires spring.web;
@@ -9,5 +9,5 @@ module suitespot.springboot.rest {
 
     requires suitespot.core;
 
-    opens suitespot.springboot.restserver to spring.beans, spring.context, spring.web;
+    opens suitespot.restserver to spring.beans, spring.context, spring.web;
 }

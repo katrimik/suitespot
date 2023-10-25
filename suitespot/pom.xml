@@ -136,6 +136,6 @@
     <modules>
         <module>core</module>
         <module>ui</module>
-        <module>springboot/restserver</module> 
+        <module>restserver</module> 
     </modules>
 </project>
