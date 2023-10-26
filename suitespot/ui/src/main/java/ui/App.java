@@ -36,10 +36,10 @@ public class App extends Application {
 
     writeRootAncher(FXMLLoader.load(this.getClass().getResource("Layout.fxml")));
 
-    rootAnchor.getChildren().add(views.get("App"));
-    writeCurrentViewName("App");
     stage.setScene(new Scene(rootAnchor));
     stage.show();
+
+    setView("App");
   }
 
   private void loadView(String viewName) {
