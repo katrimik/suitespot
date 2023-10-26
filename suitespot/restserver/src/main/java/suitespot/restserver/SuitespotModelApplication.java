@@ -14,5 +14,5 @@ public class SuitespotModelApplication {
 
 
 // to start server use: 
-// mvn spring-boot:run -f ./springboot/restserver/pom.xml 
+// mvn spring-boot:run 
 // from suitespot

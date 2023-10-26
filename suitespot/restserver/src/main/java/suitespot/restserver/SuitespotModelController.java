@@ -26,16 +26,33 @@ public class SuitespotModelController {
     return "hello";
   }
 
-  @GetMapping(path = "/test")
-  public String test() {
-    return "test fungerer";
-  }
 
-  @GetMapping(path = "/c")
-  public List<Customer> c() {
+  @GetMapping(path = "/customer")
+  public List<Customer> defaultCustomer() {
     CustomerManager cm = Manager.getCustomerManager(); 
     return cm.listCustomers();
   }
+
+  @GetMapping(path = "/customer/firstname/{firstName}")
+  public List<Customer> customer(@PathVariable("firstName") String firstName) {
+    CustomerManager cm = Manager.getCustomerManager(); 
+    return cm.listCustomers().stream().filter(c->c.getFirstName().equals(firstName)).toList();
+  }
+
+  @PutMapping(path = "/customer/{firstName}/rename/{newName}")
+  public void renameCustomer(@PathVariable("firstName") String firstName, @PathVariable("newName")String newName) {
+    CustomerManager cm = Manager.getCustomerManager(); 
+    Customer customer = cm.listCustomers().stream().filter(c->c.getFirstName().equals(firstName)).findFirst().orElse(null);
+    if (customer == null) {
+      return;
+    }
+    customer.setFirstName(newName);
+    cm.saveCustomer(customer);
+  }
+
+
+
+
 
   @GetMapping(path = "/r")
   public List<Room> r() {
