@@ -38,8 +38,12 @@ public class CustomerController {
   }
 
   @PostMapping("/customer")
-  public String createOrUpdateCustomer(@RequestBody Customer customer) {
-    return cm.saveCustomer(customer);
+  public ResponseEntity<String> createOrUpdateCustomer(@RequestBody Customer customer) {
+    try {
+      return new ResponseEntity<String>(cm.saveCustomer(customer), HttpStatus.CREATED);
+    } catch (IllegalArgumentException e) {
+      return new ResponseEntity<String>(e.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
+    }
   }
 
   @DeleteMapping("/customer/{id}")
