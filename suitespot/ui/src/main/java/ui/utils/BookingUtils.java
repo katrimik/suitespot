@@ -22,7 +22,7 @@ public class BookingUtils {
             Room roomB = null;
 
             for (Room room : rooms) {
-                System.out.println(room.getId());
+
                 if (room.getId().equals(a.getRoomId())) {
                     roomA = room;
                 }
@@ -62,9 +62,6 @@ public class BookingUtils {
                     break;
                 }
             }
-
-            System.out.println(customerA);
-            System.out.println(customerB);
 
             if (customerA == null || customerB == null) {
                 throw new IllegalArgumentException("customer list does not contain all customers in bookings");

@@ -3,6 +3,7 @@ package core.manager;
 import core.fileUtil.FileTypeEnum;
 import core.fileUtil.IJsonFileParser;
 import core.fileUtil.JsonFileParser;
+import core.model.Booking;
 import core.model.Customer;
 import core.model.Room;
 import core.model.RoomType;
@@ -41,5 +42,16 @@ public class Manager {
     IJsonFileParser<RoomType> f = new JsonFileParser<RoomType>(RoomType.class, FileTypeEnum.ROOM_TYPE);
     IRoomManager roomManager = Manager.getRoomManager();
     return new RoomTypeManager(f, roomManager);
+  }
+
+   /**
+   * Creates a new fully equipped booking manager.
+   * 
+   * @return a booking manager object
+   * 
+   */
+  public static BookingManager getBookingManager() {
+    IJsonFileParser<Booking> f = new JsonFileParser<Booking>(Booking.class, FileTypeEnum.BOOKING);
+    return new BookingManager(f);
   }
 }
