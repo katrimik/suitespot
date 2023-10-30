@@ -113,6 +113,13 @@ public class AppController implements Initializable {
 
   @FXML
   public void bookingDelete() {
+    ListViewItem<Booking> listViewBooking = bookingListView.getSelectionModel().getSelectedItem();
+    if (listViewBooking == null)
+      return;
+
+    bookingManager.deleteBooking(listViewBooking.getValue().getId());
+
+    loadBookings();
     resetFields();
   }
 
