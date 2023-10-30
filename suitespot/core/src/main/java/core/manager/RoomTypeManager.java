@@ -131,7 +131,7 @@ public class RoomTypeManager {
    * @return true if room type is available
    * 
    */
-  public boolean isRoomTypeAvailable(String name, String id) {
+  private boolean isRoomTypeAvailable(String name, String id) {
     List<RoomType> roomTypes = listRoomTypes();
     return !roomTypes
       .stream()

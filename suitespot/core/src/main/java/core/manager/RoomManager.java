@@ -118,7 +118,7 @@ public class RoomManager implements IRoomManager {
    * @return true if room is available
    * 
    */
-  public boolean isRoomNumberAvailable(int roomNumber, String roomId) {
+  private boolean isRoomNumberAvailable(int roomNumber, String roomId) {
     List<Room> rooms = listRooms();
     return !rooms.stream().anyMatch(r -> r.getRoomNumber() == roomNumber && !r.getId().equals(roomId));
   }

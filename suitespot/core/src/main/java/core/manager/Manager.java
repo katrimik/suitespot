@@ -44,7 +44,8 @@ public class Manager {
     return new RoomTypeManager(f, roomManager);
   }
 
-   /**
+
+  /**
    * Creates a new fully equipped booking manager.
    * 
    * @return a booking manager object
