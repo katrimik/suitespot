@@ -117,11 +117,7 @@ public class AppController implements Initializable {
   }
 
   private void displaySelectedBooking(Booking b) {
-    Room room = roomManager.listRooms()
-        .stream()
-        .filter(r -> r.getId().equals(b.getRoomId()))
-        .findFirst()
-        .orElse(null);
+    Room room = roomManager.getRoom(b.getRoomId());
 
     dateFromLbl.setText(b.getFromDate().toString());
     dateToLbl.setText(b.getToDate().toString());
