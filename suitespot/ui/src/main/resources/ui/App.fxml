@@ -36,7 +36,7 @@
          <children>
             <HBox prefHeight="39.0" prefWidth="295.0" spacing="10.0">
                <children>
-                  <RadioButton fx:id="dateRadioBtn" mnemonicParsing="false" onAction="#sortBookingListView" selected="true" text="Date">
+                  <RadioButton fx:id="dateRadioBtn" mnemonicParsing="false" onAction="#sortBookingListView" selected="true" text="From date">
                      <toggleGroup>
                         <ToggleGroup fx:id="sortPreference" />
                      </toggleGroup>
@@ -45,7 +45,7 @@
                   <RadioButton fx:id="customerRadioBtn" mnemonicParsing="false" onAction="#sortBookingListView" text="Customer" toggleGroup="$sortPreference" />
                </children>
             </HBox>
-            <TextField fx:id="searchField" promptText=" Search ..." style="-fx-background-color: lightgrey; -fx-background-radius: 5;" />
+            <TextField fx:id="searchField" onKeyTyped="#search" promptText=" Search ..." style="-fx-background-color: white; -fx-background-radius: 5;" />
             <ListView fx:id="bookingListView" prefHeight="359.0" prefWidth="295.0">
                <VBox.margin>
                   <Insets top="10.0" />
@@ -66,25 +66,12 @@
                      <children>
                         <HBox prefHeight="17.0" prefWidth="405.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Booking-ID:" wrappingWidth="100.0">
-                                 <font>
-                                    <Font name="System Bold" size="16.0" />
-                                 </font>
-                              </Text>
-                              <Label fx:id="bookingDataLbl" prefHeight="19.0" prefWidth="325.0" text="bookingDataLbl">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Customer" wrappingWidth="100.0">
                                  <font>
                                     <Font size="16.0" />
-                                 </font></Label>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="17.0" prefWidth="405.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" wrappingWidth="100.0">
-                                 <font>
-                                    <Font name="System Bold" size="16.0" />
                                  </font>
                               </Text>
-                              <Label fx:id="dateDataLbl" prefHeight="19.0" prefWidth="313.0" text="dateDataLbl">
+                              <Label fx:id="customerDataLbl" prefHeight="19.0" prefWidth="345.0" text="customerDataLbl">
                                  <font>
                                     <Font size="16.0" />
                                  </font></Label>
@@ -118,15 +105,29 @@
                         </HBox>
                         <HBox prefHeight="17.0" prefWidth="405.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Customer" wrappingWidth="100.0">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="From:" wrappingWidth="100.0">
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
                               </Text>
-                              <Label fx:id="customerDataLbl" prefHeight="19.0" prefWidth="345.0" text="customerDataLbl">
+                              <Label fx:id="dateFromLbl" prefHeight="19.0" prefWidth="313.0" text="dateFromLbl">
                                  <font>
                                     <Font size="16.0" />
                                  </font></Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="17.0" prefWidth="405.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="To:" wrappingWidth="100.0">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Text>
+                              <Label fx:id="dateToLbl" prefHeight="19.0" prefWidth="313.0" text="dateToLbl">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </HBox>
                      </children>

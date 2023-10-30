@@ -1,10 +1,8 @@
 package ui;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 import core.manager.BookingManager;
 import core.manager.CustomerManager;
@@ -12,6 +10,7 @@ import core.manager.IRoomManager;
 import core.manager.Manager;
 import core.manager.RoomTypeManager;
 import core.model.Booking;
+import core.model.Customer;
 import core.model.Room;
 import core.model.RoomType;
 import javafx.collections.FXCollections;
@@ -25,24 +24,26 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import ui.utils.BookingUtils;
+import ui.utils.ListViewItem;
 
 public class AppController implements Initializable {
   @FXML
   Button createBtn, deleteBtn;
 
   @FXML
-  Label bookingDataLbl, dateDataLbl, roomDataLbl, roomTypeDataLbl, customerDataLbl;
+  Label dateFromLbl, dateToLbl, roomDataLbl, roomTypeDataLbl, customerDataLbl;
 
   @FXML
   TextField searchField;
 
   @FXML
-  ListView<Booking> bookingListView;
+  ListView<ListViewItem<Booking>> bookingListView;
 
   @FXML
   RadioButton customerRadioBtn, roomRadioBtn, dateRadioBtn;
 
   private List<Booking> bookings;
+  private List<ListViewItem<Booking>> allListViewBookings;
   private final IRoomManager roomManager;
   private final RoomTypeManager roomTypeManager;
   private final BookingManager bookingManager;
@@ -69,6 +70,14 @@ public class AppController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     loadBookings();
+    resetFields();
+
+    bookingListView.setOnMouseClicked(event -> {
+      Booking selectedBooking = bookingListView.getSelectionModel().getSelectedItem().getValue();
+      if (selectedBooking != null) {
+        displaySelectedBooking(selectedBooking);
+      }
+    });
   }
 
   private void loadBookings() {
@@ -77,26 +86,29 @@ public class AppController implements Initializable {
   }
 
   private void displayBookings() {
-    ObservableList<Booking> bookingObservable = FXCollections.observableArrayList(bookings);
+    List<ListViewItem<Booking>> viewBookings = bookings.stream()
+        .map(b -> {
+
+          String displayName = "";
+
+          if (dateRadioBtn.isSelected()) {
+            displayName = b.getFromDate().toString();
+          } else if (roomRadioBtn.isSelected()) {
+            Room room = roomManager.getRoom(b.getRoomId());
+            RoomType roomType = roomTypeManager.getRoomType(room.getTypeId());
+            displayName = room.getRoomNumber() + " (" + roomType.getName() + ")";
+          } else if (customerRadioBtn.isSelected()) {
+            Customer customer = customerManager.readCustomer(b.getCustomerId());
+            displayName = customer.getFullName();
+          }
+
+          return new ListViewItem<Booking>(displayName, b);
+        })
+        .toList();
+
+    ObservableList<ListViewItem<Booking>> bookingObservable = FXCollections.observableArrayList(viewBookings);
+    allListViewBookings = viewBookings;
     bookingListView.setItems(bookingObservable);
-
-    // ObservableList<Booking> bookingObservable =
-    // FXCollections.observableArrayList();
-    // // TODO: JEG TRENGER HJEEEELP
-    // for (Booking booking : bookings) {
-    // bookingObservable.(customBookingStringFormatter(booking));
-    // }
-
-    // bookingListView.setItems(bookingObservable);
-
-    bookingListView.setOnMouseClicked(event -> {
-      Booking selectedBooking = bookingListView.getSelectionModel().getSelectedItem();
-      // TODO: tror ikke det er riktig å plassere den her egentlig, men initalize
-      // fungerer jo ikke pga. layout ...
-      if (selectedBooking != null) {
-        displaySelectedBooking(selectedBooking);
-      }
-    });
   }
 
   @FXML
@@ -111,9 +123,8 @@ public class AppController implements Initializable {
         .findFirst()
         .orElse(null);
 
-    bookingDataLbl.setText(b.getId());
-
-    dateDataLbl.setText("From " + b.getFromDate() + " to " + b.getToDate());
+    dateFromLbl.setText(b.getFromDate().toString());
+    dateToLbl.setText(b.getToDate().toString());
 
     roomDataLbl.setText(String.valueOf(room.getRoomNumber()));
 
@@ -130,80 +141,45 @@ public class AppController implements Initializable {
         .filter(c -> c.getId()
             .equals(b.getCustomerId()))
         .findFirst()
-        .orElse(null).getFirstName());
+        .orElse(null).getFullName());
   }
 
   public void sortBookingListView(ActionEvent event) {
+    bookings = bookingManager.listBookings();
+    searchField.setText("");
+
     if (dateRadioBtn.isSelected()) {
-      bookings = bookingManager.listBookings();
-
-      bookings.forEach(s -> System.out.println("" + s.getFromDate() + "-" + s.getToDate()));
-
-      BookingUtils.sortOnFromDateNewestFirst(bookings);
-      displayBookings();
-
+      bookings = BookingUtils.sortOnFromDateNewestFirst(bookings);
     } else if (roomRadioBtn.isSelected()) {
-      bookings = bookingManager.listBookings();
-
-      bookings.forEach(s -> System.out.println("" +
-          roomManager
-              .listRooms()
-              .stream()
-              .filter(a -> a.getId()
-                  .equals(s.getRoomId()))
-              .findFirst()
-              .orElse(null)));
-
-      BookingUtils.sortOnRoom(bookings, roomManager.listRooms());
-      displayBookings();
-
+      bookings = BookingUtils.sortOnRoom(bookings, roomManager.listRooms());
     } else if (customerRadioBtn.isSelected()) {
-      bookings = bookingManager.listBookings();
-
-      bookings.forEach(s -> System.out.println("" +
-          customerManager
-              .listCustomers()
-              .stream()
-              .filter(a -> a.getId()
-                  .equals(s.getCustomerId()))
-              .findFirst()
-              .orElse(null)));
-
-      BookingUtils.sortOnCustomer(bookings, customerManager.listCustomers());
-      displayBookings();
+      bookings = BookingUtils.sortOnCustomer(bookings, customerManager.listCustomers());
     }
-  }
 
-  private String customBookingStringFormatter(Booking booking) {
-    if (customerRadioBtn.isSelected()) {
-      return customerManager
-          .listCustomers()
-          .stream()
-          .filter(c -> c.getId().equals(booking.getCustomerId()))
-          .findFirst()
-          .map(customer -> customer.getFirstName() + " " + customer.getLastName())
-          .orElse("No customer found");
-    } else if (roomRadioBtn.isSelected()) {
-      Room room = roomManager
-          .listRooms()
-          .stream()
-          .filter(r -> r.getId().equals(booking.getRoomId()))
-          .findFirst()
-          .orElse(null);
-      return (room != null) ? String.valueOf(room.getRoomNumber()) : "No room found";
-    } else if (dateRadioBtn.isSelected()) {
-      return "From " + booking.getFromDate() + " to " + booking.getToDate();
-    }
-    return "Select a sorting option"; // Default or an invalid case
+    displayBookings();
   }
 
   private void resetFields() {
-    bookingDataLbl.setText("");
-    dateDataLbl.setText("");
+    dateFromLbl.setText("");
+    dateToLbl.setText("");
     roomDataLbl.setText("");
     roomTypeDataLbl.setText("");
     customerDataLbl.setText("");
     bookingListView.getSelectionModel().select(null);
   }
 
+  @FXML
+  public void search() {
+    System.out.println("wowwowwowow");
+    String searchText = searchField.getText();
+    if (searchText.trim().equals("")) {
+      displayBookings();
+      return;
+    }
+
+    List<ListViewItem<Booking>> filteredBookings = allListViewBookings.stream()
+        .filter((b -> b.getDisplayName().toLowerCase().contains(searchText.toLowerCase()))).toList();
+    ObservableList<ListViewItem<Booking>> bookingObservable = FXCollections.observableArrayList(filteredBookings);
+    bookingListView.setItems(bookingObservable);
+  }
 }
