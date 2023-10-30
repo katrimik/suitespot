@@ -38,4 +38,14 @@ public interface IRoomManager {
    */
   boolean isRoomNumberAvailable(int roomNumber, String roomId);
 
+  /**
+   * Get room by id
+   * 
+   * @param roomId id of room (uuid)
+   * 
+   * @return Room (or null if room does not exist)
+   * 
+   */
+  Room getRoom(String roomId);
+
 }
