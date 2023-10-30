@@ -27,18 +27,6 @@ public interface IRoomManager {
   void deleteAllInRoomType(String roomTypeId);
 
   /**
-   * Checks if the room number is available (aka, not taken).
-   * 
-   * @param roomNumber room number
-   * 
-   * @param roomId room id
-   * 
-   * @return true if available
-   * 
-   */
-  boolean isRoomNumberAvailable(int roomNumber, String roomId);
-
-  /**
    * Get room by id
    * 
    * @param roomId id of room (uuid)
