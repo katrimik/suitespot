@@ -166,7 +166,6 @@ public class AppController implements Initializable {
 
   @FXML
   public void search() {
-    System.out.println("wowwowwowow");
     String searchText = searchField.getText();
     if (searchText.trim().equals("")) {
       displayBookings();
