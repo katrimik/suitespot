@@ -122,4 +122,17 @@ public class RoomManager implements IRoomManager {
     List<Room> rooms = listRooms();
     return !rooms.stream().anyMatch(r -> r.getRoomNumber() == roomNumber && !r.getId().equals(roomId));
   }
+
+  /**
+   * Get room by id
+   * 
+   * @param roomId id of room (uuid)
+   * 
+   * @return Room (or null if room does not exist)
+   * 
+   */
+  public Room getRoom(String roomId) {
+    List<Room> rooms = listRooms();
+    return rooms.stream().filter(r -> r.getId().equals(roomId)).findFirst().orElse(null);
+  }
 }
