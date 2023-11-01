@@ -100,6 +100,16 @@ public class Room {
   }
 
   /**
+   * Removes a day from the stored days in a room.
+   * 
+   * @param @param Date to make room available
+   * 
+   */
+  public void deBookRoom(LocalDate date) {
+    bookedDates.remove(date);
+  }
+
+  /**
    * Checks if room is available.
    * 
    * @param date date
