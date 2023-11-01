@@ -1,5 +1,6 @@
 package ui;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -87,16 +88,19 @@ public class CustomerControllerTest extends ApplicationTest {
   public void customerAddAndDeleteTest() {
     // deleting when no customer selected
     robot.clickOn("#customerAdd");
-    var listviewCustomers = robot.lookup("#customerList").queryAs(ListView.class).getItems();
+    @SuppressWarnings("unchecked")
+    ObservableList<Customer> listviewCustomers = robot.lookup("#customerList").queryAs(ListView.class).getItems();
     robot.clickOn("#customerDelete");
-    var listviewCustomersNew = robot.lookup("#customerList").queryAs(ListView.class).getItems();
+    @SuppressWarnings("unchecked")
+    ObservableList<Customer> listviewCustomersNew = robot.lookup("#customerList").queryAs(ListView.class).getItems();
 
     assertEquals(listviewCustomers, listviewCustomersNew);
 
     // add New customer
     String fullname = createStandardCustomer("Elias");
 
-    var listviewCustomersNewAfterAdd = robot.lookup("#customerList").queryAs(ListView.class).getItems();
+    @SuppressWarnings("unchecked")
+    ObservableList<Customer> listviewCustomersNewAfterAdd = robot.lookup("#customerList").queryAs(ListView.class).getItems();
     assertNotEquals(listviewCustomersNewAfterAdd, listviewCustomersNew);
 
     deleteCustomer(fullname);
