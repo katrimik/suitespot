@@ -13,9 +13,11 @@ import org.junit.jupiter.api.Test;
 import core.fileUtil.IJsonFileParser;
 import core.fileUtil.mock.JsonFileParserMock;
 import core.model.Booking;
+import core.model.Room;
 
 public class BookingManagerTest {
     private BookingManager bookingManager;
+    private RoomManager roomManager;
     private Booking newBooking;
     private LocalDate fromDate;
     private LocalDate toDate;
@@ -23,7 +25,9 @@ public class BookingManagerTest {
     @BeforeEach
     public void setup() {
         IJsonFileParser<Booking> fileParser = new JsonFileParserMock<Booking>();
-        bookingManager = new BookingManager(fileParser);
+        IJsonFileParser<Room> roomFileParser = new JsonFileParserMock<Room>();
+        bookingManager = new BookingManager(fileParser, roomFileParser);
+        roomManager = new RoomManager(roomFileParser);
 
         fromDate = LocalDate.now();
         toDate = LocalDate.now().plusDays(1);
