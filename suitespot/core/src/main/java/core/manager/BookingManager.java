@@ -1,86 +1,138 @@
 package core.manager;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import core.fileUtil.IJsonFileParser;
 import core.model.Booking;
+import core.model.Room;
 
 public class BookingManager {
 
-    private IJsonFileParser<Booking> bookingFileManager;
+  private IJsonFileParser<Booking> bookingFileManager;
+  private IJsonFileParser<Room> roomFileManager;
 
-    private String createNewId() {
-        UUID id = UUID.randomUUID();
-        return id.toString();
+  private String createNewId() {
+    UUID id = UUID.randomUUID();
+    return id.toString();
+  }
+
+  /**
+   * Initializes a new BookingManager.
+   * 
+   * @param bookingFileManager the storage mechanism to use
+   * 
+   */
+  public BookingManager(IJsonFileParser<Booking> bookingFileManager, IJsonFileParser<Room> roomFileManager) {
+    this.bookingFileManager = bookingFileManager;
+    this.roomFileManager = roomFileManager;
+  }
+
+  /**
+   * Deletes a booking from the file storage used.
+   * 
+   * @param bookingId the id of the booking to delete
+   */
+  public void deleteBooking(String bookingId) {
+    List<Booking> bookings = bookingFileManager.readFile();
+    bookings = bookings.stream().filter(b -> {
+      boolean isBookingToDelete = b.getId().equals(bookingId);
+      if (isBookingToDelete) {
+        removeDatesFromRoom(b);
+      }
+
+      return !isBookingToDelete;
+    }).toList();
+    bookingFileManager.writeFile(bookings);
+  }
+
+  /**
+   * Saves a booking, creates a new one if the id==null, a booking can't be
+   * updated
+   * 
+   * @param booking the booking to create
+   * 
+   */
+  public String saveBooking(Booking booking) {
+    if (booking.getId() != null) {
+      throw new IllegalArgumentException("Booking must be null");
     }
 
-    /**
-     * Initializes a new BookingManager.
-     * 
-     * @param bookingFileManager the storage mechanism to use
-     * 
-     */
-    public BookingManager(IJsonFileParser<Booking> bookingFileManager) {
-        this.bookingFileManager = bookingFileManager;
+    booking.setId(createNewId());
+    bookingFileManager.appendFile(booking);
+    saveDatesToRoom(booking);
+
+    return booking.getId();
+  }
+
+  private void saveDatesToRoom(Booking booking) {
+    String roomId = booking.getRoomId();
+    LocalDate startDate = booking.getFromDate();
+    LocalDate endDate = booking.getToDate();
+
+    List<Room> rooms = roomFileManager.readFile();
+    Room roomToUpdate = rooms.stream()
+        .filter(r -> r.getId().equals(roomId))
+        .findFirst()
+        .orElse(null);
+
+    if (roomToUpdate == null) {
+      throw new IllegalArgumentException("Room not found");
     }
 
-    /**
-     * Deletes a booking from the file storage used.
-     * 
-     * @param bookingId the id of the booking to delete
-     */
-    public void deleteBooking(String bookingId) {
-        List<Booking> bookings = bookingFileManager.readFile();
-        bookings = bookings.stream().filter(b -> !b.getId().equals(bookingId)).toList();
-        bookingFileManager.writeFile(bookings);
+    roomToUpdate.bookRoom(startDate, endDate);
+    int roomIndex = rooms.indexOf(roomToUpdate);
+    rooms.set(roomIndex, roomToUpdate);
+    roomFileManager.writeFile(rooms);
+  }
+
+  private void removeDatesFromRoom(Booking booking) {
+    String roomId = booking.getRoomId();
+    LocalDate startDate = booking.getFromDate();
+    LocalDate endDate = booking.getToDate();
+
+    List<Room> rooms = roomFileManager.readFile();
+    Room roomToUpdate = rooms.stream()
+        .filter(r -> r.getId().equals(roomId))
+        .findFirst()
+        .orElse(null);
+
+    if (roomToUpdate == null) {
+      throw new IllegalArgumentException("Room not found");
     }
 
-    /**
-     * Saves a booking, creates a new one if the id==null, else it updates.
-     * 
-     * @param booking the booking to create or update
-     * 
-     */
-    public String saveBooking(Booking booking) {
-        if (booking.getId() == null) {
-            booking.setId(createNewId());
-            bookingFileManager.appendFile(booking);
-        } else {
-            // Trying a little different update approach here compared to the other managers
-            List<Booking> bookings = bookingFileManager.readFile();
-            List<Booking> updateBookings = bookings.stream().filter(b -> !b.getId().equals(booking.getId())).toList();
-            if (bookings.size() == updateBookings.size()) {
-                throw new IllegalArgumentException("The booking had an id that didn't exist in the database");
-            }
-
-            bookingFileManager.writeFile(updateBookings);
-            bookingFileManager.appendFile(booking);
-        }
-
-        return booking.getId();
+    while (!startDate.isAfter(endDate)) {
+      roomToUpdate.deBookRoom(startDate);
+      startDate = startDate.plusDays(1);
     }
 
-    /**
-     * Gets a single booking.
-     * 
-     * @param bookingId Id of booking to get
-     */
-    public Booking getBooking(String bookingId) {
-        List<Booking> bookings = bookingFileManager.readFile();
-        Booking booking = bookings.stream()
-                .filter(c -> c.getId().equals(bookingId))
-                .findFirst()
-                .orElse(null);
+    int roomIndex = rooms.indexOf(roomToUpdate);
+    rooms.set(roomIndex, roomToUpdate);
+    roomFileManager.writeFile(rooms);
+  }
 
-        return booking;
-    }
+  /**
+   * Gets a single booking.
+   * 
+   * @param bookingId Id of booking to get
+   */
+  public Booking getBooking(String bookingId) {
+    List<Booking> bookings = bookingFileManager.readFile();
+    Booking booking = bookings.stream()
+        .filter(c -> c.getId().equals(bookingId))
+        .findFirst()
+        .orElse(null);
 
-    /**
-     * Gets all bookings stored in the system (the storage engine provided in the constructor).
-     */
-    public List<Booking> listBookings() {
-        return new ArrayList<Booking>(bookingFileManager.readFile());
-    }
+    return booking;
+  }
+
+  /**
+   * Gets all bookings stored in the system (the storage engine provided in the
+   * constructor).
+   */
+  public List<Booking> listBookings() {
+    return new ArrayList<Booking>(bookingFileManager.readFile());
+  }
 }
