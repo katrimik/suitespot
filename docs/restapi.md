@@ -17,8 +17,8 @@
             <li><strong>Description:</strong> Retrieves a list of all customers in the system. </li>
             <li><strong>Response:</strong>
                 <ul>
-                    <li>HTTP Status Code: 200 (OK) if customers are found, 204 (No Content) if no customers are available.
-                    <li>JSON Array containing a list of Customer objects if available.</li>
+                    <li>HTTP Status Code: 200 (OK)
+                    <li>JSON Array containing a list of Customer objects</li>
                 </ul>
             </li>
         </ul>
@@ -35,7 +35,7 @@
             <li><strong>Description:</strong> Retrieves a customer by their unique ID.</li>
             <li><strong>Parameters:</strong>
                 <ul>
-                    <li>{id} (Path Parameter): The ID of the customer to retrieve.</li>
+                    <li>{id} (Path Parameter): The ID of the customer to retrieve (UUID).</li>
                 </ul>
             </li>
             <li><strong>Response:</strong>
@@ -65,7 +65,7 @@
                 <ul>
                     <li>HTTP Status Code: 201 (Created) if the customer is successfully created or updated.</li>
                     <li>HTTP Status Code: 400 (Bad Request) if there is an issue with the request data (e.g., invalid input).</li>
-                    <li>JSON String containing a success message or an error message.</li>
+                    <li>String containing customer-id or an error message.</li>
                 </ul>
             </li>
         </ul>
@@ -82,13 +82,12 @@
             <li><strong>Description:</strong> Deletes a customer by their unique ID.</li>
             <li><strong>Parameters:</strong>
                 <ul>
-                    <li>{id} (Path Parameter): The ID of the customer to delete.</li>
+                    <li>{id} (Path Parameter): The ID of the customer to delete (UUID).</li>
                 </ul>
             </li>
             <li><strong>Response:</strong>
                 <ul>
                     <li>HTTP Status Code: 204 (No Content) if the customer is successfully deleted.</li>
-                    <li>HTTP Status Code: 404 (Not Found) if the customer does not exist.</li>
                 </ul>
             </li>
         </ul>
@@ -109,8 +108,8 @@
             <li><strong>Description:</strong> Retrieves a list of all bookings in the system.</li>
             <li><strong>Response:</strong>
                 <ul>
-                    <li>HTTP Status Code: 200 (OK) if bookings are found.</li>
-                    <li>JSON Array containing a list of Booking objects if available.</li>
+                    <li>HTTP Status Code: 200 (OK)</li>
+                    <li>JSON Array containing a list of Booking objects.</li>
                 </ul>
             </li>
         </ul>
@@ -127,7 +126,7 @@
             <li><strong>Description:</strong> Retrieves a booking by its unique ID.</li>
             <li><strong>Parameters:</strong>
                 <ul>
-                    <li>{id}: The ID of the booking to retrieve.</li>
+                    <li>{id}: The ID of the booking to retrieve (UUID).</li>
                 </ul>
             </li>
             <li><strong>Response:</strong>
@@ -150,14 +149,14 @@
             <li><strong>Description:</strong> Creates a new booking or updates an existing one.</li>
             <li><strong>Request Body:</strong>
                 <ul>
-                    <li>JSON object representing the Booking to be created or updated.</li>
+                    <li>JSON object representing the Booking to be created or updated. </li>
                 </ul>
             </li>
             <li><strong>Response:</strong>
                 <ul>
                     <li>HTTP Status Code: 201 (Created) if the booking is successfully created or updated.</li>
                     <li>HTTP Status Code: 400 (Bad Request) if there is an issue with the request data (e.g., invalid input).</li>
-                    <li>JSON String containing a success message or an error message.</li>
+                    <li>String containing booking-id or an error message.</li>
                 </ul>
             </li>
         </ul>
@@ -180,7 +179,6 @@
             <li><strong>Response:</strong>
                 <ul>
                     <li>HTTP Status Code: 204 (No Content) if the booking is successfully deleted.</li>
-                    <li>HTTP Status Code: 404 (Not Found) if the booking does not exist.</li>
                 </ul>
             </li>
         </ul>
@@ -201,11 +199,34 @@
             <li><strong>Description:</strong> Retrieves a list of all rooms in the system. </li>
             <li><strong>Response:</strong>
                 <ul>
-                    <li>HTTP Status Code: 200 (OK) if rooms are found, 204 (No Content) if no rooms are available.
-                    <li>JSON Array containing a list of Room objects if available.</li>
+                    <li>HTTP Status Code: 200 (OK)</li>
+                    <li>JSON Array containing a list of Room objects</li>
                 </ul>
             </li>
         <ul>
+    </div>
+</details>
+<details>
+    <summary class="get-summary"> 
+        <h2 class="get verb"> GET</h2> 
+        <h2 class="endpoint"> /room/{id} </h2>
+        <h2 class="dropdown"> ▼</h2>
+    </summary>
+    <div class="get-summary">
+        <ul>
+            <li><strong>Description:</strong> Retrieves a room by its unique ID.</li>
+            <li><strong>Parameters:</strong>
+                <ul>
+                    <li>{id} (Path Parameter): The ID of the room to retrieve (UUID).</li>
+                </ul>
+            </li>
+            <li><strong>Response:</strong>
+                <ul>
+                    <li>HTTP Status Code: 200 (OK) if the room is found, 404 (Not Found) if the room does not exist.</li>
+                    <li>JSON object representing the Room if available.</li>
+                </ul>
+            </li>
+        </ul>
     </div>
 </details>
 <details>
@@ -226,7 +247,7 @@
                 <ul>
                     <li>HTTP Status Code: 201 (Created) if the room is successfully created or updated.</li>
                     <li>HTTP Status Code: 400 (Bad Request) if there is an issue with the request data (e.g., invalid input).</li>
-                    <li>JSON String containing a success message or an error message.</li>
+                    <li>String containing room-id or an error message.</li>
                 </ul>
             </li>
         </ul>
@@ -249,7 +270,6 @@
             <li><strong>Response:</strong>
                 <ul>
                     <li>HTTP Status Code: 204 (No Content) if the room is successfully deleted.</li>
-                    <li>HTTP Status Code: 404 (Not Found) if the room does not exist.</li>
                 </ul>
             </li>
         </ul>
@@ -270,8 +290,8 @@
             <li><strong>Description:</strong> Retrieves a list of all room types in the system. </li>
             <li><strong>Response:</strong>
                 <ul>
-                    <li>HTTP Status Code: 200 (OK) if room types are found, 204 (No Content) if no room types are available.
-                    <li>JSON Array containing a list of RoomType objects if available.</li>
+                    <li>HTTP Status Code: 200 (OK)</li>
+                    <li>JSON Array containing a list of RoomType objects</li>
                 </ul>
             </li>
         </ul>
@@ -288,7 +308,7 @@
             <li><strong>Description:</strong> Retrieves a room type by its unique ID.</li>
             <li><strong>Parameters:</strong>
                 <ul>
-                    <li>{id} (Path Parameter): The ID of the room type to retrieve.</li>
+                    <li>{id} (Path Parameter): The ID of the room type to retrieve (UUID).</li>
                 </ul>
             </li>
             <li><strong>Response:</strong>
@@ -318,7 +338,7 @@
                 <ul>
                     <li>HTTP Status Code: 201 (Created) if the room type is successfully created or updated.</li>
                     <li>HTTP Status Code: 400 (Bad Request) if there is an issue with the request data (e.g., invalid input).</li>
-                    <li>JSON String containing a success message or an error message.</li>
+                    <li>String containing roomtype-id or an error message.</li>
                 </ul>
             </li>
         </ul>
@@ -341,7 +361,6 @@
             <li><strong>Response:</strong>
                 <ul>
                     <li>HTTP Status Code: 204 (No Content) if the room type is successfully deleted.</li>
-                    <li>HTTP Status Code: 404 (Not Found) if the room type does not exist.</li>
                 </ul>
             </li>
         </ul>
