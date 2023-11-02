@@ -68,11 +68,11 @@ public class App extends Application {
     launch();
   }
 
-  public static void RegisterFunction(String name, Runnable callback) {
+  public static void registerFunction(String name, Runnable callback) {
     callbacks.put(name, callback);
   }
 
-  public static void CallFunction(String name) {
+  public static void callFunction(String name) {
     Runnable callback = callbacks.get(name);
     if (callback != null) {
       callback.run();

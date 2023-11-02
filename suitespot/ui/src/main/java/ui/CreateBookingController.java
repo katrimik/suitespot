@@ -64,7 +64,9 @@ public class CreateBookingController implements Initializable {
 
     roomTypeComboBox.getSelectionModel().selectFirst();
     roomTypeChanged();
+    forwardBtn.setDisable(false);
 
+    currentSection = 0;
     setCorrectSection();
 
     fromDatePicker.setValue(LocalDate.now());
@@ -74,6 +76,7 @@ public class CreateBookingController implements Initializable {
   @FXML
   public void backwardBtnClicked() {
     if (currentSection == 0) {
+      goToMainPage();
       return;
     }
 
@@ -109,8 +112,7 @@ public class CreateBookingController implements Initializable {
       return;
     }
 
-    App.CallFunction("updatebooking");
-    setInitialState();
+    App.callFunction("updatebooking");
     goToMainPage();
   }
 
@@ -191,17 +193,6 @@ public class CreateBookingController implements Initializable {
       ObservableList<Room> items = FXCollections.observableArrayList();
       roomListView.setItems(items);
       return;
-    }
-
-    System.out.println(fromDatePicker.getValue().toString());
-    System.out.println(toDatePicker.getValue().toString());
-
-    for (Room room : allRooms) {
-      System.out.println(room.getRoomNumber());
-      for (LocalDate d : room.getBookedDates()) {
-        System.out.println(d.toString());
-      }
-      System.out.println("-----");
     }
 
     List<Room> rooms = allRooms

@@ -79,7 +79,7 @@ public class AppController implements Initializable {
       }
     });
 
-    App.RegisterFunction("updatebooking", () -> {
+    App.registerFunction("updatebooking", () -> {
       displayBookings();
     });
   }
