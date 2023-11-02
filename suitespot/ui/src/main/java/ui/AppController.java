@@ -73,7 +73,12 @@ public class AppController implements Initializable {
     resetFields();
 
     bookingListView.setOnMouseClicked(event -> {
-      Booking selectedBooking = bookingListView.getSelectionModel().getSelectedItem().getValue();
+      ListViewItem<Booking> bookingItem = bookingListView.getSelectionModel().getSelectedItem();
+      if (bookingItem == null) {
+        return;
+      }
+
+      Booking selectedBooking = bookingItem.getValue();
       if (selectedBooking != null) {
         displaySelectedBooking(selectedBooking);
       }
