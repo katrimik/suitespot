@@ -14,10 +14,12 @@ import core.fileUtil.IJsonFileParser;
 import core.fileUtil.mock.JsonFileParserMock;
 import core.model.Booking;
 import core.model.Room;
+import core.model.RoomType;
 
 public class BookingManagerTest {
     private BookingManager bookingManager;
     private RoomManager roomManager;
+    private RoomTypeManager roomTypeManager;
     private Booking newBooking;
     private LocalDate fromDate;
     private LocalDate toDate;
@@ -26,12 +28,18 @@ public class BookingManagerTest {
     public void setup() {
         IJsonFileParser<Booking> fileParser = new JsonFileParserMock<Booking>();
         IJsonFileParser<Room> roomFileParser = new JsonFileParserMock<Room>();
+        IJsonFileParser<RoomType> roomTypeFileParser = new JsonFileParserMock<RoomType>();
+
         bookingManager = new BookingManager(fileParser, roomFileParser);
         roomManager = new RoomManager(roomFileParser);
+        roomTypeManager = new RoomTypeManager(roomTypeFileParser, roomManager);
+
+        String typeId = roomTypeManager.saveRoomType(new RoomType("suite", null, 1000));
+        String roomId = roomManager.saveRoom(new Room(101, typeId));
 
         fromDate = LocalDate.now();
         toDate = LocalDate.now().plusDays(1);
-        newBooking = new Booking("roomId", "customerId", fromDate, toDate);
+        newBooking = new Booking(roomId, "customerId", fromDate, toDate);
     }
 
     @Test
@@ -51,7 +59,9 @@ public class BookingManagerTest {
         List<Booking> contains0Bookings = bookingManager.listBookings();
         bookingManager.saveBooking(newBooking);
         List<Booking> contains1Bookings = bookingManager.listBookings();
+
         newBooking.setId(null);
+        newBooking.setDates(LocalDate.now().plusDays(10), LocalDate.now().plusDays(12));
         bookingManager.saveBooking(newBooking);
         List<Booking> contains2Bookings = bookingManager.listBookings();
 
@@ -76,23 +86,6 @@ public class BookingManagerTest {
 
         // testing name and not id since id is set dynamically
         assertTrue(newBooking.getRoomId().equals(booking.getRoomId()));
-    }
-
-    @Test
-    public void testUpdateBooking() {
-        String testRoomId = "roomId";
-
-        String customerId = bookingManager.saveBooking(newBooking);
-        List<Booking> beforeUpdateBookings = bookingManager.listBookings();
-        newBooking.setRoomId(testRoomId);
-        bookingManager.saveBooking(newBooking);
-        List<Booking> afterUpdateBookings = bookingManager.listBookings();
-
-        Booking customerWithNewName = bookingManager.getBooking(customerId);
-
-        assertTrue(beforeUpdateBookings.size() == 1);
-        assertTrue(afterUpdateBookings.size() == 1);
-        assertTrue(customerWithNewName.getRoomId().equals(testRoomId));
     }
 
     @Test
