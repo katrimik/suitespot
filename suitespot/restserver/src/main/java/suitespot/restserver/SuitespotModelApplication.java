@@ -10,8 +10,3 @@ public class SuitespotModelApplication {
     SpringApplication.run(SuitespotModelApplication.class, args);
   }
 }
-
-
-// to start server use: 
-// mvn spring-boot:run 
-// from suitespot

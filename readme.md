@@ -9,6 +9,7 @@
 ### Docs
 - Click here to read about our [workflow](./docs/release2/workflow.md).
 - Click here to read all [docs](./docs/).
+- Click here to read API [docs](./docs/restapi).
 - [Release 1](./docs/release1/release1.md)
 - [Release 2](./docs/release2/release2.md)
 
@@ -67,6 +68,21 @@ Commands to prepare the project might vary based on the packages installed and o
 
 **remark 1**    
 If the app is running, the command will fail. Close all instances of the app. Make sure to not only close the processes in the terminal, since the app will still run. The app might run with an old version of the core module if this step fails.
+
+## Run server locally
+```bash
+# change directory to suitespot/restserver
+cd suitespot/restserver
+
+# start spring-boot server with maven
+mvn spring-boot:run
+
+# the server vil now start up and expose the endpoints to localhost:8080/
+```
+
+- Click here to read API [documentation](./docs/restapi).
+
+
 
 ## Where to find code
 - The entire code project is located in the folder:
