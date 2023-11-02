@@ -17,7 +17,7 @@ import org.testfx.matcher.base.NodeMatchers;
 import static org.hamcrest.MatcherAssert.assertThat;
 import org.testfx.matcher.control.TextInputControlMatchers;
 
-import core.manager.CustomerManager;
+import core.manager.interfaces.ICustomerManager;
 import core.manager.Manager;
 import core.manager.RoomManager;
 import core.model.Booking;
@@ -90,7 +90,7 @@ public class AppControllerTest extends ApplicationTest {
         .queryAs(ListView.class).getSelectionModel()
         .getSelectedItem();
 
-    CustomerManager customerManager = Manager.getCustomerManager();
+    ICustomerManager customerManager = Manager.getCustomerManager();
     String selectedCustomerFullName = customerManager
         .listCustomers()
         .stream()

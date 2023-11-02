@@ -1,13 +1,15 @@
 package core.manager;
 
 import core.fileUtil.IJsonFileParser;
+import core.manager.interfaces.IRoomManager;
+import core.manager.interfaces.IRoomTypeManager;
 import core.model.RoomType;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class RoomTypeManager {
+public class RoomTypeManager implements IRoomTypeManager {
 
   private IJsonFileParser<RoomType> roomTypeManager;
   private IRoomManager roomManager;
@@ -44,6 +46,7 @@ public class RoomTypeManager {
    * @return room type id (uuid)
    * 
    */
+  @Override
   public String saveRoomType(RoomType roomType) {
     boolean isRoomTypeAvailable = isRoomTypeAvailable(roomType.getName(), roomType.getId());
     if (!isRoomTypeAvailable) {
@@ -81,6 +84,7 @@ public class RoomTypeManager {
    * @return room type
    * 
    */
+  @Override
   public RoomType getRoomType(String roomTypeId) {
     List<RoomType> listRoomTypes = roomTypeManager.readFile();
     RoomType roomType = listRoomTypes.stream()
@@ -97,6 +101,7 @@ public class RoomTypeManager {
    * @return list of all room types
    * 
    */
+  @Override
   public List<RoomType> listRoomTypes() {
     return roomTypeManager.readFile();
   }
@@ -107,6 +112,7 @@ public class RoomTypeManager {
    * @param roomTypeId room type id
    * 
    */
+  @Override
   public void deleteRoomType(String roomTypeId) {
     ArrayList<RoomType> listRoomTypes = roomTypeManager.readFile();
     ArrayList<RoomType> tmpRoomTypes = new ArrayList<RoomType>();

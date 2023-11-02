@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import core.manager.RoomTypeManager;
 import core.manager.Manager;
+import core.manager.interfaces.IRoomTypeManager;
 import core.model.RoomType;
 
 @RestController
 public class RoomTypeController {
 
-  private final RoomTypeManager rtm;
+  private final IRoomTypeManager rtm;
 
   @Autowired
   public RoomTypeController() {

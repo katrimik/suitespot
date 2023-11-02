@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import core.manager.CustomerManager;
+import core.manager.interfaces.ICustomerManager;
 import core.manager.Manager;
 import core.model.Customer;
 
 @RestController
 public class CustomerController {
 
-  private final CustomerManager cm;
+  private final ICustomerManager cm;
 
   @Autowired
   public CustomerController() {

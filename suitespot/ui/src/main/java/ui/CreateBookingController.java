@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import core.manager.BookingManager;
-import core.manager.CustomerManager;
-import core.manager.IRoomManager;
+import core.manager.interfaces.IBookingManager;
+import core.manager.interfaces.ICustomerManager;
+import core.manager.interfaces.IRoomManager;
 import core.manager.Manager;
-import core.manager.RoomTypeManager;
+import core.manager.interfaces.IRoomTypeManager;
 import core.model.Booking;
 import core.model.Customer;
 import core.model.Room;
@@ -44,10 +44,10 @@ public class CreateBookingController implements Initializable {
   @FXML
   Button backBtn, forwardBtn;
 
-  private final CustomerManager customerManager = Manager.getCustomerManager();
+  private final ICustomerManager customerManager = Manager.getCustomerManager();
   private final IRoomManager roomManager = Manager.getRoomManager();
-  private final RoomTypeManager roomTypeManager = Manager.getRoomTypeManager();
-  private final BookingManager bookingManager = Manager.getBookingManager();
+  private final IRoomTypeManager roomTypeManager = Manager.getRoomTypeManager();
+  private final IBookingManager bookingManager = Manager.getBookingManager();
 
   private List<Room> allRooms = new ArrayList<Room>();
   private int currentSection = 0;

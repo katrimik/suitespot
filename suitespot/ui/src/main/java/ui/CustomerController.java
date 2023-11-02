@@ -3,7 +3,8 @@ package ui;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import core.manager.CustomerManager;
+
+import core.manager.interfaces.ICustomerManager;
 import core.manager.Manager;
 import core.model.Customer;
 import javafx.beans.value.ChangeListener;
@@ -30,7 +31,7 @@ public class CustomerController implements Initializable {
   @FXML
   Text StatusCrudLbl;
 
-  private final CustomerManager customerManager;
+  private final ICustomerManager customerManager;
 
   public CustomerController() {
     customerManager = Manager.getCustomerManager();
