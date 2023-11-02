@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import core.manager.IRoomManager;
+import core.manager.interfaces.IRoomManager;
 import core.manager.Manager;
 import core.model.Room;
 
@@ -38,6 +38,11 @@ public class RoomController {
     } catch (IllegalArgumentException e) {
       return new ResponseEntity<String>(e.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
     }
+  }
+
+  @DeleteMapping("/room/roomtype/{id}")
+  public void deleteAllInRoomType(@PathVariable("id") String id) {
+    rm.deleteAllInRoomType(id);
   }
 
   @DeleteMapping("/room/{id}")
