@@ -1,6 +1,8 @@
 # SuiteSpot REST Server - API Documentation
 
 
+## `Endpoints`
+Endpoints are exposed to `localhost:8080`
 
 
 ## `customer`
