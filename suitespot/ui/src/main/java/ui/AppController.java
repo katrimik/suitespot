@@ -78,6 +78,10 @@ public class AppController implements Initializable {
         displaySelectedBooking(selectedBooking);
       }
     });
+
+    App.registerFunction("updatebooking", () -> {
+      displayBookings();
+    });
   }
 
   private void loadBookings() {
@@ -177,5 +181,10 @@ public class AppController implements Initializable {
         .filter((b -> b.getDisplayName().toLowerCase().contains(searchText.toLowerCase()))).toList();
     ObservableList<ListViewItem<Booking>> bookingObservable = FXCollections.observableArrayList(filteredBookings);
     bookingListView.setItems(bookingObservable);
+  }
+
+  @FXML
+  public void onCreateBtnPressed() {
+    App.setView("CreateBooking");
   }
 }

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * JavaFX App
@@ -20,6 +21,7 @@ public class App extends Application {
   private static final HashMap<String, AnchorPane> views = new HashMap<>();
   private static AnchorPane rootAnchor;
   private static String currentViewName;
+  private static Map<String, Runnable> callbacks = new HashMap<>();
 
   private static void writeCurrentViewName(String viewName) {
     currentViewName = viewName;
@@ -31,7 +33,7 @@ public class App extends Application {
 
   @Override
   public void start(Stage stage) throws IOException {
-    List<String> viewNames = Arrays.asList("App", "Room", "Customer");
+    List<String> viewNames = Arrays.asList("App", "Room", "Customer", "CreateBooking");
     viewNames.forEach(viewName -> loadView(viewName));
 
     writeRootAncher(FXMLLoader.load(this.getClass().getResource("Layout.fxml")));
@@ -64,5 +66,16 @@ public class App extends Application {
 
   public static void main(String[] args) {
     launch();
+  }
+
+  public static void registerFunction(String name, Runnable callback) {
+    callbacks.put(name, callback);
+  }
+
+  public static void callFunction(String name) {
+    Runnable callback = callbacks.get(name);
+    if (callback != null) {
+      callback.run();
+    }
   }
 }

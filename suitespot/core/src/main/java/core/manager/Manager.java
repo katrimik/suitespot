@@ -9,7 +9,7 @@ import core.model.Room;
 import core.model.RoomType;
 
 public class Manager {
-  
+
   /**
    * Creates a new fully equipped customer manager.
    * 
@@ -31,7 +31,7 @@ public class Manager {
     IJsonFileParser<Room> f = new JsonFileParser<Room>(Room.class, FileTypeEnum.ROOM);
     return new RoomManager(f);
   }
-  
+
   /**
    * Creates a new fully equipped room type manager.
    * 
@@ -44,7 +44,6 @@ public class Manager {
     return new RoomTypeManager(f, roomManager);
   }
 
-
   /**
    * Creates a new fully equipped booking manager.
    * 
@@ -53,6 +52,7 @@ public class Manager {
    */
   public static BookingManager getBookingManager() {
     IJsonFileParser<Booking> f = new JsonFileParser<Booking>(Booking.class, FileTypeEnum.BOOKING);
-    return new BookingManager(f);
+    IJsonFileParser<Room> r = new JsonFileParser<Room>(Room.class, FileTypeEnum.ROOM);
+    return new BookingManager(f, r);
   }
 }
