@@ -73,7 +73,12 @@ public class AppController implements Initializable {
     resetFields();
 
     bookingListView.setOnMouseClicked(event -> {
-      Booking selectedBooking = bookingListView.getSelectionModel().getSelectedItem().getValue();
+      ListViewItem<Booking> bookingItem = bookingListView.getSelectionModel().getSelectedItem();
+      if (bookingItem == null) {
+        return;
+      }
+
+      Booking selectedBooking = bookingItem.getValue();
       if (selectedBooking != null) {
         displaySelectedBooking(selectedBooking);
       }
@@ -117,6 +122,13 @@ public class AppController implements Initializable {
 
   @FXML
   public void bookingDelete() {
+    ListViewItem<Booking> listViewBooking = bookingListView.getSelectionModel().getSelectedItem();
+    if (listViewBooking == null)
+      return;
+
+    bookingManager.deleteBooking(listViewBooking.getValue().getId());
+
+    loadBookings();
     resetFields();
   }
 
@@ -170,7 +182,6 @@ public class AppController implements Initializable {
 
   @FXML
   public void search() {
-    System.out.println("wowwowwowow");
     String searchText = searchField.getText();
     if (searchText.trim().equals("")) {
       displayBookings();
