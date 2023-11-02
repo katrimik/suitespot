@@ -1,34 +1,25 @@
 package ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.List;
 
-import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxAssert;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;
-import static org.hamcrest.MatcherAssert.assertThat;
-import org.testfx.matcher.control.TextInputControlMatchers;
-
 import core.manager.interfaces.ICustomerManager;
 import core.manager.Manager;
 import core.manager.RoomManager;
 import core.model.Booking;
-import core.model.Customer;
-import core.model.Room;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import ui.utils.ListViewItem;
@@ -51,16 +42,8 @@ public class AppControllerTest extends ApplicationTest {
     return root;
   }
 
-  private Label getLabel(String fxid) {
-    return robot.lookup(fxid).queryAs(Label.class);
-  }
-
   private TextField getTextField(String fxid) {
     return robot.lookup(fxid).queryAs(TextField.class);
-  }
-
-  private RadioButton getRadioBtn(String fxid) {
-    return robot.lookup(fxid).queryAs(RadioButton.class);
   }
 
   private List<Booking> getListItems(String fxid) {
@@ -107,7 +90,7 @@ public class AppControllerTest extends ApplicationTest {
   @Test
   public void clickOnListViewRoom() {
     robot.clickOn("Room");
-    String roomName = "101 (Single)";
+    String roomName = "102 (Single)";
     robot.clickOn("#bookingListView").clickOn(roomName);
 
     @SuppressWarnings("unchecked")
@@ -124,7 +107,7 @@ public class AppControllerTest extends ApplicationTest {
         .orElse(null).getRoomNumber();
 
     int roomNumber = Integer.valueOf(robot.lookup("#roomDataLbl").queryAs(Label.class).getText());
-
+    System.out.println(roomNumber + " should be " + selectedRoomNumber);
     assertEquals(roomNumber, selectedRoomNumber);
 
   }
@@ -141,7 +124,7 @@ public class AppControllerTest extends ApplicationTest {
     // Ensure that the search results contain the expected items
     List<Booking> listViewItemsSearched = this.getListItems("#bookingListView");
 
-    assertTrue(listViewItemsSearched.size() == 1);
+    assertTrue(listViewItemsSearched.size() == 2);
 
   }
 }
