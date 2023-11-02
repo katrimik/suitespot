@@ -8,7 +8,7 @@ import core.model.Room;
 
 public class RoomManager implements IRoomManager {
 
-    private final ApiClient<Room> client = new ApiClient<Room>("/customer", Room.class);
+    private final ApiClient<Room> client = new ApiClient<Room>("/room", Room.class);
 
     public String saveRoom(Room room) {
         return client.post(room);

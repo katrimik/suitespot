@@ -142,18 +142,14 @@ public class ApiClient<T> {
   public void delete(String id) {
     try {
       String path = fullBasePath + "/" + id;
-      System.out.println(path);
       HttpRequest request = HttpRequest.newBuilder(new URI(path))
           .DELETE()
           .build();
 
-      HttpResponse<String> response = HttpClient
+      HttpClient
           .newBuilder()
           .build()
           .send(request, HttpResponse.BodyHandlers.ofString());
-
-      System.out.println(response.statusCode());
-      System.out.println(response.body());
 
     } catch (IOException | URISyntaxException | InterruptedException e) {
       throw new RuntimeException(e);

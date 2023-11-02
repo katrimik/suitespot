@@ -6,6 +6,7 @@ module suitespot.core {
   exports core.fileUtil;
   exports core.model;
   exports core.manager.interfaces;
+  exports core.apiManager;
 
   opens core.model to com.google.gson;
 }

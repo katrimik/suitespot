@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import core.manager.interfaces.ICustomerManager;
-import core.manager.Manager;
+import core.apiManager.Manager;
 import core.model.Customer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -39,7 +39,6 @@ public class CustomerController implements Initializable {
 
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
-    System.out.println(customerList);
     refreshCustomers();
 
     customerList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Customer>() {

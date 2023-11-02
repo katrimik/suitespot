@@ -31,6 +31,12 @@ public class RoomController {
     return new ResponseEntity<>(rm.listRooms(), HttpStatus.OK);
   }
 
+  @GetMapping("/room/{id}")
+  public ResponseEntity<Room> getRoom(@PathVariable("id") String id) {
+    Room room = rm.getRoom(id);
+    return new ResponseEntity<>(room, room == null ? HttpStatus.NOT_FOUND : HttpStatus.OK);
+  }
+
   @PostMapping("/room")
   public ResponseEntity<String> createOrUpdateRoom(@RequestBody Room room) {
     try {
