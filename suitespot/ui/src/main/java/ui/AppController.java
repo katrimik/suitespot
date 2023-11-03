@@ -4,10 +4,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import core.apiManager.Manager;
 import core.manager.interfaces.IBookingManager;
 import core.manager.interfaces.ICustomerManager;
 import core.manager.interfaces.IRoomManager;
-import core.apiManager.Manager;
 import core.manager.interfaces.IRoomTypeManager;
 import core.model.Booking;
 import core.model.Customer;

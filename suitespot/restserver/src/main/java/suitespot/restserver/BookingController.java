@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import core.manager.interfaces.IBookingManager;
 import core.manager.Manager;
+import core.manager.interfaces.IBookingManager;
 import core.model.Booking;
 
 @RestController

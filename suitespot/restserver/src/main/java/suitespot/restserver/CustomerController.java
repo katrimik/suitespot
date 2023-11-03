@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import core.manager.interfaces.ICustomerManager;
 import core.manager.Manager;
+import core.manager.interfaces.ICustomerManager;
 import core.model.Customer;
 
 @RestController
