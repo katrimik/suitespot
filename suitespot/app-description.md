@@ -23,3 +23,4 @@ Right now the application supports customers and rooms. You can create, read, up
 
 ![bookingUI](../docs/image/release1/bookingMockup.png)
 ![newBookingUI](../docs/image/release1/newBookingMockup.png)
+![roomUI](/docs/image/roomMockup.png)
