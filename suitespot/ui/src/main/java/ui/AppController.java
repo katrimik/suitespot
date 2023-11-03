@@ -4,11 +4,11 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import core.manager.BookingManager;
-import core.manager.CustomerManager;
-import core.manager.IRoomManager;
-import core.manager.Manager;
-import core.manager.RoomTypeManager;
+import core.manager.interfaces.IBookingManager;
+import core.manager.interfaces.ICustomerManager;
+import core.manager.interfaces.IRoomManager;
+import core.apiManager.Manager;
+import core.manager.interfaces.IRoomTypeManager;
 import core.model.Booking;
 import core.model.Customer;
 import core.model.Room;
@@ -45,9 +45,9 @@ public class AppController implements Initializable {
   private List<Booking> bookings;
   private List<ListViewItem<Booking>> allListViewBookings;
   private final IRoomManager roomManager;
-  private final RoomTypeManager roomTypeManager;
-  private final BookingManager bookingManager;
-  private final CustomerManager customerManager;
+  private final IRoomTypeManager roomTypeManager;
+  private final IBookingManager bookingManager;
+  private final ICustomerManager customerManager;
 
   @FXML
   public void openCustomerView() {

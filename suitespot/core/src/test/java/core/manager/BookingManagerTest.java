@@ -12,14 +12,16 @@ import org.junit.jupiter.api.Test;
 
 import core.fileUtil.IJsonFileParser;
 import core.fileUtil.mock.JsonFileParserMock;
+import core.manager.interfaces.IBookingManager;
+import core.manager.interfaces.IRoomTypeManager;
 import core.model.Booking;
 import core.model.Room;
 import core.model.RoomType;
 
 public class BookingManagerTest {
-    private BookingManager bookingManager;
+    private IBookingManager bookingManager;
     private RoomManager roomManager;
-    private RoomTypeManager roomTypeManager;
+    private IRoomTypeManager roomTypeManager;
     private Booking newBooking;
     private LocalDate fromDate;
     private LocalDate toDate;

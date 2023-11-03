@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.UUID;
 
 import core.fileUtil.IJsonFileParser;
+import core.manager.interfaces.ICustomerManager;
 import core.model.Customer;
 
-public class CustomerManager {
+public class CustomerManager implements ICustomerManager {
   IJsonFileParser<Customer> customerFileManager;
 
   /**
@@ -26,6 +27,7 @@ public class CustomerManager {
    * @param id customer id (uuid)
    * 
    */
+  @Override
   public void deleteCustomer(String id) {
     ArrayList<Customer> listCustomers = customerFileManager.readFile();
     ArrayList<Customer> tmpCustomers = new ArrayList<Customer>();
@@ -52,6 +54,7 @@ public class CustomerManager {
    * @return customer id (uuid)
    * 
    */
+  @Override
   public String saveCustomer(Customer customer) {
     if (customer.getId() == null) { // creates a new customer
       customer.setId(createNewId());
@@ -84,6 +87,7 @@ public class CustomerManager {
    * @return given customer object
    * 
    */
+  @Override
   public Customer readCustomer(String id) {
     List<Customer> listCustomers = customerFileManager.readFile();
     Customer customer = listCustomers.stream()
@@ -100,6 +104,7 @@ public class CustomerManager {
    * @return list of customer objects
    * 
    */
+  @Override
   public List<Customer> listCustomers() {
     return customerFileManager.readFile();
   }

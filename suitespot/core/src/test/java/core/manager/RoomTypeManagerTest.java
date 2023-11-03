@@ -11,12 +11,13 @@ import org.junit.jupiter.api.Test;
 
 import core.fileUtil.IJsonFileParser;
 import core.fileUtil.mock.JsonFileParserMock;
+import core.manager.interfaces.IRoomTypeManager;
 import core.model.Room;
 import core.model.RoomType;
 
 public class RoomTypeManagerTest {
 
-  private RoomTypeManager roomTypeManager;
+  private IRoomTypeManager roomTypeManager;
   private RoomType newRoomType;
 
   @BeforeEach

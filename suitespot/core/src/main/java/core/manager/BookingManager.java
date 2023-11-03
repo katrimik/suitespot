@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.UUID;
 
 import core.fileUtil.IJsonFileParser;
+import core.manager.interfaces.IBookingManager;
 import core.model.Booking;
 import core.model.Room;
 
-public class BookingManager {
+public class BookingManager implements IBookingManager {
 
   private IJsonFileParser<Booking> bookingFileManager;
   private IJsonFileParser<Room> roomFileManager;
@@ -35,6 +36,7 @@ public class BookingManager {
    * 
    * @param bookingId the id of the booking to delete
    */
+  @Override
   public void deleteBooking(String bookingId) {
     List<Booking> bookings = bookingFileManager.readFile();
     bookings = bookings.stream().filter(b -> {
@@ -55,6 +57,7 @@ public class BookingManager {
    * @param booking the booking to create
    * 
    */
+  @Override
   public String saveBooking(Booking booking) {
     if (booking.getId() != null) {
       throw new IllegalArgumentException("Booking must be null");
@@ -118,6 +121,7 @@ public class BookingManager {
    * 
    * @param bookingId Id of booking to get
    */
+  @Override
   public Booking getBooking(String bookingId) {
     List<Booking> bookings = bookingFileManager.readFile();
     Booking booking = bookings.stream()
@@ -132,6 +136,7 @@ public class BookingManager {
    * Gets all bookings stored in the system (the storage engine provided in the
    * constructor).
    */
+  @Override
   public List<Booking> listBookings() {
     return new ArrayList<Booking>(bookingFileManager.readFile());
   }

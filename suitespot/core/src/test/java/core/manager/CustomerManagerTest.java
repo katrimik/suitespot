@@ -11,11 +11,12 @@ import org.junit.jupiter.api.Test;
 
 import core.fileUtil.IJsonFileParser;
 import core.fileUtil.mock.JsonFileParserMock;
+import core.manager.interfaces.ICustomerManager;
 import core.model.Customer;
 
 public class CustomerManagerTest {
 
-  private CustomerManager customerManager;
+  private ICustomerManager customerManager;
   private Customer newCustomer;
 
   @BeforeEach

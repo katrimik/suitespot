@@ -4,9 +4,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import core.manager.IRoomManager;
-import core.manager.Manager;
-import core.manager.RoomTypeManager;
+import core.manager.interfaces.IRoomManager;
+import core.apiManager.Manager;
+import core.manager.interfaces.IRoomTypeManager;
 import core.model.Room;
 import core.model.RoomType;
 import javafx.collections.FXCollections;
@@ -37,7 +37,7 @@ public class RoomController implements Initializable {
   Button roomTypeDeleteBtn, roomDeleteBtn;
 
   private final IRoomManager roomManager;
-  private final RoomTypeManager roomTypeManager;
+  private final IRoomTypeManager roomTypeManager;
 
   public RoomController() {
     roomManager = Manager.getRoomManager();

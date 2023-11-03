@@ -10,9 +10,9 @@ Endpoints are exposed to `localhost:8080`
 
 <details>
     <summary class="get-summary"> 
-        <h2 class="get verb"> GET</h2> 
-        <h2 class="endpoint"> /customer </h2>
-        <h2 class="dropdown"> ▼</h2>
+        <h2 class="get verb">GET</h2> 
+        <h2 class="endpoint">/customer </h2>
+        <h2 class="dropdown">▼</h2>
     </summary>
     <div class="get-summary"> 
         <ul>
@@ -28,9 +28,9 @@ Endpoints are exposed to `localhost:8080`
 </details>
 <details>
     <summary class="get-summary"> 
-        <h2 class="get verb"> GET</h2> 
-        <h2 class="endpoint"> /customer/{id} </h2>
-        <h2 class="dropdown"> ▼</h2>
+        <h2 class="get verb">GET</h2> 
+        <h2 class="endpoint">/customer/{id} </h2>
+        <h2 class="dropdown">▼</h2>
     </summary>
     <div class="get-summary">
         <ul>
@@ -51,9 +51,9 @@ Endpoints are exposed to `localhost:8080`
 </details>
 <details>
     <summary class="post-summary"> 
-        <h2 class="post verb"> POST</h2> 
-        <h2 class="endpoint"> /customer </h2>
-        <h2 class="dropdown"> ▼</h2>
+        <h2 class="post verb">POST</h2> 
+        <h2 class="endpoint">/customer </h2>
+        <h2 class="dropdown">▼</h2>
     </summary>
     <div class="post-summary">
         <ul>
@@ -76,8 +76,8 @@ Endpoints are exposed to `localhost:8080`
 <details>
     <summary class="delete-summary"> 
         <h2 class="delete verb"> DELETE</h2> 
-        <h2 class="endpoint"> /customer/{id} </h2>
-        <h2 class="dropdown"> ▼</h2>
+        <h2 class="endpoint">/customer/{id} </h2>
+        <h2 class="dropdown">▼</h2>
     </summary>
     <div class="delete-summary">
         <ul>
@@ -101,9 +101,9 @@ Endpoints are exposed to `localhost:8080`
 ## `booking`
 <details>
     <summary class="get-summary"> 
-        <h2 class="get verb"> GET</h2> 
-        <h2 class="endpoint"> /booking </h2>
-        <h2 class="dropdown"> ▼</h2>
+        <h2 class="get verb">GET</h2> 
+        <h2 class="endpoint">/booking </h2>
+        <h2 class="dropdown">▼</h2>
     </summary>
     <div class="get-summary">
         <ul>
@@ -119,9 +119,9 @@ Endpoints are exposed to `localhost:8080`
 </details>
 <details>
     <summary class="get-summary"> 
-        <h2 class="get verb"> GET</h2> 
-        <h2 class="endpoint"> /booking/{id} </h2>
-        <h2 class="dropdown"> ▼</h2>
+        <h2 class="get verb">GET</h2> 
+        <h2 class="endpoint">/booking/{id} </h2>
+        <h2 class="dropdown">▼</h2>
     </summary>
     <div class="get-summary">
         <ul>
@@ -142,9 +142,9 @@ Endpoints are exposed to `localhost:8080`
 </details>
 <details>
     <summary class="post-summary"> 
-        <h2 class="post verb"> POST</h2> 
-        <h2 class="endpoint"> /booking</h2>
-        <h2 class="dropdown"> ▼</h2>
+        <h2 class="post verb">POST</h2> 
+        <h2 class="endpoint">/booking</h2>
+        <h2 class="dropdown">▼</h2>
     </summary>
     <div class="post-summary">
         <ul>
@@ -167,8 +167,8 @@ Endpoints are exposed to `localhost:8080`
 <details>
     <summary class="delete-summary"> 
         <h2 class="delete verb">DELETE</h2> 
-        <h2 class="endpoint"> /booking/{id} </h2>
-        <h2 class="dropdown"> ▼</h2>
+        <h2 class="endpoint">/booking/{id} </h2>
+        <h2 class="dropdown">▼</h2>
     </summary>
     <div class="delete-summary">
         <ul>
@@ -192,9 +192,9 @@ Endpoints are exposed to `localhost:8080`
 ## `room`
 <details>
     <summary class="get-summary"> 
-        <h2 class="get verb"> GET</h2> 
-        <h2 class="endpoint"> /room </h2>
-        <h2 class="dropdown"> ▼</h2>
+        <h2 class="get verb">GET</h2> 
+        <h2 class="endpoint">/room </h2>
+        <h2 class="dropdown">▼</h2>
     </summary>
     <div class="get-summary"> 
         <ul>
@@ -210,9 +210,9 @@ Endpoints are exposed to `localhost:8080`
 </details>
 <details>
     <summary class="get-summary"> 
-        <h2 class="get verb"> GET</h2> 
-        <h2 class="endpoint"> /room/{id} </h2>
-        <h2 class="dropdown"> ▼</h2>
+        <h2 class="get verb">GET</h2> 
+        <h2 class="endpoint">/room/{id} </h2>
+        <h2 class="dropdown">▼</h2>
     </summary>
     <div class="get-summary">
         <ul>
@@ -233,9 +233,9 @@ Endpoints are exposed to `localhost:8080`
 </details>
 <details>
     <summary class="post-summary"> 
-        <h2 class="post verb"> POST</h2> 
-        <h2 class="endpoint"> /room </h2>
-        <h2 class="dropdown"> ▼</h2>
+        <h2 class="post verb">POST</h2> 
+        <h2 class="endpoint">/room </h2>
+        <h2 class="dropdown">▼</h2>
     </summary>
     <div class="post-summary">
         <ul>
@@ -258,8 +258,30 @@ Endpoints are exposed to `localhost:8080`
 <details>
     <summary class="delete-summary"> 
         <h2 class="delete verb"> DELETE</h2> 
-        <h2 class="endpoint"> /room/{id} </h2>
-        <h2 class="dropdown"> ▼</h2>
+        <h2 class="endpoint">/room/roomtype/{id} </h2>
+        <h2 class="dropdown">▼</h2>
+    </summary>
+    <div class="delete-summary">
+        <ul>
+            <li><strong>Description:</strong> Deletes all rooms with a room type by room-type-id (UUID).</li>
+            <li><strong>Parameters:</strong>
+                <ul>
+                    <li>{id} (Path Parameter): The ID of the room type</li>
+                </ul>
+            </li>
+            <li><strong>Response:</strong>
+                <ul>
+                    <li>HTTP Status Code: 204 (No Content) if the room is successfully deleted.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</details>
+<details>
+    <summary class="delete-summary"> 
+        <h2 class="delete verb"> DELETE</h2> 
+        <h2 class="endpoint">/room/{id} </h2>
+        <h2 class="dropdown">▼</h2>
     </summary>
     <div class="delete-summary">
         <ul>
@@ -283,9 +305,9 @@ Endpoints are exposed to `localhost:8080`
 
 <details>
     <summary class="get-summary"> 
-        <h2 class="get verb"> GET</h2> 
-        <h2 class="endpoint"> /roomtype </h2>
-        <h2 class="dropdown"> ▼</h2>
+        <h2 class="get verb">GET</h2> 
+        <h2 class="endpoint">/roomtype </h2>
+        <h2 class="dropdown">▼</h2>
     </summary>
     <div class="get-summary"> 
         <ul>
@@ -301,9 +323,9 @@ Endpoints are exposed to `localhost:8080`
 </details>
 <details>
     <summary class="get-summary"> 
-        <h2 class="get verb"> GET</h2> 
-        <h2 class="endpoint"> /roomtype/{id} </h2>
-        <h2 class="dropdown"> ▼</h2>
+        <h2 class="get verb">GET</h2> 
+        <h2 class="endpoint">/roomtype/{id} </h2>
+        <h2 class="dropdown">▼</h2>
     </summary>
     <div class="get-summary">
         <ul>
@@ -324,9 +346,9 @@ Endpoints are exposed to `localhost:8080`
 </details>
 <details>
     <summary class="post-summary"> 
-        <h2 class="post verb"> POST</h2> 
-        <h2 class="endpoint"> /roomtype </h2>
-        <h2 class="dropdown"> ▼</h2>
+        <h2 class="post verb">POST</h2> 
+        <h2 class="endpoint">/roomtype </h2>
+        <h2 class="dropdown">▼</h2>
     </summary>
     <div class="post-summary">
         <ul>
@@ -349,8 +371,8 @@ Endpoints are exposed to `localhost:8080`
 <details>
     <summary class="delete-summary"> 
         <h2 class="delete verb"> DELETE</h2> 
-        <h2 class="endpoint"> /roomtype/{id} </h2>
-        <h2 class="dropdown"> ▼</h2>
+        <h2 class="endpoint">/roomtype/{id} </h2>
+        <h2 class="dropdown">▼</h2>
     </summary>
     <div class="delete-summary">
         <ul>

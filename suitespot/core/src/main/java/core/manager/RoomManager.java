@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import core.fileUtil.IJsonFileParser;
+import core.manager.interfaces.IRoomManager;
 import core.model.Room;
 
 public class RoomManager implements IRoomManager {

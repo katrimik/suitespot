@@ -11,7 +11,7 @@ import org.testfx.api.FxAssert;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;
-import core.manager.CustomerManager;
+import core.manager.interfaces.ICustomerManager;
 import core.manager.Manager;
 import core.manager.RoomManager;
 import core.model.Booking;
@@ -73,7 +73,7 @@ public class AppControllerTest extends ApplicationTest {
         .queryAs(ListView.class).getSelectionModel()
         .getSelectedItem();
 
-    CustomerManager customerManager = Manager.getCustomerManager();
+    ICustomerManager customerManager = Manager.getCustomerManager();
     String selectedCustomerFullName = customerManager
         .listCustomers()
         .stream()

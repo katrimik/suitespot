@@ -3,8 +3,9 @@ package ui;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import core.manager.CustomerManager;
-import core.manager.Manager;
+
+import core.manager.interfaces.ICustomerManager;
+import core.apiManager.Manager;
 import core.model.Customer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -30,7 +31,7 @@ public class CustomerController implements Initializable {
   @FXML
   Text StatusCrudLbl;
 
-  private final CustomerManager customerManager;
+  private final ICustomerManager customerManager;
 
   public CustomerController() {
     customerManager = Manager.getCustomerManager();
@@ -38,7 +39,6 @@ public class CustomerController implements Initializable {
 
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
-    System.out.println(customerList);
     refreshCustomers();
 
     customerList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Customer>() {

@@ -1,4 +1,4 @@
-package core.manager;
+package core.manager.interfaces;
 
 import java.util.List;
 
