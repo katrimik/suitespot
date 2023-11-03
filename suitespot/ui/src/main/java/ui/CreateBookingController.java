@@ -80,6 +80,7 @@ public class CreateBookingController implements Initializable {
       return;
     }
 
+    forwardBtn.setDisable(false);
     currentSection -= 1;
     setCorrectSection();
   }

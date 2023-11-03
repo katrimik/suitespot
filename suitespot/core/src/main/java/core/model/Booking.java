@@ -21,6 +21,9 @@ public class Booking {
         this.id = id;
     }
 
+    public Booking() {
+    }
+
     public String getId() {
         return id;
     }
