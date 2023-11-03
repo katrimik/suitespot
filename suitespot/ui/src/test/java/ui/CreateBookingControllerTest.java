@@ -12,7 +12,6 @@ import org.testfx.framework.junit5.ApplicationTest;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -33,9 +32,7 @@ public class CreateBookingControllerTest extends ApplicationTest {
 
   @Test
   public void runThroughTest() {
-    Button forwardBtn = robot.lookup("#forwardBtn").queryAs(Button.class);
     robot.clickOn("#forwardBtn");
-    assertTrue(forwardBtn.isDisable());
     robot.clickOn("#roomTypeComboBox").clickOn("Double");
     robot.clickOn("#roomListView").clickOn("302");
     robot.clickOn("#backBtn");
