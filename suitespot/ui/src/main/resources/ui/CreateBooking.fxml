@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -40,6 +41,9 @@
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <HBox alignment="CENTER_RIGHT" prefWidth="590.0" spacing="20.0">
                <children>
@@ -47,11 +51,17 @@
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="forwardBtn" mnemonicParsing="false" onAction="#forwardBtnClicked" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #38BEC9;" text="Forward" textFill="WHITE">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </children>
                <opaqueInsets>
@@ -72,7 +82,7 @@
                <children>
                   <Label fx:id="dateLabel" prefHeight="20.0" prefWidth="216.0" text="Select dates">
                      <font>
-                        <Font name="Arial" size="14.0" />
+                        <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
                   <HBox layoutY="80.0">
@@ -81,7 +91,10 @@
                            <font>
                               <Font name="Arial" size="12.0" />
                            </font></Label>
-                        <DatePicker fx:id="fromDatePicker" />
+                        <DatePicker fx:id="fromDatePicker">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></DatePicker>
                      </children>
                   </HBox>
                   <HBox>
@@ -90,7 +103,10 @@
                            <font>
                               <Font name="Arial" size="12.0" />
                            </font></Label>
-                        <DatePicker fx:id="toDatePicker" />
+                        <DatePicker fx:id="toDatePicker">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></DatePicker>
                      </children>
                   </HBox>
                </children>
@@ -99,10 +115,13 @@
                <children>
                   <Label fx:id="roomLabel" prefHeight="20.0" prefWidth="200.0" text="Available rooms">
                      <font>
-                        <Font name="Arial" size="14.0" />
+                        <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="roomTypeComboBox" onAction="#roomTypeChanged" prefHeight="30.0" prefWidth="200.0" />
+                  <ComboBox fx:id="roomTypeComboBox" onAction="#roomTypeChanged" prefHeight="30.0" prefWidth="200.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></ComboBox>
                   <ListView fx:id="roomListView" prefHeight="275.0" prefWidth="200.0" style="-fx-border-color: #D9E2EC; -fx-border-width: 2px;" />
                </children>
             </VBox>
@@ -110,7 +129,7 @@
                <children>
                   <Label fx:id="customerLabel" prefHeight="20.0" prefWidth="190.0" text="Select customer">
                      <font>
-                        <Font name="Arial" size="14.0" />
+                        <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
                   <ListView fx:id="customerListView" prefHeight="310.0" prefWidth="200.0" style="-fx-border-color: #D9E2EC; -fx-border-width: 2px;" />
