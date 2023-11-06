@@ -11,7 +11,7 @@ There are various forms of user stories, with more or less strict requirements a
 
 ## Table of contents
 
-- [Add a new customer (US-1)](#new-customer-wants-to-book-a-room-us-1)
+- [Add a new customer (US-1)](#add-a-new-customer-us-1)
 - [Edit customer details (US-2)](#edit-customer-details-us-2)
 - [Create new room and roomtype (US-3)](#create-new-room-and-room-type-us-3)
 - [Create new booking (US-4)](#create-new-booking-us-4)
