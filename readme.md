@@ -85,6 +85,18 @@ mvn spring-boot:run
 - Click here to read API [documentation](./docs/restapi).
 
 
+## Build project
+```bash
+# Make sure everything is compiled
+cd suitespot
+mvn clean install
+cd ui
+
+# Builds the project into an executable for your respectable platform (.exe on windows)
+mvn clean compile javafx:jlink jpackage:jpackage
+# The finished executable is under /suitespot/ui/target/dist/...
+```
+
 
 ## Where to find code
 - The entire code project is located in the folder:
