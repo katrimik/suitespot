@@ -108,7 +108,6 @@ public class AppControllerTest extends ApplicationTest {
         .orElse(null).getRoomNumber();
 
     int roomNumber = Integer.valueOf(robot.lookup("#roomDataLbl").queryAs(Label.class).getText());
-    System.out.println(roomNumber + " should be " + selectedRoomNumber);
     assertEquals(roomNumber, selectedRoomNumber);
 
   }
