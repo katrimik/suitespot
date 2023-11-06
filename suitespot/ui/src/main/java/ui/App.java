@@ -8,6 +8,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -19,15 +20,15 @@ public class App extends Application {
   private static AnchorPane rootAnchor;
   private static Map<String, Runnable> callbacks = new HashMap<>();
 
-  private static void writeRootAncher(AnchorPane anchor) {
-    rootAnchor = anchor;
+  private static void writeRootAncher(VBox anchor) {
+    rootAnchor = (AnchorPane) anchor.getChildren().get(0);
   }
 
   @Override
   public void start(Stage stage) throws IOException {
     writeRootAncher(FXMLLoader.load(this.getClass().getResource("Layout.fxml")));
 
-    stage.setScene(new Scene(rootAnchor));
+    stage.setScene(new Scene(rootAnchor.getParent()));
     stage.show();
 
     setView("App");
