@@ -8,37 +8,40 @@
   - [Introduction](#introduction)
     - [FileTypeEnum](#filetypeenum)
     - [JsonFile](#jsonfile)
-  - [Customer Interface](#customer-interface)
+  - [Customer](#customer)
     - [Customer](#customer)
     - [CustomerManager](#customermanager)
-  - [Room Type and Room Interface](#room-type-and-room-interface)
+  - [Room Type and Room](#room-type-and-room)
     - [RoomType](#roomtype)
     - [RoomTypeManager](#roomtypemanager)
     - [Room](#room)
     - [RoomManager](#roommanager)
   - [Booking](#booking)
   - [Testing](#testing)
+  - [Rest-API](#rest-api)
   - [Functionality](#functionality)
   - [Checkstyle warnings and spotbugs](#checkstyle-warnings-and-spotbugs)
 
 ## Introduction
-In the first release ( _Release 1_ ) we have created the Java-files in headers _"Introduction"_ and _"Customer-Interface"_. For the following release ( _Release 2_ ), we have implemented Java-files under _"Room"_. In the last release (_Release 3_) we have completed the final files and we have a "fully functional" booking-app, were the newly implemented files for booking lies under _"Booking"_. In _"Test"_ and _"Functionality"_, we have implemented files accordingly to the appropriate release.
+In our initial release, denoted as _"Release 1_", we crafted Java files within the categories of "Introduction" and "Customer." Moving on to the subsequent release, _"Release 2"_, we extended our implementation to include Java files related to "Room." In the latest release, _"Release 3,"_ we finalized the remaining files, culminating in a fully functional booking application. Specifically, the newly integrated files for booking functionality are located under the "Booking" section. Additionally, in the sections labeled "Test" and "Functionality," we incorporated files in alignment with the respective release updates.
+
+In the more recent releases, we have corrected some of the initially written code and implemented new functions in an previous release. Consequently, we've opted to incorporate and supplement the documentation from earlier releases within this document.
 
 ### FileTypeEnum
-You can find `FileTypeEnum` in the _core/fileUtil_-folder: this is were we handle our file-management.
+You can locate `FileTypeEnum` within the _core/fileUtil_-folder, which is where we manage our file operations.
 
-Enumerations in general defines a set of named constants. In our case, `FileTypeEnum` uses the constants "CUSTOMER", "BOOKING" and "ROOM". This is helpful when we create the booking- and room-classes.
+Enumerations in general defines a set of named constants. In our case, `FileTypeEnum` uses the constants "CUSTOMER", "BOOKING" and "ROOM". This proves advantageous, particularly when crafting the booking and room classes
 
 ### JsonFile
 The `JsonFile` can also be found in the _core/fileUtil_-folder.
 
-The purpose of the file is to create an instance with the class you want to save, and the name of the file you want to save to. The JsonFile:
-- appends to file
-- writes to file
-- reads to file
+The purpose of the file is to create an instance with the class you want to save, and the name of the file you want to save to. The JsonFile includes functonality such as:
+- append to file
+- write to file
+- read to file
 
 
-## Customer Interface
+## Customer 
 
 ### Customer 
 In the _model_ folder, you will discover the `Customer` file, which serves as a data object for managing individual customers. This file includes various validation methods utilizing regular expressions.
@@ -46,7 +49,7 @@ In the _model_ folder, you will discover the `Customer` file, which serves as a 
 ### CustomerManager
 In the _manager_ folder, `CustomerManager` is located. Here is the customer-ID generated, and consists of logic for saving, creating, editing and deleting customers. 
 
-## Room Type and Room Interface
+## Room Type and Room 
 ### RoomType
 In the folder _model_, you'll find the `RoomType`-file, which is a data-object. Sorting the rooms into different room types makes it easier for the manager to find the correct price and size based on the customers' preferences. 
 
@@ -88,6 +91,9 @@ For full report see [jacoco](../../suitespot/core/target/site/jacoco/index.html)
 ```
 mvn verify
 ```
+
+## Rest-API
+
 
 ## Functionality
 `Suitespot` enables you to access the main page through the layout-user interface. Once there, you have the option to navigate to either _"Manage Customer"_ or _"Manage Rooms"_. Additionally, we have implemented a feature that provides an overview of booked dates. These dates are linked to a room, room type, and a customer, and the details are displayed upon clicking the booking. The list view of bookings allows you to sort them based on your preference using radio buttons. To locate a specific booking, you can scroll through the list or use the search bar above. Furthermore, you have the ability to delete a selected booking by marking it. 
