@@ -34,7 +34,8 @@ public class BookingManager implements IBookingManager {
   /**
    * Deletes a booking from the file storage used.
    * 
-   * @param bookingId the id of the booking to delete
+   * @param bookingId the ID of the booking to delete
+   * 
    */
   @Override
   public void deleteBooking(String bookingId) {
@@ -51,7 +52,7 @@ public class BookingManager implements IBookingManager {
   }
 
   /**
-   * Saves a booking, creates a new one if the id==null, a booking can't be
+   * Saves a booking, creates a new one if the ID==null, a booking can't be
    * updated
    * 
    * @param booking the booking to create
@@ -119,7 +120,8 @@ public class BookingManager implements IBookingManager {
   /**
    * Gets a single booking.
    * 
-   * @param bookingId Id of booking to get
+   * @param bookingId ID of booking to get
+   * 
    */
   @Override
   public Booking getBooking(String bookingId) {
@@ -135,6 +137,7 @@ public class BookingManager implements IBookingManager {
   /**
    * Gets all bookings stored in the system (the storage engine provided in the
    * constructor).
+   * 
    */
   @Override
   public List<Booking> listBookings() {

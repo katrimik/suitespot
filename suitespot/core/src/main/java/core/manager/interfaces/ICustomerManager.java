@@ -9,7 +9,7 @@ public interface ICustomerManager {
     /**
      * Deletes a customer.
      * 
-     * @param id customer id (uuid)
+     * @param id customer ID (UUID)
      * 
      */
     void deleteCustomer(String id);
@@ -19,15 +19,15 @@ public interface ICustomerManager {
      * 
      * @param customer customer object
      * 
-     * @return customer id (uuid)
+     * @return customer ID (UUID)
      * 
      */
     String saveCustomer(Customer customer);
 
     /**
-     * Find the customer with given id.
+     * Find the customer with given ID.
      * 
-     * @param id customer id (uuid)
+     * @param id customer ID (UUID)
      * 
      * @return given customer object
      * 

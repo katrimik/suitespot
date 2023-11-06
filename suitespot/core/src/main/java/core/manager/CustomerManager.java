@@ -24,7 +24,7 @@ public class CustomerManager implements ICustomerManager {
   /**
    * Deletes a customer.
    * 
-   * @param id customer id (uuid)
+   * @param id customer ID (UUID)
    * 
    */
   @Override
@@ -51,7 +51,7 @@ public class CustomerManager implements ICustomerManager {
    * 
    * @param customer customer object
    * 
-   * @return customer id (uuid)
+   * @return customer ID (UUID)
    * 
    */
   @Override
@@ -80,9 +80,9 @@ public class CustomerManager implements ICustomerManager {
   }
 
   /**
-   * Find the customer with given id.
+   * Find the customer with given ID.
    * 
-   * @param id customer id (uuid)
+   * @param id customer ID (UUID)
    * 
    * @return given customer object
    * 

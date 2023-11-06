@@ -61,7 +61,6 @@ public class ApiClient<T> {
   }
 
   /**
-   * 
    * Get all Items.
    * 
    * @return all items
@@ -78,7 +77,6 @@ public class ApiClient<T> {
   }
 
   /**
-   * 
    * Get one item.
    * 
    * @param id of resource to get
@@ -105,6 +103,7 @@ public class ApiClient<T> {
    * @param data data to post (body of request)
    * 
    * @return id of created or updated resource
+   * 
    */
   public String post(T data) {
     String json = gson.toJson(data);
@@ -134,10 +133,10 @@ public class ApiClient<T> {
   }
 
   /**
-   * 
    * Send a delete request.
    * 
    * @param id of resource to delete
+   * 
    */
   public void delete(String id) {
     try {
