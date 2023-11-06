@@ -136,7 +136,7 @@ public class CreateBookingController implements Initializable {
         setDateSectionEnabled(false);
         setRoomSectionEnabled(false);
         setCustomerSectionEnabled(true);
-        forwardBtn.setText("Complete booking");
+        forwardBtn.setText("Complete");
         break;
       default:
         break;
