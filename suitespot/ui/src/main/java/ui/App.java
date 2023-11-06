@@ -46,6 +46,7 @@ public class App extends Application {
 
   public static void setView(String viewName) {
     AnchorPane view = loadView(viewName);
+    rootAnchor.getChildren().clear();
     rootAnchor.getChildren().add(view);
   }
 
