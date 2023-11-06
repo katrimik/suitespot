@@ -3,8 +3,8 @@
 
 ## Links
 ### Eclipse che
-- [open master in Eclipse Che](https://che.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2305/gr2305?new)
-- [open dev in Eclipse Che](https://che.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2305/gr2305/-/tree/dev?new)
+- [Open master in Eclipse Che](https://che.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2305/gr2305?new)
+- [Open dev in Eclipse Che](https://che.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2305/gr2305/-/tree/dev?new)
 
 ### Docs
 - Click here to read about our [workflow](./docs/release2/workflow.md).
@@ -12,6 +12,7 @@
 - Click here to read API [docs](./docs/restapi).
 - [Release 1](./docs/release1/release1.md)
 - [Release 2](./docs/release2/release2.md)
+- [Release 3](./docs/release3/release3.md)
 
 ### App description
 - See [suitespot/app-description](./suitespot/app-description.md)
@@ -40,7 +41,7 @@ git ls-remote # to list branches
 ```
 
 ## Local versions
-This can be tedious if you don't have the right environment, but should be straight forward if you're on windows with maven and java installed.Any subversion of 17 should work fine. 
+This can be tedious if you don't have the right environment, but should be straight forward if you're on windows with maven and java installed. Any subversion of 17 should work fine. 
 
 > Recommended versions:    
 java: `17.0.5`    
@@ -52,10 +53,10 @@ Commands to prepare the project might vary based on the packages installed and o
 ```bash
  # commands to install the system. Might need different ones depending on your local setup. run these in the suitespot folder, the core folder and the ui folder separatly. Build core before ui since ui depends on core. 
  mvn clean package
- mvn clean install # see remark 1
- mvn clean install -D maven.test.skip # might not be necessary
+ mvn clean install # see Remark 1
  mvn compile
- 
+
+ # The server needs to run for the app to work, see Run server locally section
 
  # to run app
  cd suitespot/ui # from root of repo
@@ -63,10 +64,11 @@ Commands to prepare the project might vary based on the packages installed and o
  mvn test        # run tests
 
  # to run jacoco tests
+ cd suitespot
  mvn verify      
 ```
 
-**remark 1**    
+**Remark 1**    
 If the app is running, the command will fail. Close all instances of the app. Make sure to not only close the processes in the terminal, since the app will still run. The app might run with an old version of the core module if this step fails.
 
 ## Run server locally
@@ -87,9 +89,10 @@ mvn spring-boot:run
 ## Where to find code
 - The entire code project is located in the folder:
     - [`suitespot`](./suitespot/)
-- This folder contains two modules:
+- This folder contains three modules:
     - [`suitespot/core`](./suitespot/core/src/main/java/core/) (business logic)
-    - [`suitespot/ui`](./suitespot/ui/src/main/java/ui/) (ui logic)
+    - [`suitespot/ui`](./suitespot/ui/src/main/java/ui/) (UI logic)
+    - [`suitespot/restserver`](./suitespot/restserver/src/main/java/suitespot/) (REST-API)
 
 ### Code location diagram
 ```
@@ -103,11 +106,21 @@ suitespot/
 │  │  │  │  │  │  ├─ Files for handling storage
 │  │  │  │  │  ├─ manager/
 │  │  │  │  │  │  ├─ Managers (crud operations on models)
+│  │  │  │  │  ├─ apiManager/
+│  │  │  │  │  │  ├─ Managers (that connect to the API, implement same interfaces as normal managers)
 │  │  │  │  │  ├─ model/
+│  │  │  │  │  │  ├─ Data models (classes that contain data and validation)
 │  │  ├─ test/
 │  │  │  ├─ java/
 │  │  │  │  ├─ core/
 │  │  │  │  │  ├─ tests for core
+├─ restserver/
+│  ├─ src/
+│  │  ├─ main/
+│  │  │  ├─ java/
+│  │  │  │  ├─ suitespot/
+│  │  │  │  |  ├─ restserver/
+│  │  │  │  |  |  ├─ API server and endpoints
 ├─ ui/
 │  ├─ src/
 │  │  ├─ main/
