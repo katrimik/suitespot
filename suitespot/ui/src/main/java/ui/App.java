@@ -7,6 +7,7 @@ import java.util.Map;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -28,6 +29,10 @@ public class App extends Application {
   public void start(Stage stage) throws IOException {
     writeRootAncher(FXMLLoader.load(this.getClass().getResource("Layout.fxml")));
 
+    stage.setMinWidth(760);
+    stage.setMinHeight(560);
+
+    stage.getIcons().add(new Image(this.getClass().getResourceAsStream("Logo.png")));
     stage.setScene(new Scene(rootAnchor.getParent()));
     stage.show();
 
