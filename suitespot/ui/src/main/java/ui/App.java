@@ -7,6 +7,7 @@ import java.util.Map;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -30,6 +31,12 @@ public class App extends Application {
 
     stage.setMinWidth(760);
     stage.setMinHeight(560);
+
+    try {
+      stage.getIcons().add(new Image(this.getClass().getResourceAsStream("logo.png")));
+    } catch (Exception e) {
+
+    }
 
     stage.setScene(new Scene(rootAnchor.getParent()));
     stage.show();
