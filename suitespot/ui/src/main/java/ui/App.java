@@ -41,7 +41,7 @@ public class App extends Application {
     stage.setScene(new Scene(rootAnchor.getParent()));
     stage.show();
 
-    setView("App");
+    setView("ChooseServer");
   }
 
   private static AnchorPane loadView(String viewName) {
