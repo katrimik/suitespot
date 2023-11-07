@@ -1,16 +1,16 @@
 package ui;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * JavaFX App
@@ -21,15 +21,24 @@ public class App extends Application {
   private static AnchorPane rootAnchor;
   private static Map<String, Runnable> callbacks = new HashMap<>();
 
-  private static void writeRootAncher(AnchorPane anchor) {
-    rootAnchor = anchor;
+  private static void writeRootAncher(VBox anchor) {
+    rootAnchor = (AnchorPane) anchor.getChildren().get(0);
   }
 
   @Override
   public void start(Stage stage) throws IOException {
     writeRootAncher(FXMLLoader.load(this.getClass().getResource("Layout.fxml")));
 
-    stage.setScene(new Scene(rootAnchor));
+    stage.setMinWidth(760);
+    stage.setMinHeight(560);
+
+    try {
+      stage.getIcons().add(new Image(this.getClass().getResourceAsStream("logo.png")));
+    } catch (Exception e) {
+
+    }
+
+    stage.setScene(new Scene(rootAnchor.getParent()));
     stage.show();
 
     setView("App");
@@ -47,6 +56,7 @@ public class App extends Application {
 
   public static void setView(String viewName) {
     AnchorPane view = loadView(viewName);
+    rootAnchor.getChildren().clear();
     rootAnchor.getChildren().add(view);
   }
 

@@ -8,21 +8,21 @@ import core.model.Booking;
 
 public class BookingManager implements IBookingManager {
 
-    private final ApiClient<Booking> client = new ApiClient<Booking>("/booking", Booking.class);
+  private final ApiClient<Booking> client = new ApiClient<Booking>("/booking", Booking.class);
 
-    public void deleteBooking(String bookingId) {
-        client.delete(bookingId);
-    }
+  public void deleteBooking(String bookingId) {
+    client.delete(bookingId);
+  }
 
-    public String saveBooking(Booking booking) {
-        return client.post(booking);
-    }
+  public String saveBooking(Booking booking) {
+    return client.post(booking);
+  }
 
-    public Booking getBooking(String bookingId) {
-        return client.get(bookingId);
-    }
+  public Booking getBooking(String bookingId) {
+    return client.get(bookingId);
+  }
 
-    public List<Booking> listBookings() {
-        return client.get();
-    }
+  public List<Booking> listBookings() {
+    return client.get();
+  }
 }

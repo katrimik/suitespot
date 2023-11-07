@@ -1,55 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="757.0" style="-fx-background-color: #a5d496;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.CustomerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="760.0" style="-fx-background-color: #F0F4F8;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.CustomerController">
    <children>
-      <Text layoutX="607.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suitespot" textAlignment="CENTER">
-         <font>
-            <Font name="Modern No. 20" size="37.0" />
-         </font>
-      </Text>
-      <ListView fx:id="customerList" layoutX="61.0" layoutY="92.0" prefHeight="392.0" prefWidth="243.0" />
-      <Text layoutX="63.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customers">
-         <font>
-            <Font name="Modern No. 20" size="30.0" />
-         </font>
-      </Text>
-      <Button fx:id="customerAdd" layoutX="241.0" layoutY="492.0" mnemonicParsing="false" onAction="#customerAdd" style="-fx-background-color: #658f57;" text="Add new">
-         <font>
-            <Font name="Modern No. 20" size="13.0" />
-         </font>
-      </Button>
-      <TextField fx:id="customerFirstName" layoutX="335.0" layoutY="151.0" prefHeight="26.0" prefWidth="89.0" promptText="First name" />
-      <TextField fx:id="customerLastName" layoutX="432.0" layoutY="151.0" prefHeight="27.0" prefWidth="126.0" promptText="Last name" />
-      <TextField fx:id="customerPhone" layoutX="335.0" layoutY="189.0" prefHeight="26.0" prefWidth="223.0" promptText="Phone" />
-      <TextField fx:id="customerEmail" layoutX="335.0" layoutY="228.0" prefHeight="26.0" prefWidth="223.0" promptText="Email" />
-      <Button fx:id="customerSave" layoutX="447.0" layoutY="301.0" mnemonicParsing="false" onAction="#customerSave" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: #658f57;" text="Save">
-         <font>
-            <Font name="Modern No. 20" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="customerDelete" layoutX="335.0" layoutY="301.0" mnemonicParsing="false" onAction="#customerDelete" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: #658f57;" text="Delete">
-         <font>
-            <Font name="Modern No. 20" size="14.0" />
-         </font>
-      </Button>
-      <Text fx:id="StatusCrudLbl" layoutX="335.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create new customer" wrappingWidth="223.20000000000005">
-         <font>
-            <Font name="Modern No. 20" size="24.0" />
-         </font>
-      </Text>
-      <Label fx:id="StatusErrorLbl" layoutX="335.0" layoutY="261.0" prefHeight="18.0" prefWidth="223.0" />
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToMainPage" prefHeight="25.0" prefWidth="147.0" style="-fx-background-color: #658f57;" text="Go to main page">
-         <font>
-            <Font name="Modern No. 20" size="14.0" />
-         </font>
-      </Button>
+      <HBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="760.0" style="-fx-background-color: #334E68;">
+         <children>
+            <Button mnemonicParsing="false" onAction="#goToMainPage" prefHeight="35.0" prefWidth="180.0" style="-fx-background-color: #BCCCDC;" text="Go to main page">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Suitespot" textAlignment="RIGHT" wrappingWidth="560.0" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Microsoft JhengHei Light" size="37.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Text>
+         </children>
+      </HBox>
+      <VBox layoutX="60.0" layoutY="100.0" prefHeight="400.0" spacing="20.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Customers">
+               <font>
+                  <Font name="Arial" size="24.0" />
+               </font>
+            </Text>
+            <ListView fx:id="customerList" prefHeight="193.0" prefWidth="244.0" style="-fx-border-color: #D9E2EC; -fx-border-width: 2Px;" VBox.vgrow="ALWAYS" />
+            <Button fx:id="customerAdd" mnemonicParsing="false" onAction="#customerAdd" prefHeight="35.0" prefWidth="244.0" style="-fx-background-color: #14919B;" text="Add new" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </VBox>
+      <VBox layoutX="335.0" layoutY="100.0" prefHeight="400.0" prefWidth="370.0" spacing="20.0" style="-fx-border-color: #D9E2EC; -fx-border-width: 2px; -fx-background-color: #FFF;">
+         <children>
+            <Text fx:id="StatusCrudLbl" strokeType="OUTSIDE" strokeWidth="0.0" text="Create new customer" wrappingWidth="308.70000000000005">
+               <font>
+                  <Font name="Arial" size="24.0" />
+               </font>
+            </Text>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <TextField fx:id="customerFirstName" prefHeight="26.0" prefWidth="89.0" promptText="First name" HBox.hgrow="ALWAYS">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></TextField>
+                  <TextField fx:id="customerLastName" prefHeight="27.0" prefWidth="79.0" promptText="Last name" HBox.hgrow="ALWAYS">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></TextField>
+               </children>
+            </HBox>
+            <TextField fx:id="customerEmail" prefHeight="26.0" prefWidth="199.0" promptText="Email">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></TextField>
+            <TextField fx:id="customerPhone" prefHeight="26.0" prefWidth="223.0" promptText="Phone">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></TextField>
+            <Label fx:id="StatusErrorLbl" prefHeight="18.0" prefWidth="334.0" />
+            <HBox alignment="CENTER" spacing="20.0">
+               <children>
+                  <Button fx:id="customerDelete" mnemonicParsing="false" onAction="#customerDelete" prefHeight="35.0" prefWidth="107.0" style="-fx-background-color: #D64545;" text="Delete" textFill="WHITE" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="customerSave" mnemonicParsing="false" onAction="#customerSave" prefHeight="35.0" prefWidth="107.0" style="-fx-background-color: #38BEC9;" text="Save" textFill="WHITE" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
    </children>
 </AnchorPane>

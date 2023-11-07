@@ -123,6 +123,7 @@
                     <destination>target/dist</destination>
                     <module>ui/ui.App</module>
                     <runtimeImage>target/suitespotfx</runtimeImage>
+                    <icon>src/main/resources/ui/logo.ico</icon>
                     <javaOptions>
                         <option>-Dfile.encoding=UTF-8</option>
                     </javaOptions>

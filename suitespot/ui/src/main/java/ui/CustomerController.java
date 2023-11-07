@@ -4,8 +4,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import core.manager.interfaces.ICustomerManager;
 import core.apiManager.Manager;
+import core.manager.interfaces.ICustomerManager;
 import core.model.Customer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

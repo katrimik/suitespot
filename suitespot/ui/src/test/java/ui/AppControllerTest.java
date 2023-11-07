@@ -11,9 +11,10 @@ import org.testfx.api.FxAssert;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;
-import core.manager.interfaces.ICustomerManager;
+
 import core.manager.Manager;
 import core.manager.RoomManager;
+import core.manager.interfaces.ICustomerManager;
 import core.model.Booking;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -107,7 +108,6 @@ public class AppControllerTest extends ApplicationTest {
         .orElse(null).getRoomNumber();
 
     int roomNumber = Integer.valueOf(robot.lookup("#roomDataLbl").queryAs(Label.class).getText());
-    System.out.println(roomNumber + " should be " + selectedRoomNumber);
     assertEquals(roomNumber, selectedRoomNumber);
 
   }

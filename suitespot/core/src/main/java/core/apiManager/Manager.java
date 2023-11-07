@@ -1,6 +1,9 @@
 package core.apiManager;
 
-import core.manager.interfaces.*;
+import core.manager.interfaces.IBookingManager;
+import core.manager.interfaces.ICustomerManager;
+import core.manager.interfaces.IRoomManager;
+import core.manager.interfaces.IRoomTypeManager;
 
 public class Manager {
 
