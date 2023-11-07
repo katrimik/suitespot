@@ -10,6 +10,10 @@ public class CustomerManager implements ICustomerManager {
 
   private final ApiClient<Customer> client = new ApiClient<Customer>("/customer", Customer.class);
 
+  public CustomerManager(String url) {
+    client.setApiUrl(url);
+  }
+
   public void deleteCustomer(String id) {
     client.delete(id);
   }
