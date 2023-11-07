@@ -10,6 +10,10 @@ public class RoomTypeManager implements IRoomTypeManager {
 
   private final ApiClient<RoomType> client = new ApiClient<RoomType>("/roomtype", RoomType.class);
 
+  public RoomTypeManager(String url) {
+    client.setApiUrl(url);
+  }
+
   public String saveRoomType(RoomType roomType) {
     return client.post(roomType);
   }

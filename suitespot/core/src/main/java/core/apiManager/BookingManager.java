@@ -10,6 +10,10 @@ public class BookingManager implements IBookingManager {
 
   private final ApiClient<Booking> client = new ApiClient<Booking>("/booking", Booking.class);
 
+  public BookingManager(String url) {
+    client.setApiUrl(url);
+  }
+
   public void deleteBooking(String bookingId) {
     client.delete(bookingId);
   }
