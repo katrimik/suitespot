@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="760.0" style="-fx-background-color: #F0F4F8;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.CustomerController">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="760.0" style="-fx-background-color: #334E68;">
+         <children>
+            <Button disable="true" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" style="-fx-background-color: #BCCCDC;" text="Go to main page" visible="false">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Suitespot" textAlignment="RIGHT" wrappingWidth="560.0" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Microsoft JhengHei Light" size="37.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Text>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutY="100.0" prefWidth="760.0">
+         <children>
+            <VBox alignment="CENTER" fillWidth="false" prefHeight="400.0" prefWidth="319.0" spacing="20.0" style="-fx-border-color: #D9E2EC; -fx-border-width: 2px; -fx-background-color: #FFF;">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose server" textAlignment="CENTER" wrappingWidth="284.70000000000005">
+                     <font>
+                        <Font name="Arial" size="24.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="linkTextField" prefHeight="25.0" prefWidth="240.0" promptText="https://localhost:8080" text="https://localhost:8080" />
+                  <Button mnemonicParsing="false" onAction="#connectToServer" prefHeight="35.0" prefWidth="240.0" style="-fx-background-color: #38BEC9;" text="Connect" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Label fx:id="StatusErrorLbl" prefHeight="18.0" prefWidth="334.0" />
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
