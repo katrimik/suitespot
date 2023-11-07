@@ -32,11 +32,6 @@ public class App extends Application {
     stage.setMinWidth(760);
     stage.setMinHeight(560);
 
-    try {
-      stage.getIcons().add(new Image(this.getClass().getResourceAsStream("Logo.png")));
-    } catch (Exception e) {
-
-    }
     stage.setScene(new Scene(rootAnchor.getParent()));
     stage.show();
 
