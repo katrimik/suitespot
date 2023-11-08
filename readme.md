@@ -9,7 +9,7 @@
 ### Docs
 - Click here to read about our [workflow](./docs/release2/workflow.md).
 - Click here to read all [docs](./docs/).
-- Click here to read API [docs](./docs/restapi).
+- Click here to read API [docs](./docs/restapi.md).
 - [Release 1](./docs/release1/release1.md)
 - [Release 2](./docs/release2/release2.md)
 - [Release 3](./docs/release3/release3.md)
@@ -52,9 +52,7 @@ maven: `3.9.4`
 Commands to prepare the project might vary based on the packages installed and other local factors. Here's a good starting point.
 ```bash
  # commands to install the system. Might need different ones depending on your local setup. run these in the suitespot folder, the core folder and the ui folder separatly. Build core before ui since ui depends on core. 
- mvn clean package
  mvn clean install # see Remark 1
- mvn compile
 
  # The server needs to run for the app to work, see Run server locally section
 
@@ -82,7 +80,7 @@ mvn spring-boot:run
 # the server vil now start up and expose the endpoints to localhost:8080/
 ```
 
-- Click here to read API [documentation](./docs/restapi).
+- Click here to read API [documentation](./docs/restapi.md).
 
 
 ## Build project
@@ -93,6 +91,9 @@ mvn clean install
 cd ui
 
 # Builds the project into an executable for your respectable platform (.exe on windows)
+# This depends on wix which depends on .net 3.5
+# Download .NET from: https://www.microsoft.com/en-us/download/details.aspx?id=21
+# Download WIX from: https://github.com/wixtoolset/wix3/releases/tag/wix3112rtm
 mvn clean compile javafx:jlink jpackage:jpackage
 # The finished executable is under /suitespot/ui/target/dist/...
 ```
