@@ -16,6 +16,8 @@
   - [Room](#room)
   - [RoomManager](#roommanager)
 - [Booking](#booking)
+  - [Booking](#booking)
+  - [BookingManager](#bookingmanager)
 - [Testing](#testing)
 - [REST-API](#rest-api)
 - [JPackage and J-Link](#jpackage-and-j-link)
@@ -101,17 +103,25 @@ This release includes the addition of a REST-API. The app has a new implementati
 
 
 ## Functionality
-`Suitespot` enables you to access the main page through the layout-user interface. Once there, you have the option to navigate to either _"Manage Customer"_ or _"Manage Rooms"_. Additionally, we have implemented a feature that provides an overview of booked dates. These dates are linked to a room, room type, and a customer, and the details are displayed upon clicking the booking. The list of bookings allows you to sort them based on your preference using radio buttons. To locate a specific booking, you can scroll through the list or use the search bar above. Furthermore, you have the ability to delete a selected booking by marking it and pressing the delete button. 
+Once you open the app, you'll have to connect to the server. If you run the server locally, the URL is already prefilled. On the contrary, running the server remotely, the remote url has to be used.
 
-![main-booking.png](../image/release3/main-booking.png) 
+![choose-server.png](../image/release3/choose-server.png) 
 
-When you click on _"Manage customers"_, you get to create, edit and delete customers, from the customer-user-interface. If you wish to return to main page, you can click on that spesific button.
+`Suitespot` enables you to access the main page through the layout-user interface. Once there, you have the option to navigate to either _"Manage customer"_ or _"Manage rooms"_. Additionally, we have implemented a feature that provides an overview of booked dates. These dates are linked to a room, room type, and a customer, and the details are displayed upon clicking the booking. The list of bookings allows you to sort them based on your preference using radio buttons. To locate a specific booking, you can either scroll through the list or use the search bar above. Furthermore, you have the ability to delete a selected booking by marking it and pressing the delete button. Lastly, you get to create a new booking, explained furhter down. 
 
-![r2-customer.png](../image/release2/r2-customer.png)
+![create-booking.png](../image/release3/main-booking.png) 
+
+When you click on _"Manage customers"_, you get to create, edit and delete customers, from the customer-user-interface. When pressing a customer from the list, the given customer's information will appear. If you wish to return to main page, you can click on that spesific button.
+
+![customer.png](../image/release3/customer.png)
 
 Furthermore, by selecting _"Manage rooms"_ from the main page, you gain access to features that enable you to create, edit, and delete room types, specifying names and prices through the room-user interface. After establishing a room type, you can proceed to create, edit, or delete specific rooms within that category. Additionally, the system allows you to switch a room's type to another pre-existing room type.
 
-![manageRooms.png](../image/release2/manageRooms.png) 
+![manage-rooms.png](../image/release3/manage-rooms.png) 
+
+Lastly, you now get to create bookings by pressing the "create new booking"-button from the main page. From here, you first choose the dates you want to book. Then you're granted choosing a room type from the ComboBox and a room from the list thereunder. The rooms you're choosing from is the ones made in "manage rooms", explained above. Finally, you choose a customer you created in "create customer", to register for this room. 
+
+![create-booking.png](../image/release3/create-booking.png) 
 
 
 ## Checkstyle warnings and spotbugs
