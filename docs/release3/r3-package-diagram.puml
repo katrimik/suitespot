@@ -1,0 +1,64 @@
+@startuml package diagram
+title Suitespot - package diagram
+
+component core {
+
+    component fileUtil as fileUtilCoreMain
+    component manager as managerCoreMain
+    component model as modelCoreMain
+    component apiManager as apim
+
+
+}
+
+folder "storage" as storage {
+
+}
+
+[gson] as gson <<Library>>
+
+
+component ui as hovedUI {
+    folder ui
+    folder "resources.ui" {
+
+
+
+    }
+}
+
+component restserver as rs {
+    package suitespot.restserver {
+        component controller
+    }
+
+}
+
+[Spring Boot] as springboot <<Library>>
+
+component javafx as jf {
+    [fxml] <<Library>>
+}
+
+
+hovedUI ..> jf
+hovedUI ..> fxml
+ui  ..> apim
+ui  ..> modelCoreMain
+fileUtilCoreMain ..> gson
+fileUtilCoreMain ..> storage
+managerCoreMain ..> fileUtilCoreMain
+managerCoreMain ..> modelCoreMain
+
+suitespot.restserver ..> managerCoreMain
+suitespot.restserver ..> modelCoreMain
+rs ..> springboot
+
+
+<style>
+.Library {
+    LineColor Red
+}
+</style>
+
+@enduml

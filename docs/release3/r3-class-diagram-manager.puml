@@ -1,0 +1,101 @@
+@startuml class diagram
+title Class Diagram Manager
+
+class CustomerManager{
+    + IJsonFileParser<Customer>
+    + CustomerManager(IJsonFileParser<Customer>)
+    + void deleteCustomer(String)
+    - String createNewId()
+    + String saveCustomer(Customer)
+    + Customer readCustomer(String)
+    + List<Customer> listCustomers()
+}
+
+class Manager{
+    + CustomerManager getCustomerManager()
+    + IRoomManager getRoomManager()
+    + RoomTypeManager getRoomTypeManager()
+    + BookingManager getBookingManger()
+
+}
+
+class RoomTypeManager{
+    - IJsonFileParser<RoomType> roomTypeManager
+    - IRoomManager roomManager
+    + RoomTypeManager(IJsonFileParser<RoomType>, IRoomManager)
+    - String createNewId()
+    + String saveRoomType(RoomType)
+    + RoomType getRoomType(String)
+    + List<RoomType> listRoomTypes()
+    + void deleteRoomType(String)
+    + boolean isRoomTypeAvailable(String, String)
+}
+
+class RoomManager{
+    - IJsonFileParser<Room> roomManager
+    + RoomManager(IJsonFileParser<Room>)
+    - String createNewId()
+    + String saveRoom(Room)
+    + List<Room> listRooms()
+    + void deleteRoom(String)
+    + void deleteAllInRoomType(String)
+    + boolean isRoomNumberAvailable(int, String)
+    + Room getRoom(String)
+}
+
+class BookingManager{
+    - IJsonFileParser<Booking>
+    - IJsonFileParser<Room>
+    - String createNewId()
+    + Bookingmanager(IJsonFileParser<Booking>, IJsonFileParser<Room>)
+    + void deleteBooking(String)
+    + String saveBooking(Booking)
+    - saveDatesToRoom(Booking)
+    - removeDatesFromRoom(Booking)
+    + Booking getBooking(String)
+    + List<Booking> listBookings()
+}
+
+interface IRoomManager{
+    + String saveRoom(Room) 
+    + List<Room> listRooms()
+    + void deleteRoom(String)
+    + void deleteAllInRoomType(String)
+    + Room getRoom(String)
+
+}
+
+interface ICustomerManager{
+    + void deleteCustomer(String)
+    + String saveCustomer(Customer)
+    + Customer readCustomer(String)
+    + List<Customer> listCustomers()
+
+}
+
+interface IBookingManager{
+    + void deleteBooking(String)
+    + String saveBooking(Booking)
+    + Booking getBooking(String)
+    + List<Booking> listBookings()
+
+}
+
+interface IRoomTypeManager{
+    + String saveRoomType(RoomType)
+    + RoomType getRoomType(String)
+    + List<RoomType> listRoomTypes()
+    + void deleteRoomType(String)
+
+}
+
+CustomerManager ..> ICustomerManager
+RoomTypeManager ..> IRoomTypeManager
+RoomManager ..> IRoomManager
+BookingManager ..> IBookingManager
+Manager --> CustomerManager
+Manager --> RoomManager
+Manager --> RoomTypeManager
+Manager --> BookingManager
+
+@enduml

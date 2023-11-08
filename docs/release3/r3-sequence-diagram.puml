@@ -1,0 +1,14 @@
+@startuml sequence diagram
+actor User
+User -> "Client" as Client: "What are the customers?"
+Client -> API: listCustomers
+API -> Client: Customers[]
+Client -> User: Shows the customers
+User -> Client: Select "John Smith"
+Client -> User: Shows details on "John Smith"
+User -> Client: Updates phone number
+User -> Client: Click "Save"
+Client -> API: saveCustomer(Customer "John Smith")
+API -> Client: ID of Customer "John Smith"
+Client -> User: Shows Customer "John Smith"
+@enduml
