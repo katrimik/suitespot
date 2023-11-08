@@ -17,9 +17,9 @@ public class RoomManager implements IRoomManager {
   }
 
   /**
-   * Creates an unique id.
+   * Creates an unique ID.
    * 
-   * @return room manager id (uuid)
+   * @return room manager ID (UUID)
    * 
    */
   private String createNewId() { 
@@ -32,7 +32,7 @@ public class RoomManager implements IRoomManager {
    * 
    * @param room room
    * 
-   * @return room id (uuid)
+   * @return room ID (UUID)
    * 
    */
   public String saveRoom(Room room) {
@@ -71,9 +71,9 @@ public class RoomManager implements IRoomManager {
   }
 
   /**
-   * Deletes one room with the given id.
+   * Deletes one room with the given ID.
    * 
-   * @param roomId room id
+   * @param roomId room ID
    * 
    */
   @Override
@@ -91,9 +91,9 @@ public class RoomManager implements IRoomManager {
   }
 
   /**
-   * Deletes all rooms of given room type id.
+   * Deletes all rooms of given room type ID.
    * 
-   * @param roomTypeId room type id
+   * @param roomTypeId room type ID
    * 
    */
   public void deleteAllInRoomType(String roomTypeId) {
@@ -114,7 +114,7 @@ public class RoomManager implements IRoomManager {
    * 
    * @param roomNumber room number
    * 
-   * @param roomId room id
+   * @param roomId room ID
    * 
    * @return true if room is available
    * 
@@ -125,9 +125,9 @@ public class RoomManager implements IRoomManager {
   }
 
   /**
-   * Get room by id
+   * Get room by ID
    * 
-   * @param roomId id of room (uuid)
+   * @param roomId ID of room (UUID)
    * 
    * @return Room (or null if room does not exist)
    * 

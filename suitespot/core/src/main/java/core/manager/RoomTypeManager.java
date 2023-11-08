@@ -28,9 +28,9 @@ public class RoomTypeManager implements IRoomTypeManager {
   }
 
   /**
-   * Creates an unique room type id.
+   * Creates an unique room type ID.
    * 
-   * @return room type id (uuid)
+   * @return room type ID (UUID)
    * 
    */
   private String createNewId() {
@@ -43,7 +43,7 @@ public class RoomTypeManager implements IRoomTypeManager {
    * 
    * @param roomType roomtype
    * 
-   * @return room type id (uuid)
+   * @return room type ID (UUID)
    * 
    */
   @Override
@@ -79,7 +79,7 @@ public class RoomTypeManager implements IRoomTypeManager {
   /**
    * Get room type. 
    * 
-   * @param roomTypeId room type id
+   * @param roomTypeId room type ID
    * 
    * @return room type
    * 
@@ -109,7 +109,7 @@ public class RoomTypeManager implements IRoomTypeManager {
   /**
    * Deletes a room type, including all rooms in type.
    * 
-   * @param roomTypeId room type id
+   * @param roomTypeId room type ID
    * 
    */
   @Override
@@ -132,7 +132,7 @@ public class RoomTypeManager implements IRoomTypeManager {
    * 
    * @param name room type name
    * 
-   * @param id room type id
+   * @param id room type ID
    * 
    * @return true if room type is available
    * 
