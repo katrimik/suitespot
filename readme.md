@@ -1,5 +1,18 @@
 # Group gr2305 repository - IT1901 fall 2023
-> benjakil, eliashet, sbnorton, katrimik 
+> benjakil, eliashet, sbnorton, katrimik
+
+## Table of contents
+- [Links](#links)
+- [Cloning the project](#cloning-the-project)
+- [Local versions](#local-versions)
+- [Run locally](#run-locally)
+- [Run server locally](#run-server-locally)
+- [Build project](#build-project)
+- [Where to find code](#where-to-find-code)
+- [Diagrams](#diagrams)
+    - [Package diagram](#package-diagram)
+    - [Sequence diagram](#sequence-diagram)
+    - [Class diagrams](#class-diagram)
 
 ## Links
 ### Eclipse che
@@ -149,7 +162,7 @@ suitespot/
 ```
  
 
-# Diagrams
+## Diagrams
 ### Package diagram
 Updated package diagram for release 3, showing the modules and folders in our project; created with PlantUML. 
 ![PlantUML](./docs/image/release3/package-diagram-r3.png)
@@ -164,4 +177,11 @@ Sequence diagram created for [US-2](/userstories.md). Created with PlantUML.
 ### Class diagram
 Class diagram for the most crucial functionality. Created with PlantUML.
 Here is the class diagram showing the manager functionality.
-![class-diagram]
+![class-diagram](./docs/image/release3/class-diagram-manager-r3.png)
+*Image of class diagram. See code [here.](./docs/release3/r3-class-diagram-manager.puml)*
+
+In addition, here is the class diagram showing the model functionality. 
+
+![class-diagram](./docs/image/release3/class-diagram-model-r3.png)
+
+*Image of class diagram. See code [here.](./docs/release3/r3-class-diagram-model.puml)*

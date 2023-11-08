@@ -9,17 +9,6 @@ class CustomerManager{
     + String saveCustomer(Customer)
     + Customer readCustomer(String)
     + List<Customer> listCustomers()
-
-
-}
-
-interface IRoomManager{
-    + String saveRoom(Room) 
-    + List<Room> listRooms()
-    + void deleteRoom(String)
-    + void deleteAllInRoomType(String)
-    + Room getRoom(String)
-
 }
 
 class Manager{
@@ -67,12 +56,46 @@ class BookingManager{
     + List<Booking> listBookings()
 }
 
-RoomManager ..> IRoomManager 
+interface IRoomManager{
+    + String saveRoom(Room) 
+    + List<Room> listRooms()
+    + void deleteRoom(String)
+    + void deleteAllInRoomType(String)
+    + Room getRoom(String)
+
+}
+
+interface ICustomerManager{
+    + void deleteCustomer(String)
+    + String saveCustomer(Customer)
+    + Customer readCustomer(String)
+    + List<Customer> listCustomers()
+
+}
+
+interface IBookingManager{
+    + void deleteBooking(String)
+    + String saveBooking(Booking)
+    + Booking getBooking(String)
+    + List<Booking> listBookings()
+
+}
+
+interface IRoomTypeManager{
+    + String saveRoomType(RoomType)
+    + RoomType getRoomType(String)
+    + List<RoomType> listRoomTypes()
+    + void deleteRoomType(String)
+
+}
+
+CustomerManager ..> ICustomerManager
+RoomTypeManager ..> IRoomTypeManager
+RoomManager ..> IRoomManager
+BookingManager ..> IBookingManager
 Manager --> CustomerManager
 Manager --> RoomManager
 Manager --> RoomTypeManager
 Manager --> BookingManager
-
-
 
 @enduml
