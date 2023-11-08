@@ -149,8 +149,19 @@ suitespot/
 ```
  
 
-# Package diagram
-Package diagram showing the modules and folders in our project; created with PlantUML. 
-![PlantUML](./docs/image/release2/plantUML.png)
-*Image of puml package diagram. See code [here](./docs/release2/package-diagram.puml)*.
+# Diagrams
+### Package diagram
+Updated package diagram for release 3, showing the modules and folders in our project; created with PlantUML. 
+![PlantUML](./docs/image/release3/package-diagram-r3.png)
+*Image of PUML package diagram. See code [here](./docs/release3/r3-package-diagram.puml)*.
 
+
+### Sequence diagram
+Sequence diagram created for [US-2](/userstories.md). Created with PlantUML.
+![sequence-diagram](./docs/image/release3/sequence-diagram-r3.png)
+*Image of sequence diagram. See code [here](./docs/release3/r3-sequence-diagram.puml)*.
+
+### Class diagram
+Class diagram for the most crucial functionality. Created with PlantUML.
+Here is the class diagram showing the manager functionality.
+![class-diagram]
