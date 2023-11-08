@@ -18,6 +18,7 @@
 - [Booking](#booking)
 - [Testing](#testing)
 - [REST-API](#rest-api)
+- [JPackage and J-Link](#jpackage-and-j-link)
 - [Functionality](#functionality)
 - [Checkstyle warnings and spotbugs](#checkstyle-warnings-and-spotbugs)
 
@@ -91,6 +92,9 @@ For full report see [jacoco](../../suitespot/core/target/site/jacoco/index.html)
 mvn verify
 ```
 
+## JPackage and J-Link
+To create the final executable for the project, we utilized J-Link and JPackage. For instructions on building this application, refer to the [root readme](/gr2305/readme.md).
+
 ## REST-API
 This release includes the addition of a REST-API. The app has a new implementation of each manager, that connects to the API with a generic class, `ApiClient`. The REST-API exposes the API of our existing controllers as HTTP endpoints. The documentation for these endpoints lies [here](/gr2305/docs/restapi.md).
 
@@ -111,7 +115,7 @@ Furthermore, by selecting _"Manage rooms"_ from the main page, you gain access t
 
 
 ## Checkstyle warnings and spotbugs
-While we still encounter several checkstyle warnings, the majority concerns javadoc. We've included javadoc for most public-facing methods in  _core_, except for those that are self-explanatory, such as getters and setters. Both documented and undocumented methods are aptly named. 
+Although we have zero checkstyle violations, we still encounter several checkstyle warnings and the majority concerns javadoc. We've included javadoc for most public-facing methods in  _core_, except for those that are self-explanatory, such as getters and setters. Both documented and undocumented methods are aptly named. 
 
 There are additional warnings in checkstyle, regarding lexicographical order. We've struggled to connect checkstyle to the config file and we're unable to modify our preferences in coding styles. Therefore, most warnings are due to our personal prefrences in coding style. 
 
