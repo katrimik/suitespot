@@ -1,80 +1,172 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="655.0" style="-fx-background-color: #a5d496;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.RoomController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="760.0" style="-fx-background-color: #F0F4F8;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.RoomController">
    <children>
-      <ListView fx:id="roomTypeListView" layoutX="15.0" layoutY="219.0" prefHeight="292.0" prefWidth="270.0" />
-      <Text layoutX="243.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage rooms">
-         <font>
-            <Font name="Modern No. 20" size="30.0" />
-         </font>
-      </Text>
-      <ListView fx:id="roomListView" layoutX="364.0" layoutY="219.0" prefHeight="292.0" prefWidth="270.0" />
-      <Button fx:id="roomTypeDeleteBtn" layoutX="14.0" layoutY="179.0" mnemonicParsing="false" onAction="#deleteRoomType" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #e33124;" text="Delete" textFill="WHITE">
-         <font>
-            <Font name="Modern No. 20" size="14.0" />
-         </font>
-      </Button>
-      <Label fx:id="StatusCrudLbl" layoutX="16.0" layoutY="51.0" text="Room type">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <TextField fx:id="roomTypeNameTxt" layoutX="112.0" layoutY="107.0" prefHeight="27.0" prefWidth="174.0" promptText="name" />
-      <Button layoutX="10.0" layoutY="8.0" mnemonicParsing="false" onAction="#goToMainPage" prefHeight="27.0" prefWidth="117.0" style="-fx-background-color: #658f57;" text="Go to main page" textFill="WHITE">
-         <font>
-            <Font name="Modern No. 20" size="14.0" />
-         </font>
-      </Button>
-      <Label layoutX="14.0" layoutY="112.0" prefHeight="18.0" prefWidth="102.0" text="Room type name" />
-      <Label layoutX="363.0" layoutY="111.0" text="Room number" />
-      <Label layoutX="14.0" layoutY="146.0" text="Price" />
-      <Button fx:id="roomTypeCreateBtn" layoutX="108.0" layoutY="179.0" mnemonicParsing="false" onAction="#createRoomType" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #38a5ff;" text="Create new" textFill="WHITE">
-         <font>
-            <Font name="Modern No. 20" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="roomTypeSaveBtn" layoutX="200.0" layoutY="179.0" mnemonicParsing="false" onAction="#saveRoomType" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #658f57;" text="Save" textFill="WHITE">
-         <font>
-            <Font name="Modern No. 20" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="roomDeleteBtn" layoutX="363.0" layoutY="179.0" mnemonicParsing="false" onAction="#deleteRoom" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #e33124;" text="Delete" textFill="WHITE">
-         <font>
-            <Font name="Modern No. 20" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="roomCreateBtn" layoutX="457.0" layoutY="179.0" mnemonicParsing="false" onAction="#createRoom" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #38a5ff;" text="Create new" textFill="WHITE">
-         <font>
-            <Font name="Modern No. 20" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="roomSaveBtn" layoutX="549.0" layoutY="179.0" mnemonicParsing="false" onAction="#saveRoom" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #658f57;" text="Save" textFill="WHITE">
-         <font>
-            <Font name="Modern No. 20" size="14.0" />
-         </font>
-      </Button>
-      <Label fx:id="StatusCrudLbl1" layoutX="363.0" layoutY="54.0" text="Room">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Separator layoutX="308.0" layoutY="67.0" orientation="VERTICAL" prefHeight="444.0" prefWidth="42.0" />
-      <Label layoutX="363.0" layoutY="146.0" text="Room type" />
-      <ComboBox fx:id="roomTypeComboBox" layoutX="475.0" layoutY="142.0" prefHeight="26.0" prefWidth="160.0" />
-      <Label fx:id="roomErrorLbl" layoutX="362.0" layoutY="83.0" prefHeight="18.0" prefWidth="285.0" text="Error Label" />
-      <Label fx:id="roomTypeErrorLbl" layoutX="15.0" layoutY="79.0" prefHeight="25.0" prefWidth="308.0" text="Error Label" wrapText="true" />
-      <Spinner fx:id="roomTypePriceTxt" editable="true" layoutX="112.0" layoutY="142.0" prefHeight="26.0" prefWidth="174.0" />
-      <Spinner fx:id="roomNumberTxt" editable="true" layoutX="475.0" layoutY="107.0" prefHeight="26.0" prefWidth="160.0" />
+      <HBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="760.0" style="-fx-background-color: #334E68;">
+         <children>
+            <Button mnemonicParsing="false" onAction="#goToMainPage" prefHeight="35.0" prefWidth="180.0" style="-fx-background-color: #BCCCDC;" text="Go to main page">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Suitespot" textAlignment="RIGHT" wrappingWidth="560.0" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="Microsoft JhengHei Light" size="37.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Text>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutY="100.0" prefWidth="760.0" spacing="70.0">
+         <children>
+            <VBox prefHeight="410.0" prefWidth="297.0" spacing="10.0">
+               <children>
+                  <Label fx:id="StatusCrudLbl" prefHeight="25.0" prefWidth="370.0" text="Room type">
+                     <font>
+                        <Font name="Arial Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="roomTypeErrorLbl" prefHeight="17.0" prefWidth="419.0" text="Error Label" wrapText="true" VBox.vgrow="ALWAYS" />
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="120.0" text="Room type name" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="roomTypeNameTxt" prefHeight="25.0" prefWidth="200.0" promptText="name">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefWidth="120.0" text="Price" />
+                        <Spinner fx:id="roomTypePriceTxt" editable="true" prefHeight="26.0" prefWidth="200.0">
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </Spinner>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="10.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Button fx:id="roomTypeDeleteBtn" mnemonicParsing="false" onAction="#deleteRoomType" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #D64545;" text="Delete" textFill="WHITE">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="roomTypeCreateBtn" mnemonicParsing="false" onAction="#createRoomType" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #14919B;" text="Create new" textFill="WHITE" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="roomTypeSaveBtn" mnemonicParsing="false" onAction="#saveRoomType" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #38BEC9;" text="Save" textFill="WHITE">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </HBox>
+            
+                        <ListView fx:id="roomTypeListView" prefHeight="292.0" prefWidth="270.0" style="-fx-border-color: #D9E2EC; -fx-border-width: 2px;" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+            <VBox prefHeight="410.0" prefWidth="337.0" spacing="10.0">
+               <children>
+                  <Label fx:id="StatusCrudLbl1" text="Room">
+                     <font>
+                        <Font name="Arial Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="roomErrorLbl" prefHeight="17.0" prefWidth="377.0" text="Error Label" VBox.vgrow="ALWAYS" />
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="120.0" text="Room type" />
+                        <ComboBox fx:id="roomTypeComboBox" prefHeight="25.0" prefWidth="248.0" HBox.hgrow="ALWAYS">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ComboBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutY="100.0">
+                     <children>
+                        <Label prefWidth="120.0" text="Room number" />
+                        <Spinner fx:id="roomNumberTxt" editable="true" prefHeight="25.0" prefWidth="249.0" HBox.hgrow="ALWAYS">
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </Spinner>
+                     </children>
+                  </HBox>
+                  <HBox spacing="10.0">
+                     <children>
+                        <Button fx:id="roomDeleteBtn" mnemonicParsing="false" onAction="#deleteRoom" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #D64545;" text="Delete" textFill="WHITE">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="roomCreateBtn" mnemonicParsing="false" onAction="#createRoom" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #14919B;" text="Create new" textFill="WHITE">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="roomSaveBtn" mnemonicParsing="false" onAction="#saveRoom" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #38BEC9;" text="Save" textFill="WHITE">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </HBox>
+                  <ListView fx:id="roomListView" prefHeight="292.0" prefWidth="270.0" style="-fx-border-width: 2px; -fx-border-color: #D9E2EC;" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+      </HBox>
    </children>
 </AnchorPane>

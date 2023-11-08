@@ -34,12 +34,12 @@ public interface ICustomerManager {
      */
     Customer readCustomer(String id);
 
-    /**
-     * List of all customers.
-     * 
-     * @return list of customer objects
-     * 
-     */
-    List<Customer> listCustomers();
+  /**
+   * List of all customers.
+   * 
+   * @return list of customer objects
+   * 
+   */
+  List<Customer> listCustomers();
 
 }

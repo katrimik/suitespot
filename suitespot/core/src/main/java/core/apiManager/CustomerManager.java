@@ -8,21 +8,25 @@ import core.model.Customer;
 
 public class CustomerManager implements ICustomerManager {
 
-    private final ApiClient<Customer> client = new ApiClient<Customer>("/customer", Customer.class);
+  private final ApiClient<Customer> client = new ApiClient<Customer>("/customer", Customer.class);
 
-    public void deleteCustomer(String id) {
-        client.delete(id);
-    }
+  public CustomerManager(String url) {
+    client.setApiUrl(url);
+  }
 
-    public String saveCustomer(Customer customer) {
-        return client.post(customer);
-    }
+  public void deleteCustomer(String id) {
+    client.delete(id);
+  }
 
-    public Customer readCustomer(String id) {
-        return client.get(id);
-    }
+  public String saveCustomer(Customer customer) {
+    return client.post(customer);
+  }
 
-    public List<Customer> listCustomers() {
-        return client.get();
-    }
+  public Customer readCustomer(String id) {
+    return client.get(id);
+  }
+
+  public List<Customer> listCustomers() {
+    return client.get();
+  }
 }

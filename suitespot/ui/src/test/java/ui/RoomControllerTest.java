@@ -1,16 +1,5 @@
 package ui;
 
-import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -27,6 +16,16 @@ import org.testfx.framework.junit5.ApplicationTest;
 
 import core.model.Room;
 import core.model.RoomType;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class RoomControllerTest extends ApplicationTest {
   private Parent root;

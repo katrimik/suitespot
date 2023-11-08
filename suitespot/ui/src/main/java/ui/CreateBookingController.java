@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import core.apiManager.Manager;
 import core.manager.interfaces.IBookingManager;
 import core.manager.interfaces.ICustomerManager;
 import core.manager.interfaces.IRoomManager;
-import core.apiManager.Manager;
 import core.manager.interfaces.IRoomTypeManager;
 import core.model.Booking;
 import core.model.Customer;
@@ -136,7 +136,7 @@ public class CreateBookingController implements Initializable {
         setDateSectionEnabled(false);
         setRoomSectionEnabled(false);
         setCustomerSectionEnabled(true);
-        forwardBtn.setText("Complete booking");
+        forwardBtn.setText("Complete");
         break;
       default:
         break;

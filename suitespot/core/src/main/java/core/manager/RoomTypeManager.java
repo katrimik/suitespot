@@ -1,13 +1,13 @@
 package core.manager;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import core.fileUtil.IJsonFileParser;
 import core.manager.interfaces.IRoomManager;
 import core.manager.interfaces.IRoomTypeManager;
 import core.model.RoomType;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 public class RoomTypeManager implements IRoomTypeManager {
 

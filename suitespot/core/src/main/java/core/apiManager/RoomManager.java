@@ -8,26 +8,30 @@ import core.model.Room;
 
 public class RoomManager implements IRoomManager {
 
-    private final ApiClient<Room> client = new ApiClient<Room>("/room", Room.class);
+  private final ApiClient<Room> client = new ApiClient<Room>("/room", Room.class);
 
-    public String saveRoom(Room room) {
-        return client.post(room);
-    }
 
-    public List<Room> listRooms() {
-        return client.get();
-    }
+  public RoomManager(String url) {
+    client.setApiUrl(url);
+  }
 
-    public void deleteRoom(String roomId) {
-        client.delete(roomId);
-    }
+  public String saveRoom(Room room) {
+    return client.post(room);
+  }
 
-    public void deleteAllInRoomType(String roomTypeId) {
-        client.delete("roomtype/" + roomTypeId);
-    }
+  public List<Room> listRooms() {
+    return client.get();
+  }
 
-    public Room getRoom(String roomId) {
-        return client.get(roomId);
-    }
+  public void deleteRoom(String roomId) {
+    client.delete(roomId);
+  }
+
+  public void deleteAllInRoomType(String roomTypeId) {
+    client.delete("roomtype/" + roomTypeId);
+  }
+
+  public Room getRoom(String roomId) {
+    return client.get(roomId);
+  }
 }
-

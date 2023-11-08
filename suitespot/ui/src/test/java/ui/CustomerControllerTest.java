@@ -1,5 +1,19 @@
 package ui;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.IOException;
+
+import org.junit.jupiter.api.Test;
+import org.testfx.api.FxAssert;
+import org.testfx.api.FxRobot;
+import org.testfx.framework.junit5.ApplicationTest;
+import org.testfx.matcher.base.NodeMatchers;
+
+import core.model.Customer;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,19 +23,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.io.IOException;
-import org.junit.jupiter.api.Test;
-import org.testfx.api.FxAssert;
-import org.testfx.api.FxRobot;
-import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.matcher.base.NodeMatchers;
-import core.model.Customer;
 
 /**
  * TestFX App test

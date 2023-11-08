@@ -1,8 +1,16 @@
 package core.apiManager;
 
-import core.manager.interfaces.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import core.manager.interfaces.IBookingManager;
+import core.manager.interfaces.ICustomerManager;
+import core.manager.interfaces.IRoomManager;
+import core.manager.interfaces.IRoomTypeManager;
 
 public class Manager {
+
+  private static String apiUrl = "http://localhost:8080";
 
   /**
    * Creates a new fully equipped customer manager.
@@ -11,7 +19,7 @@ public class Manager {
    * 
    */
   public static ICustomerManager getCustomerManager() {
-    return new CustomerManager();
+    return new CustomerManager(apiUrl);
   }
 
   /**
@@ -21,7 +29,7 @@ public class Manager {
    * 
    */
   public static IRoomManager getRoomManager() {
-    return new RoomManager();
+    return new RoomManager(apiUrl);
   }
 
   /**
@@ -31,7 +39,7 @@ public class Manager {
    * 
    */
   public static IRoomTypeManager getRoomTypeManager() {
-    return new RoomTypeManager();
+    return new RoomTypeManager(apiUrl);
   }
 
   /**
@@ -41,6 +49,15 @@ public class Manager {
    * 
    */
   public static IBookingManager getBookingManager() {
-    return new BookingManager();
-  }    
+    return new BookingManager(apiUrl);
+  }
+
+  public static String getApiUrl() {
+    return apiUrl;
+  }
+
+  public static void setApiUrl(String url) throws URISyntaxException {
+    new URI(url);
+    apiUrl = url;
+  }
 }
