@@ -1,4 +1,4 @@
-@startuml
+@startuml package diagram
 title Suitespot - package diagram
 
 component core {

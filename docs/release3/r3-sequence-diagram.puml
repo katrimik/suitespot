@@ -1,4 +1,4 @@
-@startuml
+@startuml sequence diagram
 actor User
 User -> "Client" as Client: "What are the customers?"
 Client -> API: listCustomers

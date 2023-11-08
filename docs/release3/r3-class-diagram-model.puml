@@ -1,0 +1,100 @@
+@startuml class diagram
+title Class Diagram - Model
+
+class Customer{
+    - String firstName
+    - String lastName
+    - String id 
+    - String email
+    - String phone
+
+    + Customer(String, String, String, String)
+    + Customer()
+    - boolean validateName(String)
+    + String getFirstName()
+    + void setFirstName(String)
+    + String getLastName()
+    + void setLastName(String)
+    + String getId()
+    + void setId(String)
+    + String getPhone()
+    + void setPhone(String)
+    + String getEmail()
+    + void setEmail(String)
+    + String getFullName()
+    + String toString()
+}
+
+class Room{
+    - String id
+    - int roomNumber
+    - String typeId
+    - int MIN_ROOMNUMBER
+    - int MAX_ROOMNUMBER
+    - Set<LocalDate> bookedDates 
+    - String customStringFormatter
+
+    + Room(int, String)
+    + Room(int)
+    + Room()
+    + String getId()
+    + String getCustomStringFormatter()
+    + void setCustomStringFormatter(String)
+    + void setId(String)
+    + int getRoomNumber()
+    + void setRoomNumber(int)
+    + String getTypeId()
+    + void setTypeId(String)
+    + Set<LocalDate> getBookedDates()
+    + void bookRoom(LocalDate, LocalDate)
+    + boolean isAvailable(LocalDate)
+    + boolean isAvailable(LocalDate, LocalDate)
+    + String toString()
+
+}
+
+class RoomType{
+
+    - String id
+    - Stirng name
+    - int price 
+
+    + RoomType()
+    + RoomType(String, String, int)
+    + int getPrice()
+    + int setPrice(int)
+    + String getName()
+    - boolean validateName(String)
+    + void setName(String)
+    + String getId()
+    + String setId(String)
+    + String toString()
+
+}
+
+class Booking{
+    - String id
+    - String roomId
+    - String customerId
+    - LocalDate fromDate
+    - LocalDate toDate
+
+    + Booking(String, String, LocalDate, LocalDate)
+    + Booking(String, String LocalDate, LocalDate, String)
+    + String getId()
+    + void setId(String)
+    + String getRoomId()
+    + void setRoomId(String)
+    + String getCustomerId()
+    + void setCustomerId(String)
+    + LocalDate getFromDate()
+    + LocalDate getToDate()
+    + void setDates(LocalDate, LocalDate)
+}
+
+RoomType "1" -- "many" Room
+Room "1" -- "1" Booking
+Booking "many" -- "1" Customer
+
+
+@enduml
