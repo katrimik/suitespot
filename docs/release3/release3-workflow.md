@@ -1,92 +1,162 @@
+
 <style>
 h1 { border-bottom: 0.5; }
+h2 { border-bottom: 0;}
 cite { font-size: 10px}
  </style>
 
-
-# User stories
-Purpose: *We collect user stories with the purpose of (un)covering the requirements the system must meet.
-There are various forms of user stories, with more or less strict requirements about their form. Here, we try to summarize each of them somewhat structured.*
-
+ > This is the updated *workflow*-document for the third release.
 
 ## Table of contents
 
-- [Add a new customer (US-1)](#new-customer-wants-to-book-a-room-us-1)
-- [Edit customer details (US-2)](#edit-customer-details-us-2)
-- [Create new room and roomtype (US-3)](#create-new-room-and-room-type-us-3)
-- [Create new booking (US-4)](#create-new-booking-us-4)
+- [Work habits](#work-habits)
+  - [Milestones](#milestones)
+  - [Issues](#issues)
+    - [Labels](#labels)
+  - [Branches](#branches)
+  - [Commit messages](#commit-messages)
+    - [Co-authored-by](#co-authored-by)
+- [Work flow](#work-flow)
+    - [Open communication](#open-communication)
+- [Code quality](#code-quality)
+  - [Code review](#code-review)
+  - [Testing](#testing)
+    - [Testing the logic](#testing-the-logic)
+    - [Testing the UI](#testing-the-ui)
+  - [Tools used to ensure code quality](#tools-used-to-ensure-code-quality)
+    - [Jacoco](#jacoco)
+    - [Spotbug](#spotbug)
+    - [Checkstyle](#checkstyle)
 
-## Add a new customer (US-1)
+# Work habits
 
-*A new customer has arrived at the hotel and wishes to book a room. As a receptionist at a hotel, my first step is to register the customer as a new customer.*
+Here are some of our work habits and `git` tools and practices we are following:
 
-The customer wanting to book a room has not visited the hotel before, so the staff must create a new "customer" in the hotel system. The staff must fill in details such as first name, last name, phone number, and email.
+## Milestones
 
-### Important to be able to view
+In our ongoing work, we start by collaboratively defining milestones aligned with our upcoming deliverables. These milestones can potentially align with sprints, which typically span 2-4 weeks. However, we have chosen not to strictly follow milestone-sprint convention. This decision is because our final delivery date is set for November 23rd, and we've found it more straightforward to align each milestone directly with a deliverable.
 
-- Overview: To see which customers already exist.
-- To identify the required fields for creating a new user.
-- To receive a warning if attempting to enter invalid data (e.g., incorrect email format).
+The milestons help us organize and manage `issues` and `merge requests`. Therefore, we make sure to always link an issue to a milestone.
 
-### Important to be able to do
+## Issues
 
-- Add new customers.
-- Select existing customers and obtain information about them.
-- "Reuse" existing customers.
+We make sure to create issues, whenever we intend to perform actions such as creating, fixing, implementing, or renaming code.
 
-## Edit Customer Details (US-2)
+We follow the principle, that the title of the issues should be concise and easy to understand at first glance. We're also making sure to write the descriptions clear and straightforward.
 
-*It turns out that the customer who has been registered provided an incorrect phone number (it can happen to the best of us). As an employee, I should be able to access and modify the phone number for this customer.*
+Another principle we follow: you can assign the issue to a specific team member (which we have discussed beforehand), but the person assigned to the issue <u>can not</u> be the one reviewing and approving it.
 
-The receptionist needs the ability to navigate to an existing customer and make changes to the desired data field, in this case: the phone number. It's crucial to save the changes and revisit the customer to double-check that the modification has been updated.
+### Labels
 
-### Important to be able to view
+By labelling the different issues, it opens for categorizing issues and other elements in gitlab. Some of the issues we've created and used so far:
 
-- Previously registered customers.
-- Existing data associated with the customer.
+- improvement
+- test
+- docs
 
-### Important to be able to do
+## Branches
 
-- Modify the provided data for the respective customer.
-- Save the changes.
+When working with issues in `git`, we want to work in separate branches. Our team's workflow centers around that a merge request is created, as soon as an issue is assigned to a team member. Afterward, the assigned team member uses the command `git checkout <name of the branch>`, and starts working in that branch, corresponding to the issue (s)he has been assigned to.
 
-## Create new room and room type (US-3)
-*The hotel has been expanded! As a hotel employee, I now want to register a new room type, namely the "Bridal Suite." This room will cost 10 000 kr. We have one room of this type, and the room number is 303.*
+This allows each team member to work on their specific part of the project without conflicting with other work.
 
-An employee should have the ability to create a new room type, assign a price to it, and register a new room of this type. One requirement is that you must specify the room number.
+For instance, Katrine can comfortably operate in her designated branch, directly linked to issue #6(which is related to `docs`), while Elias is working on `#9`: _implementing JaCoCo_.
 
-### Important to be able to view
+Once you think you are done with the issue, be sure to notify the designated reviewer, allowing them to review and approve the merge request before merging it into the `dev`-branch.
 
-- An overview of all existing rooms and room types.
-- A warning if the room type already exists.
-- A warning if the room number is already in use.
+For now, we've designated the `dev`-branch as our 'main' branch, since the project remains a work in progress.
 
-### Important to be able to do
+## Commit messages
 
-- Create a new room type.
-- Create a new room of the new room type.
-- The ability to modify the data associated with the room type, such as the price.
-- Delete both rooms and room types.
+We are following a certain git-commit-convention, which helps us understand the purpose and context of the code changed/implemented, at a quick glance. \
 
-# Create new booking (US-4)
-*The customer who was just registered has recently gotten married! Congratulations! The married one now wants to book the new room, the "Bridal Suite."*
+(_Notice_: The headings are always written in present tense!) \
 
-As an employee, you should now book the new room: "Bridal Suite." The customer already exists in the system, so the employee needs to be able to navigate to the customer in the system and book the "Bridal Suite" on the customer's name and with the desired time period.
+We follow this convention:
 
-### Important to be able to view
-- Create button for bookings.
-- Date picker view for dates.
-- Existing and available rooms (display room numbers).
-- Customer view.
-- Distinguish the view you are currently editing (difference in opacity).
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+Here's an example:
+
+```
+test: create ui test for CustomerController
+
+Used javafx and made sure the file extends ApplicationTest.
 
 
-### Important to be able to do
+Co-Authored-By: Ben Adams <benadams@stud.ntnu.no>
+```
 
-- Create a booking with the following data:
-  - Date
-  - Room
-  - Customer
-- Navigate between data input fields (in case of regrets).
-- Save the booking.
-- Cancel the booking.
+### Co-authored-by
+
+Over the past few weeks, as part of _Group deliverable 2_, we have been practicing pair programming. This involves teaming up in pairs and taking turns with the coding tasks. Additionally, we make an effort to review each other's code as we go along. We also make sure to include "Co-authored-by" in the commit footer, which tells who's been working together.
+
+# Work flow
+
+In accordance with certain [SCRUM](https://www.scrum.org/resources/what-scrum-module) principles, our workflow incorporates physical meetings, notably the "daily stand-up." During these meetings, we provide concise briefings on our upcoming tasks and develop a plan of action for the work session, as a kind of a "slagplan".
+
+We also usually try to end our work session with a debrief, and reflect on our work so far.
+
+### Open communication
+
+If we have any uncertainties regarding code or design choices, we ask each other. We want an environment where questions and clarifications are encouraged, aiming for a collaborative and accessible workspace.
+
+# Code quality
+
+To ensure good code quality, we as team members make sure to communicate with each other, and look over each other's code - as mentioned previously.
+
+## Code review
+We also try to use the built-in GitLab feature: "Code review" when reviewing each other's code. If you click on "changes" after a merge request has been requested, you can review the changes and optionally highlight and comment on code lines. If everything looks good, we comment accordingly.
+
+If there is a change that needs to be made and has been commented on, the team member resolves the task, marks "Resolve thread," and comments that the task is resolved.
+
+Then the code reviewer reviews one last time before potentially merging it into the main branch.
+
+## Testing
+
+Testing is an important part of software development; you want to make sure that the code is working - not only during the "general" cases, but also the edge cases. As we have learned in the ITP lectures:
+
+> […] _Automated testing allows to develop new features with a minimal effort to check if the software still works as expected_ \
+> -- <cite>"Testing and code quality", Forelesning Uke 37</cite>
+
+### Testing the logic
+
+Hence, we've created tests for our core-manager classes and their methods, to guarantee that our logic functionality operates as expected.
+
+This is because the `Manager`-classes serve as the bridge between the core logic and the UI, encapsulating our business logic. By concentrating our testing efforts on the `Manager`-files, we ensure that this critical logic - the "brain" of our project - is working as we want to.
+
+This approach optimizes our testing efforts, as it allows us to comprehensively validate the core functionality of our application while avoiding the redundancy of testing lower-level components such as the model or fileutil classes, which are linked with the `Manager`-files.
+
+We are testing with JUnit.
+
+### Testing the UI
+
+We are also making sure to test the controllers:
+`CustomerController` and `RoomController`. We are extending the test-files with the `ApplicationTest`, and using a `FxRobot` to perform the actions we want, as if an user had clicked on the different buttons and views.
+
+## Tools used to ensure code quality
+
+### Jacoco
+
+We are using _Java Code Coverage_ (JaCoCo) to measure the extent to which our code is being tested. It helps us identify code that has not been tested, and by increasing our code test coverage, it can indirectly assist us in ensuring better code quality.
+
+### Spotbug
+
+_Spotbug_ is being used to find bugs in our program. By looking at instances of "bug patterns", it will tell us that these are most likely to be errors. It also helps with styling in the project.
+
+For example, when we initially integrated Spotbug and executed the command "`mvn verify`". This raised issues because of errors and code conventions violations, such as methods starting with lowercase letters.
+
+(We located the errors, changed the name of some of the methods, and now it's working:))
+
+### Checkstyle
+
+_Checkstyle_ helps with maintaining consistent coding style and formatting, and finds errors like unused variables. We are using the default Checkstyle-xml.
+
+In our project, we have had some issues with Checkstyle, mostly because of line indentation. This has now been fixed.
+«
