@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="760.0" style="-fx-background-color: #F0F4F8;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.AppController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="760.0" style="-fx-background-color: #F0F4F8;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.AppController">
    <children>
       <HBox alignment="CENTER" prefHeight="80.0" prefWidth="760.0" spacing="20.0" style="-fx-background-color: #334E68;">
          <children>
@@ -181,6 +181,20 @@
                                  </font>
                               </Text>
                               <Label fx:id="dateToLbl" prefHeight="19.0" prefWidth="313.0" text="dateToLbl">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="17.0" prefWidth="405.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Price" wrappingWidth="100.0">
+                                 <font>
+                                    <Font name="Arial" size="16.0" />
+                                 </font>
+                              </Text>
+                              <Label fx:id="priceLbl" prefHeight="19.0" prefWidth="313.0" text="priceLbl">
                                  <font>
                                     <Font size="16.0" />
                                  </font>

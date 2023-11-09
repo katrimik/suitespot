@@ -31,7 +31,7 @@ public class AppController implements Initializable {
   Button createBtn, deleteBtn;
 
   @FXML
-  Label dateFromLbl, dateToLbl, roomDataLbl, roomTypeDataLbl, customerDataLbl;
+  Label dateFromLbl, dateToLbl, roomDataLbl, roomTypeDataLbl, customerDataLbl, priceLbl;
 
   @FXML
   TextField searchField;
@@ -134,26 +134,24 @@ public class AppController implements Initializable {
 
   private void displaySelectedBooking(Booking b) {
     Room room = roomManager.getRoom(b.getRoomId());
+    if (room == null) {
+      throw new IllegalStateException("Unexpected data. Booking does not contain a room.");
+    }
 
     dateFromLbl.setText(b.getFromDate().toString());
     dateToLbl.setText(b.getToDate().toString());
-
     roomDataLbl.setText(String.valueOf(room.getRoomNumber()));
 
-    roomTypeDataLbl.setText(roomTypeManager
-        .listRoomTypes()
-        .stream()
-        .filter(rt -> rt.getId()
-            .equals(room.getTypeId()))
-        .findFirst().orElse(null).getName());
+    RoomType roomType = roomTypeManager.getRoomType(room.getTypeId());
+    if (roomType != null) {
+      roomTypeDataLbl.setText(roomType.getName());
+      priceLbl.setText(roomType.getPrice() + ",-");
+    }
 
-    customerDataLbl.setText(customerManager
-        .listCustomers()
-        .stream()
-        .filter(c -> c.getId()
-            .equals(b.getCustomerId()))
-        .findFirst()
-        .orElse(null).getFullName());
+    Customer customer = customerManager.readCustomer(b.getCustomerId());
+    if (customer != null) {
+      customerDataLbl.setText(customer.getFullName());
+    }
   }
 
   public void sortBookingListView(ActionEvent event) {
@@ -177,6 +175,7 @@ public class AppController implements Initializable {
     roomDataLbl.setText("");
     roomTypeDataLbl.setText("");
     customerDataLbl.setText("");
+    priceLbl.setText("");
     bookingListView.getSelectionModel().select(null);
   }
 
