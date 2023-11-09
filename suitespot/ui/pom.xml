@@ -105,9 +105,9 @@
                     <noHeaderFiles>true</noHeaderFiles>
                     <stripDebug>true</stripDebug>
                     <noManPages>true</noManPages>
-                    <launcher>suitespotfx</launcher>
-                    <jlinkImageName>suitespotfx</jlinkImageName>
-                    <jlinkZipName>suitespotfx</jlinkZipName>
+                    <launcher>suitespot</launcher>
+                    <jlinkImageName>suitespot</jlinkImageName>
+                    <jlinkZipName>suitespot</jlinkZipName>
                 </configuration>
             </plugin>
 
@@ -117,25 +117,25 @@
                 <artifactId>jpackage-maven-plugin</artifactId>
                 <version>1.4.0</version>
                 <configuration>
-                    <name>SuitespotFX</name>
+                    <name>Suitespot</name>
                     <appVersion>1.0.0</appVersion>
                     <vendor>gr2305</vendor>
                     <destination>target/dist</destination>
                     <module>ui/ui.App</module>
-                    <runtimeImage>target/suitespotfx</runtimeImage>
+                    <runtimeImage>target/suitespot</runtimeImage>
                     <icon>src/main/resources/ui/logo.ico</icon>
                     <javaOptions>
                         <option>-Dfile.encoding=UTF-8</option>
                     </javaOptions>
                     <!-- linux options --> 
                     <linuxShortcut>true</linuxShortcut>
-                    <linuxMenuGroup>SuitespotFX</linuxMenuGroup>
+                    <linuxMenuGroup>Suitespot</linuxMenuGroup>
 
                     <!-- windows options --> 
                     <winDirChooser>true</winDirChooser>
                     <winShortcut>true</winShortcut>
                     <winMenu>true</winMenu>
-                    <winMenuGroup>SuitespotFX</winMenuGroup>
+                    <winMenuGroup>Suitespot</winMenuGroup>
                 </configuration>
             </plugin>
             
