@@ -91,7 +91,7 @@ public class AppController implements Initializable {
 
   private void loadBookings() {
     bookings = bookingManager.listBookings();
-    displayBookings();
+    sortBookingListView(null);
   }
 
   private void displayBookings() {
