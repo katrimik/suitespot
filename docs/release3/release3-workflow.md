@@ -18,6 +18,7 @@ cite { font-size: 10px}
     - [Co-authored-by](#co-authored-by)
 - [Work flow](#work-flow)
     - [Open communication](#open-communication)
+    - [Improvement potential](#improvement-potential)
 - [Code quality](#code-quality)
   - [Code review](#code-review)
   - [Testing](#testing)
@@ -106,6 +107,10 @@ We also usually try to end our work session with a debrief, and reflect on our w
 ### Open communication
 
 If we have any uncertainties regarding code or design choices, we ask each other. We want an environment where questions and clarifications are encouraged, aiming for a collaborative and accessible workspace.
+
+### Improvement potential
+When reviewing the overview over the "Commits to dev" (the *contributer statistics* in GitLab), there are variations in the number of commits. Benjamin and Elias both surpass Sarah and Katrine in quantity, but this doesn't necessarily imply they've contributed significantly more - it simply means they commit more frequently. In hindsight, as the project approaches its conclusion, we as a group have discussed that more frequent commits is preferable to a single large commit with extensive changes. Smaller commits opens for easier code reviews and enhance the understanding of each commit at a glance. This is a practice we can carry forward.
+
 
 # Code quality
 
