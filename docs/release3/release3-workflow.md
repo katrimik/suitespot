@@ -123,6 +123,9 @@ If there is a change that needs to be made and has been commented on, the team m
 
 Then the code reviewer reviews one last time before potentially merging it into the main branch.
 
+In our code reviews for the release 3 code, we often express our approval with a simple "CR looks good." The detailed feedback primarily happens during our in-person meetings, where we discuss and provide comments. Following these discussions, we conduct a final overview, and upon satisfaction, we approve the code with a comment before merging.
+
+
 ## Testing
 
 Testing is an important part of software development; you want to make sure that the code is working - not only during the "general" cases, but also the edge cases. As we have learned in the ITP lectures:
