@@ -9,7 +9,7 @@
     <groupId>gr2305</groupId>
     <artifactId>suitespot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>../..</relativePath>
+    <relativePath>..</relativePath>
   </parent>
 
   <artifactId>suitespot-restserver</artifactId>
