@@ -147,6 +147,11 @@ suitespot/
 │  │  │  │  ├─ suitespot/
 │  │  │  │  |  ├─ restserver/
 │  │  │  │  |  |  ├─ API server and endpoints
+│  │  ├─ test/
+│  │  │  ├─ java/
+│  │  │  │  ├─ suitespot/
+│  │  │  │  |  ├─ restserver/
+│  │  │  │  |  |  ├─ API endpoint tests
 ├─ ui/
 │  ├─ src/
 │  │  ├─ main/

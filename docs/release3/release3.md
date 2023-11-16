@@ -93,6 +93,9 @@ For full report see [jacoco](../../suitespot/core/target/site/jacoco/index.html)
 ```
 mvn verify
 ```
+#### Testing REST API
+
+Finally, we have written tests to ensure the functionality of the REST API. We are testing some of the endpoints and the overall functionality of the rest server. When you open the app, you are doing a sort of test on the REST API implicitly since the app uses the rest server under the hood. In case of failure, an error message will be displayed. Additionally, the other tests (UI and rest server) rely on the proper functioning of the rest server; without it running, these tests would not be successful. Therefore, many of the controller tests in the UI and the tests in the rest server test some of the same things. However, this is not a problem while they are both integration tests. The tests in core can run without any external dependency. 
 
 ## JPackage and J-Link
 To create the final executable for the project, we utilized J-Link and JPackage. For instructions on building this application, refer to the [root readme](/gr2305/readme.md).
